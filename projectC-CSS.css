@@ -14,4 +14,9 @@
 	border: 1px solid black;
 	border-bottom-width: 0;
 	overflow: hidden;
+    
+}
+
+.selected{
+    background-color: red;
 }
