@@ -1,0 +1,17 @@
+.page{
+	display: none;
+	width: 250px;
+}
+.tabs{
+    display: block;
+
+    width:  90px;
+    text-align: center;
+
+    height:      24px;
+    padding-top: 3px;
+    vertical-align: middle;
+	border: 1px solid black;
+	border-bottom-width: 0;
+	overflow: hidden;
+}
