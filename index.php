@@ -1,3 +1,12 @@
 <?php
 require_once 'core/init.php';
-DB::getInstance()->query("SELECT username FROM users WHERE username =?", array('Sonicdeadlock'));
+if(Session::exists('home')){
+	echo '<p>' . Session::flash('home') . '</p>';
+}
+
+$user = new User();
+if($user->isLoggedIn()){
+	?>
+	<p>Hello <a href='#'> <?php echo escape($user->data()->username); ?></a></p>
+	<?php
+}

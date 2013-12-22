@@ -41,6 +41,12 @@ class Validate{
 								$this->addError("{$item} already exists");
 							}
 						break;
+
+						case 'alpha_numeric':
+							if(is_numeric($value)){
+								$this->addError("{$item} must be more than just numbers");
+							}
+						break;
 						
 						default:
 							# code...

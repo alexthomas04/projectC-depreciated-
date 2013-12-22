@@ -10,7 +10,8 @@ if(Input::exists()){
 					'required' => true,
 					'min' => 2,
 					'max' => 20,
-					'unique' => 'users'	
+					'unique' => 'users',
+					'alpha_numeric' => true
 					),
 				'password' => array(
 					'required' => true,
@@ -40,6 +41,9 @@ if(Input::exists()){
 							'date' => date('Y-m-d H:i:s'),
 							'group' => 1
 						));
+						Session::flash('home','You have been registered and can now log in!');
+						$user->login(Input::get('username'),Hash::make(Input::get('password'),$salt));
+						header('Location: index.php');
 					}
 					catch(Exception $e){
 						die($e->getMessage());
