@@ -9,7 +9,8 @@ class DB{
 
 	private function __construct(){
 		try{
-			$this-> _pdo = new PDO('mysql:host=' . Config::get('mysql/host') .';dbname=' . Config::get('mysql/db') ,Config::get('mysql/username'),Config::get('mysql/password') );
+			$this->_pdo = new PDO('mysql:host=' . Config::get('mysql/host') .';dbname=' . Config::get('mysql/db') ,Config::get('mysql/username'),Config::get('mysql/password') );
+			$this->_pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		}
 		catch(PDOEception $e){
 			die($e-> getMessgae());
@@ -24,8 +25,9 @@ class DB{
 	}
 
 	public function query($sql,$params = array()){
+
 		$this->_error = false;
-		$x=0;
+		$x=1;
 		if($this->_query = $this->_pdo->prepare($sql)){
 			if(count($params)){
 				foreach($params as $param){
@@ -35,7 +37,7 @@ class DB{
 
 			}
 			if($this->_query->execute()){
-				$this->$_results = $this->_query->fetchAll(PDO::FETCH_OBJ);
+				$this->_results = $this->_query->fetchAll(PDO::FETCH_OBJ);
 				$this->_count = $this->_query->rowCount();
 			}else{
 				$this->_error=true;
@@ -60,6 +62,7 @@ class DB{
 
 			if(in_array($operator, $operators)){
 				$sql="{$action} FROM {$table}  WHERE {$field} {$operator} ?";
+
 				if(!$this->query($sql,array($value))->error()){
 					return $this;
 
@@ -77,7 +80,7 @@ class DB{
 	}
 
 	public function count(){
-		return $_count;
+		return $this->_count;
 	}
 
 	public function results(){
@@ -85,7 +88,7 @@ class DB{
 	}
 
 	public function first(){
-		return $this->results()[0];
+		return $this->$_results[0];
 	}
 
 	public function insert($table,$fields = array()){
