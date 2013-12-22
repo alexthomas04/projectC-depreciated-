@@ -37,8 +37,13 @@ class DB{
 
 			}
 			if($this->_query->execute()){
-				$this->_results = $this->_query->fetchAll(PDO::FETCH_OBJ);
-				$this->_count = $this->_query->rowCount();
+				try{
+					$this->_results = $this->_query->fetchAll(PDO::FETCH_OBJ);
+					$this->_count = $this->_query->rowCount();
+				}
+				catch(Exception $e){
+
+				}
 			}else{
 				$this->_error=true;
 			}
@@ -104,8 +109,8 @@ class DB{
 				}
 				$x++;
 			}
-			$sql = "INSERT INTO {$table} (`" . implode('`, `', $keys) . "`) VALUES ({$values}";
-
+			$sql = "INSERT INTO `{$table}` (`" . implode('`, `', $keys) . "`) VALUES ({$values})";
+			
 			if(!$this->query($sql, $fields)->error()){
 				return true;
 				
