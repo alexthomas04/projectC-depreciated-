@@ -1,3 +1,4 @@
+		
 <?php
 require_once 'core/init.php';
 
@@ -50,12 +51,46 @@ if(Input::exists()){
 					}
 			}
 			else{
-				print_r($validation->errors());
+				$errors="";
+				$x=1;
+				foreach($validation->errors() as $error){
+					$errors .= $error;
+					if(count($validation->errors())>$x){
+						$errors .= ',';
+					}
+					$x++;
+				}
+				?>
+				<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		<link rel="stylesheet" href="register.css" type="text/css" />
+					<script type="text/javascript">
+					$(document).ready(function(){
+						var string = <?php echo "\"" . escape($errors) . "\"" ?>;
+						console.log(string);
+						var parts = string.split(',');
+						parts.forEach(function(entry) {
+   							 var id=entry.split('|')[0];
+   							 var error=entry.split('|')[1];
+   							 $('#'+id).after("<p class='error'>"+ error + "</p>");
+   							 console.log(id + "," + error);
+						});
+						$('.error').animate({
+							left: '10px',
+							opacity: '1'},
+							600, function() {
+							/* stuff to do after animation is complete */
+						});
+					});
+					</script>
+
+
+					<?php
 			}}
 }
 ?>
 
-
+		
 <form action="" method="post">
 	<div class ="field">
 		<label for="username">Username</label>
