@@ -10,6 +10,7 @@ if($user->isLoggedIn()){
 	<p>Hello <a href='#'> <?php echo escape($user->data()->username); ?></a></p>
 	<ul>
 		<li><a href="logout.php">log out</a></li>
+		<li><a href="changepassword.php">Change Password</a></li>
 	</ul>
 	<?php
 }else{

@@ -35,7 +35,7 @@ if(Input::exists()){
 					$salt = Hash::salt(32);
 					try{
 						$user->create(array(
-							'username' => Input::get('username'),
+							'username' => strtolower(Input::get('username')),
 							'password' => Hash::make(Input::get('password'),$salt),
 							'salt' => $salt,
 							'name' => Input::get('name'),
@@ -62,8 +62,8 @@ if(Input::exists()){
 				}
 				?>
 				<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-		<link rel="stylesheet" href="register.css" type="text/css" />
+				<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+				<link rel="stylesheet" href="register.css" type="text/css" />
 					<script type="text/javascript">
 					$(document).ready(function(){
 						var string = <?php echo "\"" . escape($errors) . "\"" ?>;

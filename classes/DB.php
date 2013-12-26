@@ -121,7 +121,7 @@ class DB{
 
 	}
 
-	public function update($table, $id, $fields){
+	public function update($table, $id, $fields=array()){
 		$set = '';
 		$x=1;
 
@@ -132,9 +132,8 @@ class DB{
 			}
 		}
 
-
 		$sql="UPDATE {$table} SET {$set} WHERE id={$id}";
-
+		print_r($sql);
 		if(!$this->query($sql,$fields)->error()){
 			return true;
 		}

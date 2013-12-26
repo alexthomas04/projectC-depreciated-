@@ -72,6 +72,9 @@ class User{
 								
 								return true;
 							}
+							else{
+								print_r('Wrong username or password');
+							}
 						}
 					}
 
@@ -93,5 +96,9 @@ class User{
 	}
 	public function exists(){
 		return (!empty($this->_data)) ? true : false;
+	}
+
+	public function change($field , $value){
+		$this->_db->update('users',$this->data()->id,array($field=>$value));
 	}
 }

@@ -12,7 +12,8 @@ if(Input::exists()){
 		if($validation->passed()){
 			$user = new User();
 			$remember = (Input::get('remember') === 'on') ? true : false;
-			$login = $user->login(Input::get('username'),Input::get('password'),$remember);
+			$login = $user->login(strtolower(Input::get('username')),Input::get('password'),$remember);
+			if($login)
 			Redirect::to('index.php');
 		}
 		else{
