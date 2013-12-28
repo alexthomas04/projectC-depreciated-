@@ -1,0 +1,6 @@
+.text_area{
+	width: 200px;
+	height: 300px;
+	border:   2px;
+	overflow: scroll;
+}
