@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		<script src="jquery-2.0.3.js"></script>
 		
 		<script src="Application-ProjectC.js"></script>
 		<link rel="stylesheet" href="projectC-CSS.css" type="text/css" />
@@ -20,6 +20,16 @@
 				<div class='Page'>
 					<div class='Pad'>
 						<h1>PAGE 1!</h1>
+						<div id="chatArea">
+							<p></p>
+						</div>
+						<div>
+							<form onsubmit="return false;">
+								<input type="text"  placholder=""></input>
+								<button value="Send">Send</button>
+								
+							</form>
+						</div>
 					</div>
 				</div>
 				<div class='Page'>
@@ -43,12 +53,7 @@
 
 		<script type="text/javascript">
 			initializeTabs();
-			center();
-			function center(){
-				var tabs=$('.Tabs');
-			var marginLeft = window.innerWidth/2-tabs.width()/2;
-			tabs.css('margin-left',marginLeft);
-			}
+			selectTab(0);
 		</script>
 	</body>
 </html>

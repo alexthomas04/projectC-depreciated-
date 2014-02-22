@@ -1,0 +1,81 @@
+<link rel="stylesheet" href="css/index.css" type="text/css" />
+<div id='chat_area'>
+			<div class='text_area'>
+
+			</div>
+			<form onsubmit='handleChat();return false;' id='input_area' action='#'>
+				<input class='chat_input' type='text'><button type='submit'>Send</button>
+				<input type="submit" style="position: absolute; left: -9999px"/>
+			</form>
+		</div>
+
+
+
+
+
+
+		<script type="text/javascript">
+
+		$(document).ready(function(){
+
+
+		});
+
+		function handleChat(){
+				var text = $('.chat_input').val();
+				var preparedMessage = prepareChat(username);
+				var newText = "<p><span class='username'>"+username+":</span>  "+text+"</p>";
+				$('.text_area').append(newText);
+				$('.chat_input').val("");
+				$.ajax({
+					url: 'chat.php',
+					type: 'post',
+					dataType: 'text',
+					data: {message: preparedMessage},
+					
+				})
+				.done(function(data) {
+					updateChat(data);
+				})
+				.fail(function(xhr, textStatus, errorThrown) {
+					console.log(errorThrown);
+				})
+				.always(function() {
+					console.log("complete");
+				});
+				
+
+
+		}
+
+		function prepareChat(username){
+			//format the chat for the ajax-php
+			return username +"sent:"+$('.chat_input').val();
+		}
+
+		function updateChat(data){
+			//logic for chat
+			$('body').append(data);
+
+		}
+
+		function getTabs(){
+			$.ajax({
+					url: 'projectC.html',
+					type: 'post',
+					dataType: 'html',
+					data: {message: preparedMessage},
+					
+				})
+				.done(function(data) {
+					$('#frame').src(data);
+					return data;
+				})
+				.fail(function(xhr, textStatus, errorThrown) {
+					console.log(errorThrown);
+				})
+				.always(function() {
+					console.log("complete");
+				});
+		}
+		</script>

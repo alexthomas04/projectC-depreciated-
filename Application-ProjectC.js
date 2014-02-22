@@ -3,13 +3,8 @@
 $(document).ready(function(){
 	$('.Tab').on('click',function(event){
 		event.preventDefault();
-		var pages = $(this).closest('.TabView').find('.Page');
 		var id = parseInt($(this).data('id'));
-		var selectedPage = pages.eq(id);
-		$('.selected').removeClass('selected');
-		$(this).addClass('selected');
-		pages.css('display', 'none');
-		selectedPage.css('display', 'block');
+		selectTab(id);
 		console.log($(this).data());
 	});
 
@@ -27,7 +22,13 @@ function initializeTabs(){
 		Tab.data('id',i+"");
 	};
 
-		
-	
-
 }
+
+function selectTab(id){
+		var pages = $('.TabView').find('.Page');
+		var selectedPage = pages.eq(id);
+		$('.selected').removeClass('selected');
+		$(".Tab").eq(id).addClass('selected');
+		pages.css('display', 'none');
+		selectedPage.css('display', 'block');
+	}
