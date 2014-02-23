@@ -20,6 +20,7 @@ public class Chunk {
 				blocks[x][y]=new Block(jsonCells.optString(y));
 			}
 		}
+		System.out.println("done");
 		
 	}
 	public Chunk(int x,int y){
