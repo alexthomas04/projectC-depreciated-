@@ -1,12 +1,15 @@
 package world;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import entities.Entity;
 import json.JSONObject;
 
 public class Block {
 		private double temperature=0,humidity=0,life=0;
+		private ArrayList<Entity> entities = new ArrayList<Entity>();
 	
 	public Block(String jsonString){
 		JSONObject json = new JSONObject(jsonString);
@@ -31,6 +34,15 @@ public class Block {
 			humidity = Double.parseDouble(attributes.get("humidity"));
 		if(attributes.containsKey("life"))
 			life = Double.parseDouble(attributes.get("life"));
+	}
+	public void addEntity(Entity e){
+		entities.add(e);
+	}
+	public void removeEntity(Entity e){
+		entities.remove(e);
+	}
+	public void removeEntities(){
+		entities.clear();
 	}
 	
 	

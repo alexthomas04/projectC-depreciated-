@@ -6,21 +6,20 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 
+import entities.Rock;
 import world.Chunk;
+import world.World;
 import json.JSONArray;
 
 public class Tester {
 	public static void main(String[] args){
 		
 		try{
-			BufferedReader br = new BufferedReader(new FileReader(new File("chunk.txt")));
-			String jsonString ="",line="";
-			do{
-				line =br.readLine();
-				if(line!=null)
-					jsonString+=line;
-			}while(line!=null);
-			new Chunk(jsonString);
+			Rock.staticLoad();
+			World w = new World();
+			w.loadChunks("world/");
+			w.loadEntities("world/");
+			w.save("world/");
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
