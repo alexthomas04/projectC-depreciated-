@@ -64,6 +64,9 @@ public class World {
 	public boolean loadEntities(String dir){
 		try{
 			File directory = new File(dir);
+			if(!directory.exists()){
+				directory.mkdir();
+			}
 			if(!directory.isDirectory())
 			{
 				return false;
