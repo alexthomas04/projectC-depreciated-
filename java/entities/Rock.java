@@ -27,6 +27,16 @@ public class Rock extends Entity {
 	}
 	
 	@Override
+	public boolean move(Chunk c,int x,int y){
+		return false;
+	}
+	
+	@Override
+	public boolean move(int x,int y){
+		return false;
+	}
+	
+	@Override
 	public JSONObject getJson(){
 		JSONObject json = super.getJson();
 		json.put("type", TYPE);

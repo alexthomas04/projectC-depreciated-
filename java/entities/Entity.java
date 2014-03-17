@@ -78,6 +78,24 @@ public abstract class Entity {
 		chunk.addEntity(this, locX, locY);
 		
 	}
+	
+	public boolean move(Chunk c , int x, int y){
+		chunk.removeEntity(this, locX, locY);
+		locX=x;
+		locY=y;
+		c.addEntity(this, locX, locY);
+		return true;
+	}
+	
+	public boolean move(int x, int y){
+		chunk.removeEntity(this, locX, locY);
+		locX=x;
+		locY=y;
+		chunk.addEntity(this, locX, locY);
+		return true;
+	}
+	
+	
 	public JSONObject getJson(){
 		JSONObject json = new JSONObject();
 		json.put("locationX",locX);
