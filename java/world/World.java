@@ -13,6 +13,8 @@ import entities.EntityTypeManager;
 import entities.Rock;
 
 public class World {
+	private static final String FILE_EXTENTION = ".json";
+	
 	private ArrayList<Entity> entities = new ArrayList<Entity>();
 	private ArrayList<Chunk> chunks = new ArrayList<Chunk>();
 	
@@ -39,13 +41,13 @@ public class World {
 				return false;
 			}
 			int id=0;
-			File chunk = new File(dir+"chunk"+id+".atf");
+			File chunk = new File(dir+"chunk"+id+FILE_EXTENTION);
 			while(chunk.exists()){
 				char[] charBuffer = new char[(int)chunk.length()];
 				new FileReader(chunk).read(charBuffer);
 				chunks.add(new Chunk(new String(charBuffer)));
 				id++;
-				chunk = new File(dir+"chunk"+id+".atf");
+				chunk = new File(dir+"chunk"+id+FILE_EXTENTION);
 			}
 			
 		}catch(Exception ex){
@@ -58,7 +60,7 @@ public class World {
 	
 	
 	/**
-	 * @param dir The Directory of the entities.atf file
+	 * @param dir The Directory of the entities(FILE_EXTENTION) file
 	 * @return If entities were loaded 
 	 */
 	public boolean loadEntities(String dir){
@@ -71,7 +73,7 @@ public class World {
 			{
 				return false;
 			}
-			File f = new File(dir+"entities.atf");
+			File f = new File(dir+"entities"+FILE_EXTENTION);
 			char[] charBuffer = new char[(int)f.length()];
 			new FileReader(f).read(charBuffer);
 			JSONArray entityArray = new JSONArray(new String(charBuffer));
@@ -96,7 +98,7 @@ public class World {
 		try{
 			for(int i=0;i<chunks.size();i++){
 				String data = chunks.get(i).getJson().toString();
-				BufferedWriter bw = new BufferedWriter(new FileWriter(new File(dir+"chunk"+i+".atf")));
+				BufferedWriter bw = new BufferedWriter(new FileWriter(new File(dir+"chunk"+i+FILE_EXTENTION)));
 				bw.write(data);
 				bw.flush();
 				bw.close();
@@ -105,7 +107,7 @@ public class World {
 			for(Entity e : entities){
 				entityArray.put(e.getJson());
 			}
-			BufferedWriter bw = new BufferedWriter(new FileWriter(new File(dir+"entities.atf")));
+			BufferedWriter bw = new BufferedWriter(new FileWriter(new File(dir+"entities"+FILE_EXTENTION)));
 			bw.write(entityArray.toString());
 			bw.flush();
 			bw.close();
