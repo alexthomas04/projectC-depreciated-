@@ -37,16 +37,12 @@ public class World {
 	/**
 	 * Instantiates a new world.
 	 *
-	 * @param numChunks the num chunks
+	 * @param numChunks the number chunks
 	 */
 	public World(int numChunks){
 		for(int i=0;i<numChunks;i++){
 			genNewChunk(i);
 		}
-		Rock r = new Rock(5,93,chunks.get(0),this);
-		Rock n = new Rock(54,33,chunks.get(0),this);
-		entities.add(n);
-		entities.add(r);
 	}
 	
 	/**
@@ -105,7 +101,7 @@ public class World {
 				JSONObject entityData = entityArray.getJSONObject(i);
 				int chunkId=entityData.optInt("chunk");
 				Class type = EntityTypeManager.GetEntityType(entityData.optString("type"));
-				Entity e = (Entity) type.getConstructor(Chunk.class,World.class,JSONObject.class).newInstance(chunks.get(chunkId),this,entityData);
+				Entity e = (Entity) type.getConstructor(Chunk.class,World.class,JSONObject.class).newInstance(entities.size(),chunks.get(chunkId),this,entityData);
 				entities.add(e);
 			}
 			
@@ -156,5 +152,15 @@ public class World {
 		chunks.add(new Chunk(Chunk.DEFAULT_X,Chunk.DEFAULT_Y,id));
 	}
 	
+	public Chunk getChunk(int id){
+		return chunks.get(id);
+	}
+	
+	public ArrayList<Entity> getEntities(){
+		return entities;
+	}
+	public void addEntity(Entity e){
+		entities.add(e);
+	}
 
 }

@@ -1,6 +1,9 @@
 package entities;
 
+import java.util.Hashtable;
+
 import json.JSONObject;
+import lombok.Data;
 import world.Chunk;
 import world.World;
 
@@ -8,6 +11,7 @@ import world.World;
 /**
  * The Class Rock.
  */
+
 public class Rock extends Entity {
 	
 	/** The Constant TYPE. */
@@ -21,8 +25,8 @@ public class Rock extends Entity {
 	 * @param c the Chunk that the entity will be put in
 	 * @param w the World that the entity will be put in
 	 */
-	public Rock(int x, int y, Chunk c, World w) {
-		super(x, y, c, w);
+	public Rock(int identification,int  x, int y, Chunk c, World w) {
+		super(identification,x, y, c, w);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -33,8 +37,8 @@ public class Rock extends Entity {
 	 * @param w the World that the entity will be put in
 	 * @param jsonString the JSON data
 	 */
-	public Rock(Chunk c, World w, String jsonString) {
-		super(c, w, jsonString);
+	public Rock(int identification,Chunk c, World w, String jsonString) {
+		super(identification,c, w, jsonString);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -45,10 +49,12 @@ public class Rock extends Entity {
 	 * @param w the World that the entity will be put in
 	 * @param json the JSON data
 	 */
-	public Rock(Chunk c, World w, JSONObject json) {
-		super(c, w, json);
+	public Rock(int identification,Chunk c, World w, JSONObject json) {
+		super(identification,c, w, json);
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 
 	/**
 	 * Static load.
@@ -83,6 +89,11 @@ public class Rock extends Entity {
 		JSONObject json = super.getJson();
 		json.put("type", TYPE);
 		return json;
+	}
+
+	public static Hashtable<String, String> getStandard() {
+		Hashtable<String,String> table= new Hashtable<String,String>();
+		return table;
 	}
 
 }
