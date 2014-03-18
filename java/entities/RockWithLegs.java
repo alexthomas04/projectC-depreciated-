@@ -15,7 +15,7 @@ import world.World;
  */
 public class RockWithLegs extends Entity {
 
-	private final static String TYPE="rockwithlegs";
+	public final static String TYPE="rockwithlegs";
 	/**
 	 * @param identification
 	 * @param x
@@ -81,11 +81,24 @@ public class RockWithLegs extends Entity {
 
 	}
 	
+	/**
+	 * Gets the standard.
+	 *
+	 * @return the standard Hashtable of stats
+	 */
+	public static Hashtable<String, String> getStandard() {
+		Hashtable<String,String> table= new Hashtable<String,String>();
+		return table;
+	}
+	
 	@Override
 	public JSONObject getJson(){
 		JSONObject json = super.getJson();
 		json.put("type", TYPE);
 		return json;
+	}
+	public String getType(){
+		return "rock with legs";
 	}
 
 }

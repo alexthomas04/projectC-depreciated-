@@ -15,7 +15,7 @@ import world.World;
 public class Rock extends Entity {
 	
 	/** The Constant TYPE. */
-	private final static String TYPE="rock";
+	public final static String TYPE="rock";
 	
 	/**
 	 * Instantiates a new rock.
@@ -91,9 +91,18 @@ public class Rock extends Entity {
 		return json;
 	}
 
+	/**
+	 * Gets the standard.
+	 *
+	 * @return the standard Hashtable of stats
+	 */
 	public static Hashtable<String, String> getStandard() {
 		Hashtable<String,String> table= new Hashtable<String,String>();
 		return table;
+	}
+	
+	public String getType(){
+		return "rock";
 	}
 
 }

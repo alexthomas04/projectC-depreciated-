@@ -6,6 +6,8 @@ import java.util.Iterator;
 
 import entities.Entity;
 import json.JSONObject;
+import lombok.Getter;
+import lombok.Setter;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -13,17 +15,17 @@ import json.JSONObject;
  */
 public class Block {
 		
-		/** The life. */
-		private double temperature=0;
+		/** The temperature. */
+		@Getter @Setter private double temperature=0;
 		
 		/** The humidity. */
-		private double humidity=0;
+		@Getter @Setter private double humidity=0;
 		
 		/** The life. */
-		private double life=0;
+		@Getter @Setter private double life=0;
 		
 		/** The entities on that block. */
-		private ArrayList<Entity> entities = new ArrayList<Entity>();
+		@Getter private ArrayList<Entity> entities = new ArrayList<Entity>();
 	
 	/**
 	 * Instantiates a new block.
@@ -103,6 +105,7 @@ public class Block {
 		json.put("life", life);
 		return json;
 	}
+	
 	
 	
 

@@ -6,6 +6,7 @@ import java.util.Hashtable;
 import entities.Entity;
 import json.JSONArray;
 import json.JSONObject;
+import lombok.Getter;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -14,13 +15,15 @@ import json.JSONObject;
 public class Chunk {
 	/////////////////Feilds\\\\\\\\\\\\\\\\\
 	/** The id. */
-	private int sizeX=0,sizeY=0,id;
+	@Getter private int id;
+	@Getter private int sizeX=0;
+	@Getter private int	sizeY=0;	
 	
 	/** The blocks. */
 	private Block[][] blocks;
 	
 	/** The entities. */
-	private ArrayList<Entity> entities = new ArrayList<Entity>();
+	@Getter private ArrayList<Entity> entities = new ArrayList<Entity>();
 	
 	/** The Constant DEFAULT_X. */
 	public static final int DEFAULT_X=100;
@@ -76,24 +79,7 @@ public class Chunk {
 	}
 	
 	
-	////////////////Accessers\\\\\\\\\\\\\
-	/**
-	 * Gets the id.
-	 *
-	 * @return the id
-	 */
-	public int getId(){
-		return id;
-	}
-	
-	/**
-	 * Gets the entites.
-	 *
-	 * @return the entites
-	 */
-	public ArrayList<Entity> getEntites(){
-		return entities;
-	}
+
 	
 	
 	
@@ -130,6 +116,13 @@ public class Chunk {
 	 */
 	public void removeEntities(int x , int y){
 		blocks[x][y].removeEntities();
+	}
+	
+	public ArrayList<Entity> getEntities(int x,int y){
+		ArrayList<Entity> list = new ArrayList<Entity>();
+		for(Entity e : blocks[x][y].getEntities())
+			list.add(e);
+		return list;
 	}
 	
 	

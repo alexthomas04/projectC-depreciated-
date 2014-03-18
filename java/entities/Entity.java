@@ -127,8 +127,7 @@ public abstract class Entity {
 	/** The world. */
 	protected World world;
 	
-	/** The Constant TYPE. */
-	protected final static String TYPE="ABSTRACT";
+	
 	
 
 	
@@ -274,7 +273,7 @@ public abstract class Entity {
 	 * Stores the class in the EntityTypeManager for loading from a file
 	 */
 	public static void staticLoad(){
-		EntityTypeManager.storeType(TYPE, Entity.class);
+		
 	}
 	
 	/**
@@ -388,6 +387,10 @@ public abstract class Entity {
 	
 	 public static Hashtable<String,String> getStandard(){
 		 return null;
+	 }
+	 
+	 public String getType(){
+		 return "ABSTRACT";
 	 }
 	
 	
