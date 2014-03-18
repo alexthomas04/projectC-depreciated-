@@ -52,7 +52,7 @@ public class Block {
 	}
 	
 	/**
-	 * Inits the.
+	 * Inits the attributes.
 	 *
 	 * @param attributes the attributes
 	 */

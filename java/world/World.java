@@ -12,17 +12,33 @@ import entities.Entity;
 import entities.EntityTypeManager;
 import entities.Rock;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class World.
+ */
 public class World {
+	
+	/** The Constant FILE_EXTENTION. */
 	private static final String FILE_EXTENTION = ".json";
 	
+	/** The entities. */
 	private ArrayList<Entity> entities = new ArrayList<Entity>();
+	
+	/** The chunks. */
 	private ArrayList<Chunk> chunks = new ArrayList<Chunk>();
 	
 	/**
-	 * @param dir The directory of the chunk{#}.atf files
-	 * @return If the chunks were loaded
+	 * Instantiates a new world.
+	 *
+	 * 
 	 */
 	public World(){	}
+	
+	/**
+	 * Instantiates a new world.
+	 *
+	 * @param numChunks the num chunks
+	 */
 	public World(int numChunks){
 		for(int i=0;i<numChunks;i++){
 			genNewChunk(i);
@@ -33,6 +49,12 @@ public class World {
 		entities.add(r);
 	}
 	
+	/**
+	 * Load chunks.
+	 *
+	 * @param dir the dir
+	 * @return true, if successful
+	 */
 	public boolean loadChunks(String dir){
 		try{
 			File directory = new File(dir);
@@ -60,8 +82,10 @@ public class World {
 	
 	
 	/**
+	 * Load entities.
+	 *
 	 * @param dir The Directory of the entities(FILE_EXTENTION) file
-	 * @return If entities were loaded 
+	 * @return If entities were loaded
 	 */
 	public boolean loadEntities(String dir){
 		try{
@@ -94,6 +118,12 @@ public class World {
 		
 	}
 	
+	/**
+	 * Save.
+	 *
+	 * @param dir the dir
+	 * @return true, if successful
+	 */
 	public boolean save(String dir){
 		try{
 			for(int i=0;i<chunks.size();i++){
@@ -117,6 +147,11 @@ public class World {
 		return true;
 	}
 	
+	/**
+	 * Generate new chunk.
+	 *
+	 * @param id the id of the chunk
+	 */
 	public void genNewChunk(int id){
 		chunks.add(new Chunk(Chunk.DEFAULT_X,Chunk.DEFAULT_Y,id));
 	}
