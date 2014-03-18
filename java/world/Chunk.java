@@ -7,15 +7,34 @@ import entities.Entity;
 import json.JSONArray;
 import json.JSONObject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Chunk.
+ */
 public class Chunk {
 	/////////////////Feilds\\\\\\\\\\\\\\\\\
+	/** The id. */
 	private int sizeX=0,sizeY=0,id;
+	
+	/** The blocks. */
 	private Block[][] blocks;
+	
+	/** The entities. */
 	private ArrayList<Entity> entities = new ArrayList<Entity>();
-	public static final int DEFAULT_X=100,DEFAULT_Y=100;
+	
+	/** The Constant DEFAULT_X. */
+	public static final int DEFAULT_X=100;
+	
+	/** The Constant DEFAULT_Y. */
+	public static final int DEFAULT_Y=100;
 	
 	
 	////////////////Constructors\\\\\\\\\\\\\\
+	/**
+	 * Instantiates a chunk from JSON.
+	 *
+	 * @param jsonString the JSON string
+	 */
 	public Chunk(String jsonString){
 		JSONObject json = new JSONObject(jsonString);
 		sizeX = json.optInt("sizeX",0);
@@ -32,6 +51,14 @@ public class Chunk {
 		System.out.println("done");
 		
 	}
+	
+	/**
+	 * Instantiates a new chunk.
+	 *
+	 * @param x the width
+	 * @param y the height
+	 * @param identification the id 
+	 */
 	public Chunk(int x,int y,int identification){
 		sizeX=x;
 		sizeY=y;
@@ -50,9 +77,20 @@ public class Chunk {
 	
 	
 	////////////////Accessers\\\\\\\\\\\\\
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public int getId(){
 		return id;
 	}
+	
+	/**
+	 * Gets the entites.
+	 *
+	 * @return the entites
+	 */
 	public ArrayList<Entity> getEntites(){
 		return entities;
 	}
@@ -61,13 +99,35 @@ public class Chunk {
 	
 	
 	///////////////Methods\\\\\\\\\\\\\\\
+	/**
+	 * Adds the entity.
+	 *
+	 * @param e the entity that is being added
+	 * @param x the x coordinate
+	 * @param y the y coordinate
+	 */
 	public void addEntity(Entity e,int x,int y){
 		entities.add(e);
 		blocks[x][y].addEntity(e);
 	}
+	
+	/**
+	 * Removes the entity.
+	 *
+	 * @param e the entity
+	 * @param x the x coordinate
+	 * @param y the y coordinate
+	 */
 	public void removeEntity(Entity e,int x, int y){
 		blocks[x][y].removeEntity(e);
 	}
+	
+	/**
+	 * Removes the all the entities from the block.
+	 *
+	 * @param x the x coordinate
+	 * @param y the y coordinate
+	 */
 	public void removeEntities(int x , int y){
 		blocks[x][y].removeEntities();
 	}
@@ -79,6 +139,11 @@ public class Chunk {
 	
 	
 	
+	/**
+	 * Gets the json.
+	 *
+	 * @return the json
+	 */
 	public JSONObject getJson(){
 		JSONObject json = new JSONObject();
 		json.put("sizeX", sizeX);

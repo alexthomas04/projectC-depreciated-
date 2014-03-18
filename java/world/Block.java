@@ -7,10 +7,29 @@ import java.util.Iterator;
 import entities.Entity;
 import json.JSONObject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Block.
+ */
 public class Block {
-		private double temperature=0,humidity=0,life=0;
+		
+		/** The life. */
+		private double temperature=0;
+		
+		/** The humidity. */
+		private double humidity=0;
+		
+		/** The life. */
+		private double life=0;
+		
+		/** The entities on that block. */
 		private ArrayList<Entity> entities = new ArrayList<Entity>();
 	
+	/**
+	 * Instantiates a new block.
+	 *
+	 * @param jsonString the json string
+	 */
 	public Block(String jsonString){
 		JSONObject json = new JSONObject(jsonString);
 		Iterator itr = json.keys();
@@ -23,10 +42,20 @@ public class Block {
 		
 	}
 	
+	/**
+	 * Instantiates a new block.
+	 *
+	 * @param attributes the attributes
+	 */
 	public Block(Hashtable<String,String> attributes){
 		init(attributes);
 	}
 	
+	/**
+	 * Inits the.
+	 *
+	 * @param attributes the attributes
+	 */
 	private void init(Hashtable<String,String> attributes){
 		if(attributes.containsKey("temperature"))
 			temperature = Double.parseDouble(attributes.get("temperature"));
@@ -35,17 +64,38 @@ public class Block {
 		if(attributes.containsKey("life"))
 			life = Double.parseDouble(attributes.get("life"));
 	}
+	
+	/**
+	 * Adds the entity.
+	 *
+	 * @param e the e
+	 */
 	public void addEntity(Entity e){
 		entities.add(e);
 	}
+	
+	/**
+	 * Removes the entity.
+	 *
+	 * @param e the e
+	 */
 	public void removeEntity(Entity e){
 		entities.remove(e);
 	}
+	
+	/**
+	 * Removes the entities.
+	 */
 	public void removeEntities(){
 		entities.clear();
 	}
 	
 	
+	/**
+	 * Gets the block as json.
+	 *
+	 * @return the json
+	 */
 	public JSONObject getJson(){
 		JSONObject json = new JSONObject();
 		json.put("temperature", temperature);

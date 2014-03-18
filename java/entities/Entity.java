@@ -7,12 +7,34 @@ import json.JSONObject;
 import world.Chunk;
 import world.World;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Entity.
+ *
+ * @author Alex Thomas
+ */
 public abstract class Entity {
+	
+	/** The id. */
 	protected int locX=0,locY=0,id;
+	
+	/** The chunk. */
 	protected Chunk chunk;
+	
+	/** The world. */
 	protected World world;
+	
+	/** The Constant TYPE. */
 	protected final static String TYPE="ABSTRACT";
 	
+	/**
+	 * Instantiates a new entity.
+	 *
+	 * @param x the x coordinate 
+	 * @param y the y coordinate
+	 * @param c the Chunk that the entity will be put in
+	 * @param w the World that the entity will be put in
+	 */
 	public Entity(int x,int y,Chunk c,World w){
 		locX=x;
 		locY=y;
@@ -22,6 +44,13 @@ public abstract class Entity {
 		
 	}
 	
+	/**
+	 * Instantiates a new entity.
+	 *
+	 * @param c the Chunk that the entity will be put in
+	 * @param w the World that the entity will be put in
+	 * @param jsonString the JSON data
+	 */
 	public Entity(Chunk c,World w,String jsonString){
 		world=w;
 		chunk=c;
@@ -34,6 +63,14 @@ public abstract class Entity {
 		}
 		init(attributes);
 	}
+	
+	/**
+	 * Instantiates a new entity.
+	 *
+	 * @param c the Chunk d that the entity will be put in
+	 * @param w the World that the entity will be put in
+	 * @param json the JSON data
+	 */
 	public Entity(Chunk c,World w,JSONObject json){
 		world=w;
 		chunk=c;
@@ -47,15 +84,38 @@ public abstract class Entity {
 	}
 	
 	
+	/**
+	 * Gets the x.
+	 *
+	 * @return the x
+	 */
 	public int getX(){
 		return locX;
 	}
+	
+	/**
+	 * Gets the y.
+	 *
+	 * @return the y
+	 */
 	public int getY(){
 		return locY;
 	}
+	
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public int getId(){
 		return id;
 	}
+	
+	/**
+	 * Gets the chunk.
+	 *
+	 * @return the chunk
+	 */
 	public Chunk getChunk(){
 		return chunk;
 	}
@@ -63,9 +123,19 @@ public abstract class Entity {
 	
 	
 	
+	/**
+	 * Static load.
+	 * Stores the class in the EntityTypeManager for loading from a file
+	 */
 	public static void staticLoad(){
 		EntityTypeManager.storeType(TYPE, Entity.class);
 	}
+	
+	/**
+	 * Inits the attributes.
+	 *
+	 * @param attributes the attributes
+	 */
 	protected void init(Hashtable<String,String> attributes){
 		if(attributes!=null){
 		if(attributes.containsKey("locationX"))
@@ -79,6 +149,14 @@ public abstract class Entity {
 		
 	}
 	
+	/**
+	 * Move to a different chunk.
+	 *
+	 * @param c the Chunk
+	 * @param x the x
+	 * @param y the y
+	 * @return true, if successful
+	 */
 	public boolean move(Chunk c , int x, int y){
 		chunk.removeEntity(this, locX, locY);
 		locX=x;
@@ -87,6 +165,13 @@ public abstract class Entity {
 		return true;
 	}
 	
+	/**
+	 * Move within the same chunk.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @return true, if successful
+	 */
 	public boolean move(int x, int y){
 		chunk.removeEntity(this, locX, locY);
 		locX=x;
@@ -96,6 +181,11 @@ public abstract class Entity {
 	}
 	
 	
+	/**
+	 * Gets the entity as json.
+	 *
+	 * @return the json
+	 */
 	public JSONObject getJson(){
 		JSONObject json = new JSONObject();
 		json.put("locationX",locX);
