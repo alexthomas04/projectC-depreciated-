@@ -54,6 +54,21 @@ public class Rock extends Entity {
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * Instantiates a new rock.
+	 *
+	 * @param identification the identification
+	 * @param x the x coordinate
+	 * @param y the y coordinate
+	 * @param c the Chunk that the entity will be put in
+	 * @param w the World that the entity will be put in
+	 * @param attributes the attributes of the entity
+	 */
+	public Rock(int identification,int x,int y,Chunk c,World w,Hashtable<String,String> attributes){
+		super(identification,x,y,c,w,attributes);
+		
+	}
+	
 	
 
 	/**
@@ -98,6 +113,7 @@ public class Rock extends Entity {
 	 */
 	public static Hashtable<String, String> getStandard() {
 		Hashtable<String,String> table= new Hashtable<String,String>();
+		table.put("weight", "20");
 		return table;
 	}
 	

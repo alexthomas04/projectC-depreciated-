@@ -16,6 +16,7 @@ public class Player extends Entity {
 
 	public final static String TYPE="player";
 	private ArrayList<Entity> inventory = new ArrayList<Entity>();
+	private int food=10;
 	public Player(int identification, int x, int y, Chunk c, World w) {
 		super(identification, x, y, c, w);
 		// TODO Auto-generated constructor stub
@@ -72,6 +73,8 @@ public class Player extends Entity {
 			return pickUp(Arrays.copyOfRange(command, 2, command.length));
 		else if(command[0].equalsIgnoreCase("inventory"))
 			return inventory(Arrays.copyOfRange(command, 1, command.length));
+		else if(command[0].equalsIgnoreCase("eat"))
+			return eat(Arrays.copyOfRange(command, 1, command.length));
 		return "Comamnd did not execute";
 	}
 	
@@ -191,6 +194,7 @@ public class Player extends Entity {
 			for(Entity e : entities){
 				if(e.getId()==searchId){
 					chunk.removeEntity(e, locX, locY);
+					world.removeEntity(e);
 					inventory.add(e);
 				}
 					
@@ -200,8 +204,11 @@ public class Player extends Entity {
 		else{
 			ArrayList<Entity> entities = chunk.getEntities(locX, locY);
 			for(Entity e : entities){
-					chunk.removeEntity(e, locX, locY);
-					inventory.add(e);
+					if(!(e instanceof Player)){
+						chunk.removeEntity(e, locX, locY);
+						world.removeEntity(e);
+						inventory.add(e);
+					}
 			}
 			return "";
 		}
@@ -237,11 +244,46 @@ public class Player extends Entity {
 		
 		
 	}
+	public String eat(String[] command){
+		if(command.length>=1){
+			int searchId;
+			try{
+			 searchId = Integer.parseInt(command[0]);
+			}catch(Exception ex){
+				return "Not enough arguments";
+			}
+			for(Entity e : inventory){
+				if(e.getId()==searchId && e instanceof Edible){
+					inventory.remove(e);
+					food += ((Edible)e).getFoodLevel();
+					return "You ate a "+e.getType() + ". Which had "+((Edible)e).getFoodLevel()+". Your current food is "+food;
+					
+				}
+					
+			}
+		}
+		else{
+			for(Entity e : inventory){
+				if( e instanceof Edible){
+					inventory.remove(e);
+					food += ((Edible)e).getFoodLevel();
+					return "You ate a "+e.getType() + ". Which had "+((Edible)e).getFoodLevel()+". Your current food is "+food;
+					
+				}
+					
+			}
+		}
+		return "You had nothing edible in your inventory";
+	}
 	
 	@Override
 	protected void init(Hashtable<String,String> attributes){
 		if(attributes!=null){
+			if(inventory == null)
+				inventory = new ArrayList<Entity>();
 		super.init(attributes);
+		if(attributes.containsKey("food"))
+			food = Integer.parseInt(attributes.get("food"));
 		if(attributes.containsKey("invnetory")){
 			JSONArray invn = new JSONArray(attributes.get("invnetory"));
 			for(int i=0;i<invn.length();i++){
@@ -249,6 +291,7 @@ public class Player extends Entity {
 				Class type = EntityTypeManager.GetEntityType(entityJson.optString("type"));
 				try {
 					Entity e = (Entity) type.getConstructor(Integer.TYPE,Chunk.class,World.class,JSONObject.class).newInstance(world.getEntities().size(),world.getChunk(0),world,entityJson);
+					inventory.add(e);
 				} catch (InstantiationException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -280,10 +323,18 @@ public class Player extends Entity {
 		for(Entity e : inventory)
 			invn.put(e.getJson());
 		json.put("invnetory",invn);
+		json.put("food", food);
 		return json;
 	}
 	public String getType(){
 		return "player";
+	}
+	
+	@Override 
+	public void tick(){
+		food--;
+		if(food<0)
+			System.out.println("You ran out of food " +food);
 	}
 
 }

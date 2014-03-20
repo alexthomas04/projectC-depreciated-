@@ -2,8 +2,12 @@ package world;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Random;
 
 import entities.Entity;
+import entities.GenericPlant;
+import entities.Rock;
+import entities.RockWithLegs;
 import json.JSONArray;
 import json.JSONObject;
 import lombok.Getter;
@@ -126,7 +130,32 @@ public class Chunk {
 	}
 	
 	
-	
+	public static Chunk generateRandomChunk(int x,int y,int identification,World w,int itterations){
+		Chunk c = new Chunk(x,y,identification);
+		Random rand = new Random();
+		for(int z=0;z<itterations;z++){
+			for(int i=0;i<x;i++){
+				for(int k=0;k<y;k++){
+					if(rand.nextInt(20)==1){
+						Entity e = new Rock(w.getEntities().size(),i,k,c,w,Rock.getStandard());
+						w.addEntity(e);
+						c.addEntity(e, i, k);
+						}
+					if(rand.nextInt(20)==1){
+						Entity e =new RockWithLegs(w.getEntities().size(),i,k,c,w,RockWithLegs.getStandard());
+						w.addEntity(e);
+						c.addEntity(e, i, k);
+						}
+					if(rand.nextInt(20)==1){
+						Entity e =new GenericPlant(w.getEntities().size(),i,k,c,w,GenericPlant.getStandard());
+						w.addEntity(e);
+						c.addEntity(e, i, k);
+						}
+				}
+			}
+		}
+		return c;
+	}
 	
 	
 	

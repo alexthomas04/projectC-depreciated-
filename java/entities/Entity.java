@@ -70,6 +70,8 @@ public abstract class Entity {
 	/** The weight. */
 	@Getter @Setter protected int weight=0;
 	
+	@Getter @Setter protected int vision=1;
+	
 	/** The total weight. */
 	protected int totalWeight;
 	
@@ -392,6 +394,19 @@ public abstract class Entity {
 	 public String getType(){
 		 return "ABSTRACT";
 	 }
+	 
+	 public Hashtable<String,String> getDetails(){
+		 JSONObject json = getJson();
+		 Iterator itr = json.keys();
+			Hashtable<String,String> attributes = new Hashtable<String,String>();
+			while(itr.hasNext()){
+				String key = (String) itr.next();
+				attributes.put(key, json.optString(key));
+			}
+			return attributes;
+	 }
+	 
+	 public void tick(){ }
 	
 	
 
