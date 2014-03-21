@@ -15,7 +15,7 @@ import world.World;
 public class Player extends Entity {
 
 	public final static String TYPE="player";
-	private int food=0;
+	private int food=10;
 	private ArrayList<Entity> inventory;
 	public Player(int identification, int x, int y, Chunk c, World w) {
 		super(identification, x, y, c, w);
@@ -63,7 +63,9 @@ public class Player extends Entity {
 	
 	
 	public String handleCommand(String[] command){
-		if(command[0].equalsIgnoreCase("move")){
+		if(dead)
+			return "You can't do that ... \nYou're dead";
+		else if(command[0].equalsIgnoreCase("move")){
 			return move(Arrays.copyOfRange(command, 1, command.length));
 		}
 		else if(command[0].equalsIgnoreCase("look")){
@@ -327,4 +329,11 @@ public class Player extends Entity {
 		return "player";
 	}
 
+	@Override
+	public void tick(){
+		food--;
+		if(food<0)
+			dead=true;
+		
+	}
 }

@@ -129,6 +129,8 @@ public abstract class Entity {
 	/** The world. */
 	protected World world;
 	
+	protected boolean dead=false;
+	
 	
 	
 
@@ -321,6 +323,8 @@ public abstract class Entity {
 			luck = Integer.parseInt(attributes.get("luck"));
 		if(attributes.containsKey("weight"))
 			weight = Integer.parseInt(attributes.get("weight"));
+		if(attributes.containsKey("dead"))
+			dead = Boolean.parseBoolean(attributes.get("dead"));
 		}
 		chunk.addEntity(this, locX, locY);
 		
@@ -383,6 +387,7 @@ public abstract class Entity {
 		json.put("speed",speed);
 		json.put("luck",luck);
 		json.put("weight",weight);
+		json.put("dead",dead);
 		
 		
 		return json;
