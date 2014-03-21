@@ -338,7 +338,8 @@ public abstract class Entity {
 		chunk.removeEntity(this, locX, locY);
 		locX=x;
 		locY=y;
-		c.addEntity(this, locX, locY);
+		if(c!= null)
+			c.addEntity(this, locX, locY);
 		return true;
 	}
 	

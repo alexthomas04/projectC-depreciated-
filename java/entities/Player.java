@@ -15,7 +15,8 @@ import world.World;
 public class Player extends Entity {
 
 	public final static String TYPE="player";
-	private ArrayList<Entity> inventory = new ArrayList<Entity>();
+	private int food=0;
+	private ArrayList<Entity> inventory;
 	public Player(int identification, int x, int y, Chunk c, World w) {
 		super(identification, x, y, c, w);
 		// TODO Auto-generated constructor stub
@@ -72,26 +73,28 @@ public class Player extends Entity {
 			return pickUp(Arrays.copyOfRange(command, 2, command.length));
 		else if(command[0].equalsIgnoreCase("inventory"))
 			return inventory(Arrays.copyOfRange(command, 1, command.length));
+		else if(command[0].equalsIgnoreCase("eat"))
+			return eat(Arrays.copyOfRange(command, 1, command.length));
 		return "Comamnd did not execute";
 	}
 	
 	public String move(String[] command){
 		if(command.length<1)
 			return "Not enough arguments";
-		if(command[0].equalsIgnoreCase("left")){
+		if(command[0].equalsIgnoreCase("right")){
 			if(chunk.getSizeX()>locX+1){
 				move(locX+1,locY);
-				return "You are at ("+locX+", "+locY+")."+ ((chunk.getSizeX()-1==locX)? "You are at the left edge." : "");
+				return "You are at ("+locX+", "+locY+")."+ ((chunk.getSizeX()-1==locX)? "You are at the right edge." : "");
 			}
 			else
 				return "You are already at the left edge";
 		}
 			
-		else if(command[0].equalsIgnoreCase("right"))
+		else if(command[0].equalsIgnoreCase("left"))
 		{
 			if(0<=locX-1){
 				move(locX-1,locY);
-				return "You are at ("+locX+", "+locY+")."+ ((0==locX)? "You are at the right edge." : "");
+				return "You are at ("+locX+", "+locY+")."+ ((0==locX)? "You are at the left edge." : "");
 			}
 			else
 				return "You are already at the right edge";
@@ -138,7 +141,7 @@ public class Player extends Entity {
 			ArrayList<Entity> entities;
 			entities=chunk.getEntities(locX, locY);
 			for(Entity e : entities)
-				data+=e.getType() + " , " + e.getId() + ". At "+(locX)+", " +(locY+1)+"\n";
+				data+=e.getType() + " , " + e.getId() + ". At "+(locX)+", " +(locY)+"\n";
 			return "You found " + ((data.isEmpty())?"nothing":data);
 		}
 		else if(command[0].equalsIgnoreCase("Up"))
@@ -189,8 +192,9 @@ public class Player extends Entity {
 			}
 			ArrayList<Entity> entities = chunk.getEntities(locX, locY);
 			for(Entity e : entities){
-				if(e.getId()==searchId){
+				if(e.getId()==searchId && !(e instanceof Player)){
 					chunk.removeEntity(e, locX, locY);
+					world.removeEntity(e);
 					inventory.add(e);
 				}
 					
@@ -200,8 +204,11 @@ public class Player extends Entity {
 		else{
 			ArrayList<Entity> entities = chunk.getEntities(locX, locY);
 			for(Entity e : entities){
+				if(!(e instanceof Player)){
 					chunk.removeEntity(e, locX, locY);
-					inventory.add(e);
+					world.removeEntity(e);
+					e.move(null, 0, 0);
+					inventory.add(e);}
 			}
 			return "";
 		}
@@ -238,17 +245,49 @@ public class Player extends Entity {
 		
 	}
 	
+	public String eat(String[] command){
+		if(command.length>=1){
+			int searchId;
+			try{
+			 searchId = Integer.parseInt(command[0]);
+			}catch(Exception ex){
+				return "Not enough arguments";
+			}
+			for(Entity e : inventory){
+				if(e.getId()==searchId && e instanceof Edible){
+					inventory.remove(e);
+					food += ((Edible)e).getFoodLevel();
+					return "Ate a " + e.getType() +" with " + ((Edible)e).getFoodLevel() + " food. Now you have " + food+ " food.";
+				}
+					
+			}
+		}
+		for(Entity e : inventory){
+			if( e instanceof Edible){
+				inventory.remove(e);
+				food += ((Edible)e).getFoodLevel();
+				return "Ate a " + e.getType() +" with " + ((Edible)e).getFoodLevel() + " food. Now you have " + food+ " food.";
+			}
+		}
+		return "Nothing edible in inventory";
+	}
+	
 	@Override
 	protected void init(Hashtable<String,String> attributes){
+		if(inventory == null)
+			inventory = new ArrayList<Entity>();
 		if(attributes!=null){
 		super.init(attributes);
+		if(attributes.containsKey("food"))
+			food = Integer.parseInt(attributes.get("food"));
 		if(attributes.containsKey("invnetory")){
 			JSONArray invn = new JSONArray(attributes.get("invnetory"));
 			for(int i=0;i<invn.length();i++){
 				JSONObject entityJson = invn.optJSONObject(i);
 				Class type = EntityTypeManager.GetEntityType(entityJson.optString("type"));
 				try {
-					Entity e = (Entity) type.getConstructor(Integer.TYPE,Chunk.class,World.class,JSONObject.class).newInstance(world.getEntities().size(),world.getChunk(0),world,entityJson);
+					Entity e = (Entity) type.getConstructor(Integer.TYPE,Chunk.class,World.class,JSONObject.class).newInstance(inventory.size(),world.getChunk(0),world,entityJson);
+					inventory.add(e);
 				} catch (InstantiationException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -280,8 +319,10 @@ public class Player extends Entity {
 		for(Entity e : inventory)
 			invn.put(e.getJson());
 		json.put("invnetory",invn);
+		json.put("food", food);
 		return json;
 	}
+	
 	public String getType(){
 		return "player";
 	}
