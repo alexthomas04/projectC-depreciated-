@@ -23,9 +23,7 @@
 
 		function handleChat(){
 				var text = $('.chat_input').val();
-				var preparedMessage = prepareChat(username);
-				var newText = "<p><span class='username'>"+username+":</span>  "+text+"</p>";
-				$('.text_area').append(newText);
+				var preparedMessage = getChat();
 				$('.chat_input').val("");
 				$.ajax({
 					url: 'chat.php',
@@ -48,14 +46,16 @@
 
 		}
 
-		function prepareChat(username){
-			//format the chat for the ajax-php
-			return username +"sent:"+$('.chat_input').val();
+		function getChat(){
+			
+			return $('.chat_input').val();
 		}
 
 		function updateChat(data){
 			//logic for chat
-			$('body').append(data);
+			$('.text_area').append(data);
+			var div = $('.text_area');
+			div.scrollTop(div.scrollTop()+200);
 
 		}
 

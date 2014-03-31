@@ -69,7 +69,6 @@ class User{
 										}
 										Cookie::put($this->_cookieName,$hash,Config::get('remember/cookie_expiry'));
 									}
-								
 								return true;
 							}
 							else{

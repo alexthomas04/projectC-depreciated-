@@ -11,12 +11,15 @@ import json.JSONArray;
 import json.JSONObject;
 import world.Chunk;
 import world.World;
+import lombok.*;
 
 public class Player extends Entity {
 
 	public final static String TYPE="player";
-	private int food=10;
+	private int food;
+	private int visionXP;
 	private ArrayList<Entity> inventory;
+	@Getter private String name;
 	public Player(int identification, int x, int y, Chunk c, World w) {
 		super(identification, x, y, c, w);
 		// TODO Auto-generated constructor stub
@@ -57,6 +60,8 @@ public class Player extends Entity {
 	 */
 	public static Hashtable<String, String> getStandard() {
 		Hashtable<String,String> table= new Hashtable<String,String>();
+		table.put("food","10");
+		table.put("vision", "1");
 		return table;
 	}
 	
@@ -89,7 +94,7 @@ public class Player extends Entity {
 				return "You are at ("+locX+", "+locY+")."+ ((chunk.getSizeX()-1==locX)? "You are at the right edge." : "");
 			}
 			else
-				return "You are already at the left edge";
+				return "You are already at the right edge";
 		}
 			
 		else if(command[0].equalsIgnoreCase("left"))
@@ -99,7 +104,7 @@ public class Player extends Entity {
 				return "You are at ("+locX+", "+locY+")."+ ((0==locX)? "You are at the left edge." : "");
 			}
 			else
-				return "You are already at the right edge";
+				return "You are already at the left edge";
 		}
 		else if(command[0].equalsIgnoreCase("down"))
 		{
@@ -108,7 +113,7 @@ public class Player extends Entity {
 				return "You are at ("+locX+", "+locY+")."+ ((chunk.getSizeY()-1==locY)? "You are at the bottom edge." : "");
 			}
 			else
-				return "You are already at the left edge";
+				return "You are already at the bottom edge";
 		}
 		else if(command[0].equalsIgnoreCase("up"))
 		{
@@ -117,7 +122,7 @@ public class Player extends Entity {
 				return "You are at ("+locX+", "+locY+")."+ ((0==locY)? "You are at the top edge." : "");
 			}
 			else
-				return "You are already at the left edge";
+				return "You are already at the top edge";
 		}
 		return "Comamnd did not execute";
 	}
@@ -132,6 +137,7 @@ public class Player extends Entity {
 					if(locX+i<chunk.getSizeX() && locY+k<chunk.getSizeY() && locX+i>=0 && locY+k>=0 ){//&& locY+k != locY && locX+i!=locX){
 						for(Entity e : chunk.getEntities(locX+i, locY+k))
 							data+=e.getType() + " , " + e.getId() + ". At "+(locX+i)+", " +(locY+k)+"\n";
+							visionXP++;
 					}
 				}
 			}
@@ -142,8 +148,10 @@ public class Player extends Entity {
 			String data = "";
 			ArrayList<Entity> entities;
 			entities=chunk.getEntities(locX, locY);
-			for(Entity e : entities)
+			for(Entity e : entities){
 				data+=e.getType() + " , " + e.getId() + ". At "+(locX)+", " +(locY)+"\n";
+				visionXP++;
+			}
 			return "You found " + ((data.isEmpty())?"nothing":data);
 		}
 		else if(command[0].equalsIgnoreCase("Up"))
@@ -170,6 +178,7 @@ public class Player extends Entity {
 									String key = keys.nextElement();
 									details+=key+" = "+attributes.get(key)+"\n";
 								}
+								visionXP++;
 								return details;
 							}
 								
@@ -282,6 +291,8 @@ public class Player extends Entity {
 		super.init(attributes);
 		if(attributes.containsKey("food"))
 			food = Integer.parseInt(attributes.get("food"));
+		if(attributes.containsKey("name"))
+			name = attributes.get("name");
 		if(attributes.containsKey("invnetory")){
 			JSONArray invn = new JSONArray(attributes.get("invnetory"));
 			for(int i=0;i<invn.length();i++){
@@ -322,6 +333,7 @@ public class Player extends Entity {
 			invn.put(e.getJson());
 		json.put("invnetory",invn);
 		json.put("food", food);
+		json.put("name", name);
 		return json;
 	}
 	
@@ -334,6 +346,11 @@ public class Player extends Entity {
 		food--;
 		if(food<0)
 			dead=true;
+		
+	}
+
+	public String handleCommand(String string) {
+		return handleCommand(string.split(" "));
 		
 	}
 }

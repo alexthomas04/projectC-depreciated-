@@ -29,48 +29,48 @@ public abstract class Entity {
 	protected int locY=0;
 	
 	/** The strength. */
-	@Getter @Setter protected int strength=0;
+	@Getter @Setter protected int strength;
 	
 	/** The power. */
-	@Getter @Setter protected int power =0;
+	@Getter @Setter protected int power ;
 	
 	/** The wisdom. */
-	@Getter @Setter protected int wisdom=0;
+	@Getter @Setter protected int wisdom;
 	
 	/** The physical endurence. */
-	@Getter @Setter protected int physicalEndurence=0;
+	@Getter @Setter protected int physicalEndurence;
 	
 	/** The sharp endurence. */
-	@Getter @Setter protected int sharpEndurence=0;
+	@Getter @Setter protected int sharpEndurence;
 	
 	/** The stab enderence. */
-	@Getter @Setter protected int stabEnderence=0;
+	@Getter @Setter protected int stabEnderence;
 	
 	/** The temperature resistance. */
-	@Getter @Setter protected int temperatureResistance=0;
+	@Getter @Setter protected int temperatureResistance;
 	
 	/** The p h afinity. */
-	@Getter @Setter protected int pHAfinity=7;
+	@Getter @Setter protected int pHAfinity;
 	
 	/** The hydration. */
-	@Getter @Setter protected int hydration=0;
+	@Getter @Setter protected int hydration;
 	
 	/** The vitality. */
-	@Getter @Setter protected int vitality=0;
+	@Getter @Setter protected int vitality;
 	
 	/** The dexterity. */
-	@Getter @Setter protected int dexterity=0;
+	@Getter @Setter protected int dexterity;
 	
 	/** The speed. */
-	@Getter @Setter protected int speed=0;
+	@Getter @Setter protected int speed;
 	
 	/** The luck. */
-	@Getter @Setter protected int luck=0;
+	@Getter @Setter protected int luck;
 	
 	/** The weight. */
-	@Getter @Setter protected int weight=0;
+	@Getter @Setter protected int weight;
 	
-	@Getter @Setter protected int vision=1;
+	@Getter @Setter protected int vision;
 	
 	/** The total weight. */
 	protected int totalWeight;

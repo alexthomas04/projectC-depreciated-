@@ -115,6 +115,7 @@ public class World {
 			
 		}catch(Exception ex){
 			ex.printStackTrace();
+			System.out.println("Did you forget to static load somthing ....");
 			return false;
 		}
 		
@@ -229,6 +230,18 @@ public class World {
 			e.tick();
 		for(Player p : players)
 			p.tick();
+	}
+	
+	public Player getPlayer(String name){
+		for(Player p : players){
+			if(p.getName().equals(name))
+				return p;
+		}
+		return null;
+	}
+	
+	public boolean hasPlayer(String name){
+		return !(getPlayer(name)==null);
 	}
 
 }
