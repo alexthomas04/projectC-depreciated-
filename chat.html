@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="css/index.css" type="text/css" />
-<div id='chat_area'>
+<div id='chat_area' onload="">
 			<div class='text_area'>
 
 			</div>
@@ -13,23 +13,21 @@
 
 
 
-
+		<script src="jquery-2.0.3.js"></script>
 		<script type="text/javascript">
-
-		$(document).ready(function(){
-
-
-		});
-
+		setInterval(function(){update();}, 500);
+		
+		var state=0;
 		function handleChat(){
+			
 				var text = $('.chat_input').val();
 				var preparedMessage = getChat();
 				$('.chat_input').val("");
 				$.ajax({
 					url: 'chat.php',
 					type: 'post',
-					dataType: 'text',
-					data: {message: preparedMessage},
+					dataType: 'json',
+					data: {"message": preparedMessage,"state":state}
 					
 				})
 				.done(function(data) {
@@ -39,11 +37,30 @@
 					console.log(errorThrown);
 				})
 				.always(function() {
-					console.log("complete");
 				});
 				
 
 
+		}
+
+		function update(){
+			$.ajax({
+					url: 'chat.php',
+					type: 'post',
+					dataType: 'json',
+					data: {"state":state}
+					
+				})
+				.done(function(data) {
+					console.log('done');
+					updateChat(data);
+				})
+				.fail(function(xhr, textStatus, errorThrown) {
+					console.log(errorThrown);
+				})
+				.always(function() {
+					console.log("complete");
+				});
 		}
 
 		function getChat(){
@@ -53,8 +70,19 @@
 
 		function updateChat(data){
 			//logic for chat
-			$('.text_area').append(data);
-			var div = $('.text_area');
+			
+			if(data.text){
+					for (var i = 0; i < data.text.length; i++) {
+						$('.text_area').append($("<p>"+ data.text[i]+"</p>"));
+						console.log( data.text[i]);
+					}	
+					state = data.state;
+				}
+				if(data.type == "internal"){
+					$('.text_area').append("<p>"+data.message+"</p>");
+					$('.text_area').append("<p>"+data.response+"</p>");
+				}
+				var div = $('.text_area');
 			div.scrollTop(div.scrollTop()+200);
 
 		}
@@ -63,8 +91,7 @@
 			$.ajax({
 					url: 'projectC.html',
 					type: 'post',
-					dataType: 'html',
-					data: {message: preparedMessage},
+					dataType: 'html'
 					
 				})
 				.done(function(data) {

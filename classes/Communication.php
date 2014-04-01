@@ -26,7 +26,7 @@ class Communication{
 	$guid = com_create_guid();
 	$prepared = "c" . "|" . $guid . "|" . "execute" . "|" . $user->data()->username . "|" . $command;
 	 socket_sendto($write_socket,$prepared,4000,0,"127.0.0.1",9876);
-	echo Communication::waitForResponse($guid); 
+	return Communication::waitForResponse($guid); 
 	}
 
 	private static function waitForResponse($guid){
@@ -45,7 +45,7 @@ class Communication{
 		//socket_recvfrom($listen_socket, $buf, 4000, 0, "localhost",9875);
 		$result = socket_recv($listen_socket,$buf,4000,0);
 		$parts = explode("|", $buf);
-		echo $parts[count($parts)-1];
+		return $parts[count($parts)-1];
 		/*if($parts[0]=='s' && $parts[1]==$guid){
 				$found=true;
 				return $parts;
