@@ -94,6 +94,7 @@ a:hover{
   outline: none!important;  
   
   background: #1a1a1a!important;
+  overflow: auto;
 }
 
 .text_area p {
