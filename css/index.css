@@ -1,41 +1,175 @@
-.text_area{
-	width: 40%;
-	height: 300px;
-	border:  #aaa solid 1px;
-	overflow: auto;
-    border-radius:10px;
-}
-
 ::-webkit-scrollbar{
-    width:12px;
+  width:10px!important;
 }
 
 ::-webkit-scrollbar-track{
-    background-color:#eaeaea;
+  background-color:#1a1a1a!important;
+  border-left:1px solid #7d7e7d!important;
 }
 
 ::-webkit-scrollbar-thumb{
-    background-color:#ccc;
+  background-color:#666!important;
 }
 
 ::-webkit-scrollbar-thumb:hover{
-    background-color:#aaa;
-}
-
-.chat_input{
- width:18%;   
-border-radius:4;
+  background-color:#7d7e7d!important;
 }
 
 body{
-    background-color:#444;
+  color:#999!important; 
 }
 
 a{
-    text-decoration:none;
-    color:#aaa;
+  color:#aaa!important;
 }
+
 a:visited{
-    text-decoration:none;
-    color:#aaa;
+  color:#666!important;
+}
+
+a:hover{
+  text-decoration:underline;
+}
+
+#php_user_info{
+  height:38px!important;
+  width:100%!important;
+  min-width:350px!important;
+  max-width:960px!important;
+  display:block;
+  margin: 10px auto!important;
+ 
+  border: solid 1px #7d7e7d!important;
+
+  background: #1a1a1a!important;
+}
+
+#php_user_info p{
+  float:left;
+  padding:0px 5px;
+  
+  font-size:12px!important;
+  color: #999!important;
+}
+
+#php_user_info ul{
+  float:right;
+  padding:0px 5px;
+
+  font-size:12px!important;
+  list-style-type: none;
+}
+
+#php_user_info ul li{
+  display:inline;
+  padding-right:5px;
+}
+
+#php_user_info ul li:last-of-type{
+  padding-right:0px;
+}
+
+#chat_area, #command_area {
+  width:100%!important;
+  min-width:350px!important;
+  max-width:960px!important;
+  display:block;
+  float:none;
+  margin:0em auto;
+}
+
+#command_area form input.chat_input, #command_area .text_area{
+  font-family:"Courier New", Courier, monospace!important;
+}
+
+.text_area {
+  height: 300px!important;
+  width: 100%!important;
+  min-width: 300px!important;  
+  margin:0px!important;
+  padding:0px!important;
+  
+  border: solid 1px #7d7e7d!important;
+  border-radius:0px!important;
+  outline: none!important;  
+  
+  background: #1a1a1a!important;
+}
+
+.text_area p {
+  padding:2px 5px!important;
+  margin:0px 5px!important;
+
+  border-bottom: 1px solid #262626!important;
+  
+  font-size:14px!important;  
+  line-height:19px!important;
+}
+
+form {
+  margin:5px 0px!important;
+}
+
+.chat_input {
+  height:28px!important;
+  width: 80%!important;
+  display: inline-block!important;
+  padding-left:2px!important;
+
+  border: solid 1px #7d7e7d!important;
+  border-right:solid 1px #1a1a1a!important;
+  border-radius: 0!important;
+  outline: none!important;
+  
+  color: #EFEFEF!important;
+  
+  background: #1a1a1a!important;
+
+}
+
+button {
+  min-width: 60px!important;
+  width:20%!important;
+  height: 28px!important;
+  margin: 0px 0px!important;
+  display: inline-block!important;
+
+  border: solid 1px #7d7e7d!important;  
+  border-radius: 0!important;
+  box-shadow: none!important;
+  outline: none!important;
+
+  color: #EFEFEF!important;
+  font-size: 11px!important;
+  text-align: center!important;
+  text-decoration: none!important;
+  text-transform:uppercase!important;
+  text-shadow: 
+    1px   0px  1px #666,
+    -1px   0px  0px #666,
+    0px   1px  1px #666,
+    0px  -1px  0px #666!important;
+  white-space: nowrap!important;
+
+  background: #7d7e7d!important; /* Old browsers */
+  background: -moz-linear-gradient(top, #7d7e7d 0%, #0e0e0e 100%)!important; /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7d7e7d), color-stop(100%,#0e0e0e))!important; /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #7d7e7d 0%,#0e0e0e 100%)!important; /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #7d7e7d 0%,#0e0e0e 100%)!important; /* Opera 11.10+ */
+}
+button:hover {
+  border-color: #606060!important;
+
+  background: #45484d!important; /* Old browsers */
+  background: -moz-linear-gradient(top, #45484d 0%, #000000 100%)!important; /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#45484d), color-stop(100%,#000000))!important; /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #45484d 0%,#000000 100%)!important; /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #45484d 0%,#000000 100%)!important; /* Opera 11.10+ */
+}
+button:active {
+  background: #000000!important; /* Old browsers */
+  background: -moz-linear-gradient(top, #000000 0%, #45484d 100%)!important; /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#000000), color-stop(100%,#45484d))!important; /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #000000 0%,#45484d 100%)!important; /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #000000 0%,#45484d 100%)!important; /* Opera 11.10+ */
 }
