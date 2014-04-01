@@ -17,7 +17,9 @@ if(substr($message, 0,1)==="/"){
 	      		 if (preg_match($reg_exUrl, $message, $url)) {
 	        		  $message = preg_replace($reg_exUrl, '<a href="'.$url[0].'" target="_blank">'.$url[0].'</a>', $message);
 	      		 } 
+	      		 	
 	        		  fwrite(fopen('chat.txt', 'a'), '<span class="username">' .  $user->data()->username . ':</span>'. $message = str_replace("\n", " ", $message) . "\n"); 
+
 			}
 		}
 			$lines = file('chat.txt');
@@ -32,6 +34,10 @@ if(substr($message, 0,1)==="/"){
                  }
              }
              $log["text"] = $text;
+             if(count($lines)>20){
+	      		 		 file_put_contents("chat.txt", " ");
+	      		 		 $log['state'] = 0;
+	      		 	}
 			}
 		
 	}
