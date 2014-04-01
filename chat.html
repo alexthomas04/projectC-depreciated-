@@ -3,7 +3,16 @@
 			<div class='text_area'>
 
 			</div>
-			<form onsubmit='handleChat();return false;' id='input_area' action='#'>
+			<form onsubmit='handleChat();return false;'  action='#'>
+				<input class='chat_input' type='text'><button type='submit'>Send</button>
+				<input type="submit" style="position: absolute; left: -9999px"/>
+			</form>
+		</div>
+		<div id='command_area' onload="">
+			<div class='text_area'>
+
+			</div>
+			<form onsubmit='handleChat();return false;'  action='#'>
 				<input class='chat_input' type='text'><button type='submit'>Send</button>
 				<input type="submit" style="position: absolute; left: -9999px"/>
 			</form>
@@ -19,10 +28,9 @@
 		
 		var state=0;
 		function handleChat(){
-			
-				var text = $('.chat_input').val();
 				var preparedMessage = getChat();
-				$('.chat_input').val("");
+				$(".chat_input").val("");
+				if(!(preparedMessage === undefined )){
 				$.ajax({
 					url: 'chat.php',
 					type: 'post',
@@ -37,7 +45,7 @@
 					console.log(errorThrown);
 				})
 				.always(function() {
-				});
+				});}
 				
 
 
@@ -64,26 +72,33 @@
 		}
 
 		function getChat(){
+			if($('#chat_area .chat_input').val() != "")
+				return $('#chat_area .chat_input').val();
+			if($('#command_area .chat_input').val() != "")
+				return $('#command_area .chat_input').val();
 			
-			return $('.chat_input').val();
 		}
 
 		function updateChat(data){
 			//logic for chat
 			
 			if(data.text){
+				var div = $('#chat_area .text_area');
 					for (var i = 0; i < data.text.length; i++) {
-						$('.text_area').append($("<p>"+ data.text[i]+"</p>"));
+						$('#chat_area .text_area').append($("<p>"+ data.text[i]+"</p>"));
 						console.log( data.text[i]);
+						div.scrollTop(div.scrollTop()+200);
 					}	
 					state = data.state;
 				}
 				if(data.type == "internal"){
-					$('.text_area').append("<p>"+data.message+"</p>");
-					$('.text_area').append("<p>"+data.response+"</p>");
+					var div = $('#command_area .text_area');
+					$('#command_area .text_area').append("<p>"+data.message+"</p>");
+					$('#command_area .text_area').append("<p>"+data.response+"</p>");
+					div.scrollTop(div.scrollTop()+200);
 				}
-				var div = $('.text_area');
-			div.scrollTop(div.scrollTop()+200);
+				
+			
 
 		}
 

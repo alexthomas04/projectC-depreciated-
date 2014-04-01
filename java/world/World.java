@@ -145,7 +145,7 @@ public class World {
 				Class type = EntityTypeManager.GetEntityType(entityData.optString("type"));
 				for(Object o : type.getConstructors())
 					System.out.println(o.toString());
-				Player p = (Player) type.getConstructor(Integer.TYPE,Chunk.class,World.class,JSONObject.class).newInstance(entities.size(),chunks.get(chunkId),this,entityData);
+				Player p = (Player) type.getConstructor(Integer.TYPE,Chunk.class,World.class,JSONObject.class).newInstance(entities.size()+players.size(),chunks.get(chunkId),this,entityData);
 				players.add(p);
 			}
 			
