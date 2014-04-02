@@ -27,6 +27,7 @@
 		setInterval(function(){update();}, 500);
 		
 		var state=0;
+		var waiting=false;
 		function handleChat(){
 				var preparedMessage = getChat();
 				$(".chat_input").val("");
@@ -45,13 +46,16 @@
 					console.log(errorThrown);
 				})
 				.always(function() {
+					waiting=false;
 				});}
-				
+				waiting=true;
 
 
 		}
 
 		function update(){
+			if(!waiting){
+
 			$.ajax({
 					url: 'chat.php',
 					type: 'post',
@@ -69,6 +73,7 @@
 				.always(function() {
 					console.log("complete");
 				});
+			}
 		}
 
 		function getChat(){
@@ -94,7 +99,7 @@
 				if(data.type == "internal"){
 					var div = $('#command_area .text_area');
 					$('#command_area .text_area').append("<p>"+data.message+"</p>");
-					$('#command_area .text_area').append("<p>"+data.response+"</p>");
+					$('#command_area .text_area').append("<p><span class='time'>"+data.time+"</span> "+data.response+"</p>");
 					div.scrollTop(div.scrollTop()+200);
 				}
 				
