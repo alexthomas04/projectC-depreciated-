@@ -4,7 +4,8 @@ class User{
 			$_data,
 			$_sessionName,
 			$_cookieName,
-			$_isLoggedIn;
+			$_isLoggedIn,
+			$_isAdmin;
 
 	public function __construct($user=null){
 		$this->_db=DB::getInstance();
@@ -15,13 +16,18 @@ class User{
 				$user=Session::get($this->_sessionName);
 				if($this->find($user)){
 					$this->_isLoggedIn=true;
+					
 				}else{
 
 				}
 			}
 		}else{
-			$this->find($user);
+			$this->_isLoggedIn=$this->find($user);
 			}
+			$admin_id = $this->_db->get('groups',array('name','=','Administrator'))->first()->id;
+			$this->_isAdmin = ($this->data()->group == $admin_id )? true : false;
+			Session::put('username', $this->data()->username);
+			Session::put('onServer',$this->data()->onServer);
 	}
 
 	public function create($fields=array()){
@@ -99,5 +105,9 @@ class User{
 
 	public function change($field , $value){
 		$this->_db->update('users',$this->data()->id,array($field=>$value));
+	}
+
+	public function isAdmin(){
+		return $this->_isAdmin;
 	}
 }

@@ -1,12 +1,12 @@
 <?php
 require_once 'core/init.php';
-$user = new User();
 $log = array();
 $message = Input::get('message');  
 if(substr($message, 0,1)==="/"){
 	
-	$r = Communication::sendCommand(substr($message,1),$user);
-	$log = array("type"=> "internal","time"=>time('H-i-s-u-e'),"message"=>$message,"response"=>$r);
+	//$r = Communication::sendCommand(substr($message,1));
+	//$log = array("type"=> "internal","time"=>date('H:i:s e',time()),"message"=>$message,"response"=>$r);
+	$log = array("type"=> 'internal',"message"=>$message,'response'=>'Sorry the game server is offline at this time',"time"=>date('H:i:s e',time()));
 	}
 	else{
 		if(file_exists("chat.txt")){
@@ -18,7 +18,7 @@ if(substr($message, 0,1)==="/"){
 	        		  $message = preg_replace($reg_exUrl, '<a href="'.$url[0].'" target="_blank">'.$url[0].'</a>', $message);
 	      		 } 
 	      		 	
-	        		  fwrite(fopen('chat.txt', 'a'), '<span class="username">' .  $user->data()->username . ':</span>'. $message = str_replace("\n", " ", $message) . "\n"); 
+	        		  fwrite(fopen('chat.txt', 'a'), '<span class="time">' . date('H:i:s e',time()) . '</span> ' . '<a href="profile.php?username=' . Session::get('username') . '" target="_blank"><span class="username">' .   Session::get('username') . '</span></a>: ' . $message = str_replace("\n", " ", $message) . "\n"); 
 
 			}
 		}
@@ -30,7 +30,9 @@ if(substr($message, 0,1)==="/"){
 				$text = array();
 				foreach ($lines as $line_num => $line) {
                  if ($line_num >= $state){
+                 	fwrite(fopen("archive.txt", "a"), $line );
                        $text[] =  $line = str_replace("\n", "", $line);
+                       
                  }
              }
              $log["text"] = $text;
