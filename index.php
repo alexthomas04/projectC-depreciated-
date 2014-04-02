@@ -40,6 +40,9 @@ require_once 'core/init.php';
                     <ul>
                         <li><a href="logout.php">log out</a></li>
                         <li><a href="changepassword.php">Change Password</a></li>
+                        <?php if($user->isAdmin()){ ?>
+                        <li><a href="archive.php">Archive</a></li>
+                        <?php } ?>
                     </ul>
                     <?php
                 }else{
@@ -52,11 +55,8 @@ require_once 'core/init.php';
 
 		<?php
             if($user->isLoggedIn())
-                {$loc = "chat.html";
-                $file = fopen($loc,'r');
-                $html = fread($file,filesize($loc));
-                fclose($file);
-                echo $html;
+                {
+                    include 'chat.html'; 
             }
         ?>
 	</body>

@@ -62,7 +62,7 @@ if(Input::exists()){
 				?>
 				<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 				<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-				<link rel="stylesheet" href="register.css" type="text/css" />
+				<link rel="stylesheet" href="css/register.css" type="text/css" />
 					<script type="text/javascript">
 					$(document).ready(function(){
 						var string = <?php echo "\"" . escape($errors) . "\"" ?>;

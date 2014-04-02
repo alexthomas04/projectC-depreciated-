@@ -17,6 +17,7 @@
 
 body{
   color:#999!important; 
+  background-color: #5d5d5d;
 }
 
 a{
@@ -173,4 +174,14 @@ button:active {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#000000), color-stop(100%,#45484d))!important; /* Chrome,Safari4+ */
   background: -webkit-linear-gradient(top, #000000 0%,#45484d 100%)!important; /* Chrome10+,Safari5.1+ */
   background: -o-linear-gradient(top, #000000 0%,#45484d 100%)!important; /* Opera 11.10+ */
+}
+
+.username{
+  font-weight:bold;
+}
+
+.time{
+  font-size: 10px;
+  color:#666;
+  font-family: "Arial Narrow",Arial;
 }

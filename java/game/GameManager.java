@@ -23,7 +23,7 @@ public class GameManager {
 		Rock.staticLoad();
 		RockWithLegs.staticLoad();
 		if(!world.loadChunks("world/")){
-			world=new World(2);
+			world=new World(1);
 		}
 		else{
 		world.loadEntities("world/");
@@ -34,6 +34,8 @@ public class GameManager {
 		ch.start();
 		AutoSave as = new AutoSave();
 		as.start();
+		Ticker t = new Ticker();
+		t.start();
 	}
 	
 	
@@ -109,6 +111,29 @@ public class GameManager {
 				}
 				
 			}
+		}
+	}
+
+	private class Ticker extends Thread{
+		private long interval=60000;
+		public Ticker(){
+			super();
+		}
+		public Ticker(long l){
+			interval=l;
+		}
+		public void run(){
+			while(true){
+				try {
+					Thread.sleep(interval);
+					world.tick();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		
 		}
 	}
 }
