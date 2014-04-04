@@ -206,7 +206,7 @@ public class World {
 	 * @param id the id of the chunk
 	 */
 	public void genNewChunk(int id){
-		chunks.add(Chunk.generateRandomChunk(1000 , 10000, id, this, 1));
+		chunks.add(Chunk.generateRandomChunk(100 , 100, id, this, 1));
 	}
 	
 	public Chunk getChunk(int id){
@@ -234,7 +234,7 @@ public class World {
 	
 	public Player getPlayer(String name){
 		for(Player p : players){
-			if(p.getName().equals(name))
+			if(p.getName()!=null && p.getName().equals(name))
 				return p;
 		}
 		return null;

@@ -24,9 +24,9 @@
 
 		<script src="jquery-2.0.3.js"></script>
 		<script type="text/javascript">
-		setInterval(function(){update();}, 500);
+		//setInterval(function(){update();}, 500);
 		
-		var state=0;
+		var state=-1;
 		var waiting=false;
 		function handleChat(){
 				var preparedMessage = getChat();
@@ -40,6 +40,7 @@
 					
 				})
 				.done(function(data) {
+					console.log('done');
 					updateChat(data);
 				})
 				.fail(function(xhr, textStatus, errorThrown) {
@@ -55,7 +56,7 @@
 
 		function update(){
 			if(!waiting){
-
+				waiting=true;
 			$.ajax({
 					url: 'chat.php',
 					type: 'post',
@@ -72,6 +73,7 @@
 				})
 				.always(function() {
 					console.log("complete");
+					waiting=false;
 				});
 			}
 		}
@@ -95,6 +97,7 @@
 						div.scrollTop(div.scrollTop()+200);
 					}	
 					state = data.state;
+					console.log(state);
 				}
 				if(data.type == "internal"){
 					var div = $('#command_area .text_area');

@@ -24,10 +24,11 @@ class User{
 		}else{
 			$this->_isLoggedIn=$this->find($user);
 			}
+			if($this->_isLoggedIn){
 			$admin_id = $this->_db->get('groups',array('name','=','Administrator'))->first()->id;
 			$this->_isAdmin = ($this->data()->group == $admin_id )? true : false;
 			Session::put('username', $this->data()->username);
-			Session::put('onServer',$this->data()->onServer);
+			Session::put('onServer',$this->data()->onServer);}
 	}
 
 	public function create($fields=array()){

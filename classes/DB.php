@@ -76,6 +76,21 @@ class DB{
 		}
 		return false;
 	}
+	public function getAll($table,$order,$limit=0,$end=0){
+		$sql = "SELECT * FROM " . $table ."\n";
+		if(isset($order)){$sql=$sql . " ORDER BY `{$table}`.`id` {$order} \n";}
+		if($limit != 0){ $sql=$sql. " LIMIT " . $limit;
+			if($end != 0){
+				$sql = $sql . ", " . $end;
+			}
+			$sql = $sql . "\n";
+	}
+		
+		if(!$this->query($sql,null)->error()){
+					return $this;
+
+				}
+	}
 
 	public function get($table,$where){
 		return $this->action('SELECT *', $table,$where);
@@ -89,7 +104,7 @@ class DB{
 	}
 
 	public function results(){
-		return $_results;
+		return $this->_results;
 	}
 
 	public function first(){
@@ -110,7 +125,6 @@ class DB{
 				$x++;
 			}
 			$sql = "INSERT INTO `{$table}` (`" . implode('`, `', $keys) . "`) VALUES ({$values})";
-			
 			if(!$this->query($sql, $fields)->error()){
 				return true;
 				
@@ -133,11 +147,19 @@ class DB{
 		}
 
 		$sql="UPDATE {$table} SET {$set} WHERE id={$id}";
-		print_r($sql);
 		if(!$this->query($sql,$fields)->error()){
 			return true;
 		}
 		return false;
+	}
+
+	public function tableCount($table){
+		$sql="SELECT COUNT(*) FROM ".$table;
+		if(!$this->query($sql,null)->error()){
+					$array_form = get_object_vars($this->first());
+					return $array_form['COUNT(*)'];
+
+				}
 	}
 
 }
