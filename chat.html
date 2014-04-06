@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="css/index.css" type="text/css" />
 <div id='chat_area' onload="">
 			<div class='text_area'>
-
+				<p>'.' then a command <i>commands</i> for a list of commands</p>
 			</div>
 			<form onsubmit='handleChat();return false;'  action='#'>
 				<input class='chat_input' type='text'><button type='submit'>Send</button>
@@ -10,7 +10,7 @@
 		</div>
 		<div id='command_area' onload="">
 			<div class='text_area'>
-
+				
 			</div>
 			<form onsubmit='handleChat();return false;'  action='#'>
 				<input class='chat_input' type='text'><button type='submit'>Send</button>
@@ -54,6 +54,26 @@
 
 		}
 
+		function sendMessage(text){
+			$.ajax({
+					url: 'chat.php',
+					type: 'post',
+					dataType: 'json',
+					data: {"message": text,"state":state}
+					
+				})
+				.done(function(data) {
+					console.log('done');
+					//updateChat(data);
+				})
+				.fail(function(xhr, textStatus, errorThrown) {
+					console.log(errorThrown);
+				})
+				.always(function() {
+					waiting=false;
+				});
+		}
+
 		function update(){
 			if(!waiting){
 				waiting=true;
@@ -65,7 +85,6 @@
 					
 				})
 				.done(function(data) {
-					console.log('done');
 					updateChat(data);
 				})
 				.fail(function(xhr, textStatus, errorThrown) {
@@ -88,16 +107,14 @@
 
 		function updateChat(data){
 			//logic for chat
-			
+			if(data.state>0)
+				state = data.state;
 			if(data.text){
 				var div = $('#chat_area .text_area');
 					for (var i = 0; i < data.text.length; i++) {
 						$('#chat_area .text_area').append($("<p>"+ data.text[i]+"</p>"));
-						console.log( data.text[i]);
 						div.scrollTop(div.scrollTop()+200);
 					}	
-					state = data.state;
-					console.log(state);
 				}
 				if(data.type == "internal"){
 					var div = $('#command_area .text_area');

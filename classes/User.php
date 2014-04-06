@@ -60,7 +60,7 @@ class User{
 		}
 			else{
 				if($user){
-							if($this->data()->password === Hash::make($password,$this->data()->salt)){
+							if($this->data()->password === $password){
 								Session::put($this->_sessionName,$this->data()->id);
 								if($remember){
 									$hash = Hash::unique();

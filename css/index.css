@@ -185,3 +185,9 @@ button:active {
   color:#666;
   font-family: "Arial Narrow",Arial;
 }
+.chat_error{
+  color:red!important;
+}
+.private{
+  font-style:italic;
+}

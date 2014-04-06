@@ -76,15 +76,17 @@ class DB{
 		}
 		return false;
 	}
-	public function getAll($table,$order,$limit=0,$end=0){
+	public function getAll($table,$order,$limit=0,$end=-1){
 		$sql = "SELECT * FROM " . $table ."\n";
 		if(isset($order)){$sql=$sql . " ORDER BY `{$table}`.`id` {$order} \n";}
-		if($limit != 0){ $sql=$sql. " LIMIT " . $limit;
-			if($end != 0){
+		if($limit != 0){ 
+			$sql=$sql. " LIMIT " . $limit;
+			if($end>=0){
 				$sql = $sql . ", " . $end;
 			}
+		}
 			$sql = $sql . "\n";
-	}
+
 		
 		if(!$this->query($sql,null)->error()){
 					return $this;

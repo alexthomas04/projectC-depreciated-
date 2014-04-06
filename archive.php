@@ -11,19 +11,21 @@ if($user->isAdmin()){
 		echo 'Invalid Page Number';
 	}
 	else
-	{$chats = $db->getAll('chat',null,$per_page*($page-1),$per_page*$page)->results();
-		echo $per_page*$page . "   " . $per_page*($page-1);
+	{$chats = $db->getAll('chat',null,$per_page*($page-1)+1,$per_page*$page)->results();
+		echo $per_page*($page-1) . "   " .  $per_page*$page ;
+		echo "<ol>";
 		foreach ($chats as $key => $chat) {
 			$username = $chat->username;
 	                 		$color=$chat->name_color;
 	                 		$t = $chat->message;
 	                 		$time=$chat->time;
-	                 		echo  '<p>'.
+	                 		echo  '<li>'.
 	                 		'<span class="time">' . $time . "</span> " .
 	                 		'<a class="username"  href="profile.php?username=' . $username . '" target="_blank">' . $username . "</a>: " .
-	                 		$t . "</p>";
+	                 		$t . "</li>";
 					
 			}}
+			echo "</ol>";
 			if($page>1){
 				echo "<a href='archive.php?page=" . ($page-1) . "'> prev </a>";
 			}
