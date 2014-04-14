@@ -219,3 +219,4 @@ chat.txt
 archive.txt
 *.class
 java/json/HelloWorld.java
+javadoc/*
