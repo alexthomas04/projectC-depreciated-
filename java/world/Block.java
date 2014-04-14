@@ -16,15 +16,57 @@ import lombok.Setter;
 public class Block {
 		
 		/** The temperature. */
-		@Getter @Setter private double temperature=0;
+		
+		/**
+		 * Gets the temperature.
+		 *
+		 * @return the temperature
+		 */
+		@Getter 
+ /**
+  * Sets the temperature.
+  *
+  * @param temperature the new temperature
+  */
+ @Setter private double temperature=0;
 		
 		/** The humidity. */
-		@Getter @Setter private double humidity=0;
+		
+		/**
+		 * Gets the humidity.
+		 *
+		 * @return the humidity
+		 */
+		@Getter 
+ /**
+  * Sets the humidity.
+  *
+  * @param humidity the new humidity
+  */
+ @Setter private double humidity=0;
 		
 		/** The life. */
-		@Getter @Setter private double life=0;
+		
+		/**
+		 * Gets the life.
+		 *
+		 * @return the life
+		 */
+		@Getter 
+ /**
+  * Sets the life.
+  *
+  * @param life the new life
+  */
+ @Setter private double life=0;
 		
 		/** The entities on that block. */
+		
+		/**
+		 * Gets the entities.
+		 *
+		 * @return the entities
+		 */
 		@Getter private ArrayList<Entity> entities = new ArrayList<Entity>();
 	
 	/**

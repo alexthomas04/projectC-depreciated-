@@ -1,5 +1,6 @@
 package json;
 
+// TODO: Auto-generated Javadoc
 /*
 Copyright (c) 2002 JSON.org
 
@@ -73,10 +74,11 @@ public class Cookie {
      * stored under the key "value". This method does not do checking or
      * validation of the parameters. It only converts the cookie string into
      * a JSONObject.
+     *
      * @param string The cookie specification string.
      * @return A JSONObject containing "name", "value", and possibly other
      *  members.
-     * @throws JSONException
+     * @throws JSONException the JSON exception
      */
     public static JSONObject toJSONObject(String string) throws JSONException {
         String         name;
@@ -111,9 +113,10 @@ public class Cookie {
      * If the JSONObject contains "expires", "domain", "path", or "secure"
      * members, they will be appended to the cookie specification string.
      * All other members are ignored.
+     *
      * @param jo A JSONObject
      * @return A cookie specification string
-     * @throws JSONException
+     * @throws JSONException the JSON exception
      */
     public static String toString(JSONObject jo) throws JSONException {
         StringBuffer sb = new StringBuffer();

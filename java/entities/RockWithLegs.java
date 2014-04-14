@@ -9,19 +9,25 @@ import json.JSONObject;
 import world.Chunk;
 import world.World;
 
+// TODO: Auto-generated Javadoc
 /**
- * @author Sonicdeadlock
+ * The Class RockWithLegs.
  *
+ * @author Sonicdeadlock
  */
 public class RockWithLegs extends Entity {
 
+	/** The Constant TYPE. */
 	public final static String TYPE="rockwithlegs";
+	
 	/**
-	 * @param identification
-	 * @param x
-	 * @param y
-	 * @param c
-	 * @param w
+	 * Instantiates a new rock with legs.
+	 *
+	 * @param identification the identification
+	 * @param x the x
+	 * @param y the y
+	 * @param c the c
+	 * @param w the w
 	 */
 	public RockWithLegs(int identification, int x, int y, Chunk c, World w) {
 		super(identification, x, y, c, w);
@@ -29,12 +35,14 @@ public class RockWithLegs extends Entity {
 	}
 
 	/**
-	 * @param identification
-	 * @param x
-	 * @param y
-	 * @param c
-	 * @param w
-	 * @param attributes
+	 * Instantiates a new rock with legs.
+	 *
+	 * @param identification the identification
+	 * @param x the x
+	 * @param y the y
+	 * @param c the c
+	 * @param w the w
+	 * @param attributes the attributes
 	 */
 	public RockWithLegs(int identification, int x, int y, Chunk c, World w,
 			Hashtable<String, String> attributes) {
@@ -43,10 +51,12 @@ public class RockWithLegs extends Entity {
 	}
 
 	/**
-	 * @param identification
-	 * @param c
-	 * @param w
-	 * @param jsonString
+	 * Instantiates a new rock with legs.
+	 *
+	 * @param identification the identification
+	 * @param c the c
+	 * @param w the w
+	 * @param jsonString the json string
 	 */
 	public RockWithLegs(int identification, Chunk c, World w, String jsonString) {
 		super(identification, c, w, jsonString);
@@ -54,10 +64,12 @@ public class RockWithLegs extends Entity {
 	}
 
 	/**
-	 * @param identification
-	 * @param c
-	 * @param w
-	 * @param json
+	 * Instantiates a new rock with legs.
+	 *
+	 * @param identification the identification
+	 * @param c the c
+	 * @param w the w
+	 * @param json the json
 	 */
 	public RockWithLegs(int identification, Chunk c, World w, JSONObject json) {
 		super(identification, c, w, json);
@@ -65,10 +77,12 @@ public class RockWithLegs extends Entity {
 	}
 
 	/**
-	 * @param identification
-	 * @param c
-	 * @param w
-	 * @param attributes
+	 * Instantiates a new rock with legs.
+	 *
+	 * @param identification the identification
+	 * @param c the c
+	 * @param w the w
+	 * @param attributes the attributes
 	 */
 	public RockWithLegs(int identification, Chunk c, World w,
 			Hashtable<String, String> attributes) {
@@ -76,6 +90,9 @@ public class RockWithLegs extends Entity {
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * Static load.
+	 */
 	public static void staticLoad() {
 		EntityTypeManager.storeType(TYPE, RockWithLegs.class);
 
@@ -91,12 +108,19 @@ public class RockWithLegs extends Entity {
 		return table;
 	}
 	
+	/* (non-Javadoc)
+	 * @see entities.Entity#getJson()
+	 */
 	@Override
 	public JSONObject getJson(){
 		JSONObject json = super.getJson();
 		json.put("type", TYPE);
 		return json;
 	}
+	
+	/* (non-Javadoc)
+	 * @see entities.Entity#getType()
+	 */
 	public String getType(){
 		return "rock with legs";
 	}

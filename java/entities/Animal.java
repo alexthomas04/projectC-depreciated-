@@ -9,18 +9,22 @@ import json.JSONObject;
 import world.Chunk;
 import world.World;
 
+// TODO: Auto-generated Javadoc
 /**
- * @author alexthomas
+ * The Class Animal.
  *
+ * @author alexthomas
  */
 public abstract class Animal extends Entity {
 
 	/**
-	 * @param identification
-	 * @param x
-	 * @param y
-	 * @param c
-	 * @param w
+	 * Instantiates a new animal.
+	 *
+	 * @param identification the identification
+	 * @param x the x
+	 * @param y the y
+	 * @param c the c
+	 * @param w the w
 	 */
 	public Animal(int identification, int x, int y, Chunk c, World w) {
 		super(identification, x, y, c, w);
@@ -28,12 +32,14 @@ public abstract class Animal extends Entity {
 	}
 
 	/**
-	 * @param identification
-	 * @param x
-	 * @param y
-	 * @param c
-	 * @param w
-	 * @param attributes
+	 * Instantiates a new animal.
+	 *
+	 * @param identification the identification
+	 * @param x the x
+	 * @param y the y
+	 * @param c the c
+	 * @param w the w
+	 * @param attributes the attributes
 	 */
 	public Animal(int identification, int x, int y, Chunk c, World w,
 			Hashtable<String, String> attributes) {
@@ -42,10 +48,12 @@ public abstract class Animal extends Entity {
 	}
 
 	/**
-	 * @param identification
-	 * @param c
-	 * @param w
-	 * @param jsonString
+	 * Instantiates a new animal.
+	 *
+	 * @param identification the identification
+	 * @param c the c
+	 * @param w the w
+	 * @param jsonString the json string
 	 */
 	public Animal(int identification, Chunk c, World w, String jsonString) {
 		super(identification, c, w, jsonString);
@@ -53,10 +61,12 @@ public abstract class Animal extends Entity {
 	}
 
 	/**
-	 * @param identification
-	 * @param c
-	 * @param w
-	 * @param json
+	 * Instantiates a new animal.
+	 *
+	 * @param identification the identification
+	 * @param c the c
+	 * @param w the w
+	 * @param json the json
 	 */
 	public Animal(int identification, Chunk c, World w, JSONObject json) {
 		super(identification, c, w, json);
@@ -64,10 +74,12 @@ public abstract class Animal extends Entity {
 	}
 
 	/**
-	 * @param identification
-	 * @param c
-	 * @param w
-	 * @param attributes
+	 * Instantiates a new animal.
+	 *
+	 * @param identification the identification
+	 * @param c the c
+	 * @param w the w
+	 * @param attributes the attributes
 	 */
 	public Animal(int identification, Chunk c, World w,
 			Hashtable<String, String> attributes) {

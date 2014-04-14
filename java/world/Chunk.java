@@ -19,14 +19,38 @@ import lombok.Getter;
 public class Chunk {
 	/////////////////Feilds\\\\\\\\\\\\\\\\\
 	/** The id. */
+	
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	@Getter private int id;
+	
+	/**
+	 * Gets the size x.
+	 *
+	 * @return the size x
+	 */
 	@Getter private int sizeX=0;
+	
+	/**
+	 * Gets the size y.
+	 *
+	 * @return the size y
+	 */
 	@Getter private int	sizeY=0;	
 	
 	/** The blocks. */
 	private Block[][] blocks;
 	
 	/** The entities. */
+	
+	/**
+	 * Gets the entities.
+	 *
+	 * @return the entities
+	 */
 	@Getter private ArrayList<Entity> entities = new ArrayList<Entity>();
 	
 	/** The Constant DEFAULT_X. */
@@ -122,6 +146,13 @@ public class Chunk {
 		blocks[x][y].removeEntities();
 	}
 	
+	/**
+	 * Gets the entities.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @return the entities
+	 */
 	public ArrayList<Entity> getEntities(int x,int y){
 		ArrayList<Entity> list = new ArrayList<Entity>();
 		for(Entity e : blocks[x][y].getEntities())
@@ -130,6 +161,16 @@ public class Chunk {
 	}
 	
 	
+	/**
+	 * Generate random chunk.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param identification the identification
+	 * @param w the w
+	 * @param itterations the itterations
+	 * @return the chunk
+	 */
 	public static Chunk generateRandomChunk(int x,int y,int identification,World w,int itterations){
 		Chunk c = new Chunk(x,y,identification);
 		Random rand = new Random();

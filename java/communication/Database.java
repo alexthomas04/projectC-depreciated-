@@ -6,21 +6,42 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Database.
+ */
 public class Database{
+	
+	/** The Constant URL. */
 	private static final String	URL		= "jdbc:mysql://localhost/projectc?user=root&password=root";
+	
+	/** The conn. */
 	private Connection			conn	= null;
+	
+	/** The _db. */
 	private static Database		_db;
 
+	/**
+	 * Instantiates a new database.
+	 */
 	public Database(){
 		connect();
 	}
 
+	/**
+	 * Gets the database instance.
+	 *
+	 * @return the database instance
+	 */
 	public static Database getDatabaseInstance(){
 		if (_db == null)
 			_db = new Database();
 		return _db;
 	}
 
+	/**
+	 * Connect.
+	 */
 	private void connect(){
 
 		try{
@@ -34,6 +55,12 @@ public class Database{
 		}
 	}
 
+	/**
+	 * Query select.
+	 *
+	 * @param sql the sql
+	 * @return the result set
+	 */
 	public ResultSet querySelect(String sql){
 		Statement stm;
 		ResultSet rs = null;
@@ -49,6 +76,12 @@ public class Database{
 		return rs;
 	}
 
+	/**
+	 * Query update.
+	 *
+	 * @param sql the sql
+	 * @return the int
+	 */
 	public int queryUpdate(String sql){
 		Statement stm;
 		int rs = 0;
@@ -61,6 +94,13 @@ public class Database{
 		return rs;
 	}
 
+	/**
+	 * Insert message.
+	 *
+	 * @param username the username
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean insertMessage(String username, String message){
 
 		try{

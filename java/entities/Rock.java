@@ -20,7 +20,8 @@ public class Rock extends Entity {
 	/**
 	 * Instantiates a new rock.
 	 *
-	 * @param x the x coordinate 
+	 * @param identification the identification
+	 * @param x the x coordinate
 	 * @param y the y coordinate
 	 * @param c the Chunk that the entity will be put in
 	 * @param w the World that the entity will be put in
@@ -33,6 +34,7 @@ public class Rock extends Entity {
 	/**
 	 * Instantiates a new rock.
 	 *
+	 * @param identification the identification
 	 * @param c the Chunk that the entity will be put in
 	 * @param w the World that the entity will be put in
 	 * @param jsonString the JSON data
@@ -45,6 +47,7 @@ public class Rock extends Entity {
 	/**
 	 * Instantiates a new rock.
 	 *
+	 * @param identification the identification
 	 * @param c the Chunk that the entity will be put in
 	 * @param w the World that the entity will be put in
 	 * @param json the JSON data
@@ -117,6 +120,9 @@ public class Rock extends Entity {
 		return table;
 	}
 	
+	/* (non-Javadoc)
+	 * @see entities.Entity#getType()
+	 */
 	public String getType(){
 		return "rock";
 	}

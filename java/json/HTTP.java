@@ -26,6 +26,7 @@ SOFTWARE.
 
 import java.util.Iterator;
 
+// TODO: Auto-generated Javadoc
 /**
  * Convert an HTTP header to a JSONObject and back.
  * @author JSON.org
@@ -63,10 +64,11 @@ public class HTTP {
      * ...}</pre>
      * It does no further checking or conversion. It does not parse dates.
      * It does not do '%' transforms on URLs.
+     *
      * @param string An HTTP header string.
      * @return A JSONObject containing the elements and attributes
      * of the XML string.
-     * @throws JSONException
+     * @throws JSONException the JSON exception
      */
     public static JSONObject toJSONObject(String string) throws JSONException {
         JSONObject     jo = new JSONObject();

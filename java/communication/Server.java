@@ -7,10 +7,24 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Server.
+ */
 public class Server {
+	
+	/** The write socket. */
 	private DatagramSocket listenSocket,writeSocket;
+	
+	/** The Constant LISTEN_PORT. */
 	private static final int LISTEN_PORT=9876;
+	
+	/** The Constant WRITE_PORT. */
 	private static final int WRITE_PORT=9875;
+	
+	/**
+	 * Instantiates a new server.
+	 */
 	public Server() {
 		try {
 			listenSocket = new DatagramSocket(LISTEN_PORT);
@@ -21,6 +35,11 @@ public class Server {
 		}
 	}
 	
+	/**
+	 * Gets the message.
+	 *
+	 * @return the message
+	 */
 	public String getMessage(){
 		String message="";
 		do{
@@ -39,6 +58,11 @@ public class Server {
 		return message;
 	}
 	
+	/**
+	 * Send message.
+	 *
+	 * @param message the message
+	 */
 	public void sendMessage(String message){
 		byte[] sendData = message.getBytes();
 		DatagramPacket sendPacket;

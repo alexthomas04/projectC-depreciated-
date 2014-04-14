@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 
+// TODO: Auto-generated Javadoc
 /*
 Copyright (c) 2002 JSON.org
 
@@ -40,12 +41,25 @@ SOFTWARE.
  */
 public class JSONTokener {
 
+    /** The character. */
     private long    character;
+    
+    /** The eof. */
     private boolean eof;
+    
+    /** The index. */
     private long    index;
+    
+    /** The line. */
     private long    line;
+    
+    /** The previous. */
     private char    previous;
+    
+    /** The reader. */
     private Reader  reader;
+    
+    /** The use previous. */
     private boolean usePrevious;
 
 
@@ -69,6 +83,9 @@ public class JSONTokener {
 
     /**
      * Construct a JSONTokener from an InputStream.
+     *
+     * @param inputStream the input stream
+     * @throws JSONException the JSON exception
      */
     public JSONTokener(InputStream inputStream) throws JSONException {
         this(new InputStreamReader(inputStream));
@@ -89,6 +106,8 @@ public class JSONTokener {
      * Back up one character. This provides a sort of lookahead capability,
      * so that you can test for a digit or letter before attempting to parse
      * the next number or identifier.
+     *
+     * @throws JSONException the JSON exception
      */
     public void back() throws JSONException {
         if (this.usePrevious || this.index <= 0) {
@@ -120,6 +139,11 @@ public class JSONTokener {
         return -1;
     }
 
+    /**
+     * End.
+     *
+     * @return true, if successful
+     */
     public boolean end() {
         return this.eof && !this.usePrevious;
     }
@@ -128,7 +152,9 @@ public class JSONTokener {
     /**
      * Determine if the source string still contains characters that next()
      * can consume.
+     *
      * @return true if not yet at the end of the source.
+     * @throws JSONException the JSON exception
      */
     public boolean more() throws JSONException {
         this.next();
@@ -144,6 +170,7 @@ public class JSONTokener {
      * Get the next character in the source string.
      *
      * @return The next character, or 0 if past the end of the source string.
+     * @throws JSONException the JSON exception
      */
     public char next() throws JSONException {
         int c;
@@ -224,8 +251,9 @@ public class JSONTokener {
 
     /**
      * Get the next char in the string, skipping whitespace.
-     * @throws JSONException
+     *
      * @return  A character, or 0 if there are no more characters.
+     * @throws JSONException the JSON exception
      */
     public char nextClean() throws JSONException {
         for (;;) {
@@ -302,8 +330,10 @@ public class JSONTokener {
     /**
      * Get the text up but not including the specified character or the
      * end of line, whichever comes first.
-     * @param  delimiter A delimiter character.
+     *
+     * @param delimiter the delimiter
      * @return   A string.
+     * @throws JSONException the JSON exception
      */
     public String nextTo(char delimiter) throws JSONException {
         StringBuffer sb = new StringBuffer();
@@ -323,8 +353,10 @@ public class JSONTokener {
     /**
      * Get the text up but not including one of the specified delimiter
      * characters or the end of line, whichever comes first.
+     *
      * @param delimiters A set of delimiter characters.
      * @return A string, trimmed.
+     * @throws JSONException the JSON exception
      */
     public String nextTo(String delimiters) throws JSONException {
         char c;
@@ -346,9 +378,9 @@ public class JSONTokener {
     /**
      * Get the next value. The value can be a Boolean, Double, Integer,
      * JSONArray, JSONObject, Long, or String, or the JSONObject.NULL object.
-     * @throws JSONException If syntax error.
      *
      * @return An object.
+     * @throws JSONException If syntax error.
      */
     public Object nextValue() throws JSONException {
         char c = this.nextClean();
@@ -393,9 +425,11 @@ public class JSONTokener {
     /**
      * Skip characters until the next character is the requested character.
      * If the requested character is not found, no characters are skipped.
+     *
      * @param to A character to skip to.
      * @return The requested character, or zero if the requested character
      * is not found.
+     * @throws JSONException the JSON exception
      */
     public char skipTo(char to) throws JSONException {
         char c;

@@ -1,6 +1,7 @@
 package json;
 
 
+// TODO: Auto-generated Javadoc
 /*
  Copyright (c) 2013 JSON.org
 
@@ -235,11 +236,10 @@ public class Kim {
      * values and ranges from 0 to length - 1. The index of the next character
      * is at index + Kim.characterSize(kim.characterAt(index)).
      *
-     * @param at
-     *            the index of the char value. The first character is at 0.
+     * @param at            the index of the char value. The first character is at 0.
+     * @return the int
+     * @throws JSONException             if at does not point to a valid character.
      * @returns a Unicode character between 0 and 0x10FFFF.
-     * @throws JSONException
-     *             if at does not point to a valid character.
      */
     public int characterAt(int at) throws JSONException {
         int c = get(at);
@@ -299,8 +299,8 @@ public class Kim {
      * Two kim objects containing exactly the same bytes in the same order are
      * equal to each other.
      *
-     * @param obj
-     *            the other kim with which to compare.
+     * @param obj            the other kim with which to compare.
+     * @return true, if successful
      * @returns true if this and obj are both kim objects containing identical
      *          byte sequences.
      */
@@ -335,6 +335,8 @@ public class Kim {
 
     /**
      * Returns a hash code value for the kim.
+     *
+     * @return the int
      */
     public int hashCode() {
         return this.hashcode;

@@ -33,6 +33,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
+// TODO: Auto-generated Javadoc
 /**
  * A JSONArray is an ordered sequence of values. Its external text form is a
  * string wrapped in square brackets with commas separating the values. The
@@ -161,10 +162,10 @@ public class JSONArray {
     }
 
     /**
-     * Construct a JSONArray from an array
+     * Construct a JSONArray from an array.
      *
-     * @throws JSONException
-     *             If not an array.
+     * @param array the array
+     * @throws JSONException             If not an array.
      */
     public JSONArray(Object array) throws JSONException {
         this();
@@ -601,11 +602,9 @@ public class JSONArray {
     /**
      * Append a double value. This increases the array's length by one.
      *
-     * @param value
-     *            A double value.
-     * @throws JSONException
-     *             if the value is not finite.
+     * @param value            A double value.
      * @return this.
+     * @throws JSONException             if the value is not finite.
      */
     public JSONArray put(double value) throws JSONException {
         Double d = new Double(value);
@@ -864,13 +863,12 @@ public class JSONArray {
      * Make a prettyprinted JSON text of this JSONArray. Warning: This method
      * assumes that the data structure is acyclical.
      *
-     * @param indentFactor
-     *            The number of spaces to add to each level of indentation.
+     * @param indentFactor            The number of spaces to add to each level of indentation.
      * @return a printable, displayable, transmittable representation of the
      *         object, beginning with <code>[</code>&nbsp;<small>(left
      *         bracket)</small> and ending with <code>]</code>
      *         &nbsp;<small>(right bracket)</small>.
-     * @throws JSONException
+     * @throws JSONException the JSON exception
      */
     public String toString(int indentFactor) throws JSONException {
         StringWriter sw = new StringWriter();
@@ -885,8 +883,9 @@ public class JSONArray {
      * <p>
      * Warning: This method assumes that the data structure is acyclical.
      *
+     * @param writer the writer
      * @return The writer.
-     * @throws JSONException
+     * @throws JSONException the JSON exception
      */
     public Writer write(Writer writer) throws JSONException {
         return this.write(writer, 0, 0);
@@ -898,12 +897,11 @@ public class JSONArray {
      * <p>
      * Warning: This method assumes that the data structure is acyclical.
      *
-     * @param indentFactor
-     *            The number of spaces to add to each level of indentation.
-     * @param indent
-     *            The indention of the top level.
+     * @param writer the writer
+     * @param indentFactor            The number of spaces to add to each level of indentation.
+     * @param indent            The indention of the top level.
      * @return The writer.
-     * @throws JSONException
+     * @throws JSONException the JSON exception
      */
     Writer write(Writer writer, int indentFactor, int indent)
             throws JSONException {

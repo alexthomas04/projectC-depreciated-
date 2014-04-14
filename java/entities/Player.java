@@ -15,38 +15,100 @@ import world.Chunk;
 import world.World;
 import lombok.*;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Player.
+ */
 public class Player extends Entity{
 
+	/** The Constant TYPE. */
 	public final static String	TYPE	= "player";
+	
+	/** The food. */
 	private int					food;
+	
+	/** The inventory. */
 	private ArrayList<Entity>	inventory;
+	
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
 	@Getter
 	private String				name;
+	
+	/**
+	 * Instantiates a new player.
+	 *
+	 * @param identification the identification
+	 * @param x the x
+	 * @param y the y
+	 * @param c the Chunk
+	 * @param w the World
+	 */
 	public Player(int identification, int x, int y, Chunk c, World w){
 		super(identification, x, y, c, w);
 
 	}
 
+	/**
+	 * Instantiates a new player.
+	 *
+	 * @param identification the identification
+	 * @param x the x
+	 * @param y the y
+	 * @param c the Chunk
+	 * @param w the World
+	 * @param attributes the attributes
+	 */
 	public Player(int identification, int x, int y, Chunk c, World w, Hashtable<String, String> attributes){
 		super(identification, x, y, c, w, attributes);
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Instantiates a new player.
+	 *
+	 * @param identification the identification
+	 * @param c the Chunk	
+	 * @param w the World
+	 * @param jsonString the json string
+	 */
 	public Player(int identification, Chunk c, World w, String jsonString){
 		super(identification, c, w, jsonString);
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Instantiates a new player.
+	 *
+	 * @param identification the identification
+	 * @param c the Chunk	
+	 * @param w the World
+	 * @param json the json
+	 */
 	public Player(int identification, Chunk c, World w, JSONObject json){
 		super(identification, c, w, json);
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Instantiates a new player.
+	 *
+	 * @param identification the identification
+	 * @param c the Chunk
+	 * @param w the World
+	 * @param attributes the attributes
+	 */
 	public Player(int identification, Chunk c, World w, Hashtable<String, String> attributes){
 		super(identification, c, w, attributes);
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Stores the enetity type in the EntityTypeManager
+	 */
 	public static void staticLoad(){
 		EntityTypeManager.storeType(TYPE, Player.class);
 
@@ -64,6 +126,12 @@ public class Player extends Entity{
 		return table;
 	}
 
+	/**
+	 * Handle command.
+	 *
+	 * @param command the command
+	 * @return the result
+	 */
 	public String handleCommand(String[] command){
 		for (int i = 0; i < command.length; i++){
 			command[i] = command[i].trim();
@@ -92,6 +160,12 @@ public class Player extends Entity{
 		return "Comamnd did not execute";
 	}
 
+	/**
+	 * Move.
+	 *
+	 * @param command the command
+	 * @return the result
+	 */
 	public String move(String[] command){
 		if (command.length < 1)
 			return "Not enough arguments";
@@ -138,6 +212,12 @@ public class Player extends Entity{
 		return "Comamnd did not execute";
 	}
 
+	/**
+	 * Look.
+	 *
+	 * @param command the command
+	 * @return the result
+	 */
 	public String look(String[] command){
 		if (command.length < 1)
 			return "Not enough arguments";
@@ -259,6 +339,12 @@ public class Player extends Entity{
 
 	}
 
+	/**
+	 * Pick up.
+	 *
+	 * @param command the command
+	 * @return the result
+	 */
 	public String pickUp(String[] command){
 		String details = "";
 		if (command.length >= 1){
@@ -295,6 +381,12 @@ public class Player extends Entity{
 		}
 	}
 
+	/**
+	 * Inventory.
+	 *
+	 * @param command the command
+	 * @return the result
+	 */
 	public String inventory(String[] command){
 
 		if (command.length >= 1){
@@ -325,6 +417,12 @@ public class Player extends Entity{
 
 	}
 
+	/**
+	 * Eat.
+	 *
+	 * @param command the command
+	 * @return the result
+	 */
 	public String eat(String[] command){
 		if (command.length >= 1){
 			int searchId;
@@ -352,6 +450,12 @@ public class Player extends Entity{
 		return "Nothing edible in inventory";
 	}
 
+	/**
+	 * Skill check.
+	 *
+	 * @param command the command
+	 * @return the result
+	 */
 	public String skillCheck(String[] command){
 		Skill skill;
 		if (command.length < 1)
@@ -397,6 +501,12 @@ public class Player extends Entity{
 		return response;
 	}
 
+	/**
+	 * Drop.
+	 *
+	 * @param command the command
+	 * @return the result
+	 */
 	public String drop(String[] command){
 		if (command.length < 1)
 			return "Not enough arguments";
@@ -423,6 +533,12 @@ public class Player extends Entity{
 		return "Entity removed";
 	}
 
+	/**
+	 * Attack.
+	 *
+	 * @param command the command
+	 * @return the result
+	 */
 	public String attack(String[] command){
 		if(command.length<1)
 			return "Invalid number of aruments";
@@ -456,6 +572,9 @@ public class Player extends Entity{
 		return "They are at "+victim.healthPoints+" HP";
 	}
 	
+	/* (non-Javadoc)
+	 * @see entities.Entity#init(java.util.Hashtable)
+	 */
 	@Override
 	protected void init(Hashtable<String, String> attributes){
 		strength = new Skill(1, 0, "strength", this);
@@ -498,6 +617,9 @@ public class Player extends Entity{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see entities.Entity#getJson()
+	 */
 	@Override
 	public JSONObject getJson(){
 		JSONObject json = super.getJson();
@@ -511,11 +633,17 @@ public class Player extends Entity{
 		return json;
 	}
 
+	/* (non-Javadoc)
+	 * @see entities.Entity#getType()
+	 */
 	@Override
 	public String getType(){
 		return "player";
 	}
 
+	/* (non-Javadoc)
+	 * @see entities.Entity#tick()
+	 */
 	@Override
 	public void tick(){
 		food--;
@@ -524,15 +652,34 @@ public class Player extends Entity{
 
 	}
 
+	/**
+	 * Handle command.
+	 *
+	 * @param string the string
+	 * @return the result
+	 */
 	public String handleCommand(String string){
 		return handleCommand(string.trim().split(" "));
 
 	}
+	
+	/**
+	 * Level up.
+	 *
+	 * @param skillName the skill name
+	 * @param level the level
+	 */
 	public void levelUp(String skillName, int level){
 		String message = "CONGRATULATIONS!! Your " + skillName + " is now at Level " + level;
 		messageWrite(message);
 		calcStats();
 	}
+	
+	/**
+	 * Stores a message for the player on the database
+	 *
+	 * @param message the message
+	 */
 	public void messageWrite(String message){
 		Database db = Database.getDatabaseInstance();
 		db.insertMessage(name, message);

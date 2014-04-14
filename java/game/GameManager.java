@@ -10,13 +10,25 @@ import entities.RockWithLegs;
 import world.Chunk;
 import world.World;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GameManager.
+ */
 public class GameManager {
 
+		/** The world. */
 		private World world;
+	
+	/**
+	 * Instantiates a new game manager.
+	 */
 	public GameManager() {
 		world = new World();
 	}
 	
+	/**
+	 * Run.
+	 */
 	public void run(){
 		GenericPlant.staticLoad();
 		Player.staticLoad();
@@ -44,8 +56,17 @@ public class GameManager {
 	
 	
 	
+	/**
+	 * The Class CommandHandler.
+	 */
 	private class CommandHandler extends Thread{
+		
+		/** The server. */
 		Server server = new Server();
+		
+		/* (non-Javadoc)
+		 * @see java.lang.Thread#run()
+		 */
 		public  void run(){
 			while(true){
 				String message = server.getMessage();
@@ -89,16 +110,34 @@ public class GameManager {
 		}
 	}
 
+	/**
+	 * The Class AutoSave.
+	 */
 	private class AutoSave extends Thread{
+		
+		/** The interval. */
 		private long interval=60000;
+		
+		/**
+		 * Instantiates a new auto save.
+		 *
+		 * @param i the i
+		 */
 		public AutoSave(long i){
 			super();
 			interval =i;
 		}
+		
+		/**
+		 * Instantiates a new auto save.
+		 */
 		public AutoSave(){
 			super();
 		}
 		
+		/* (non-Javadoc)
+		 * @see java.lang.Thread#run()
+		 */
 		public void run(){
 			while(true){
 				try {
@@ -114,14 +153,33 @@ public class GameManager {
 		}
 	}
 
+	/**
+	 * The Class Ticker.
+	 */
 	private class Ticker extends Thread{
+		
+		/** The interval. */
 		private long interval=60000;
+		
+		/**
+		 * Instantiates a new ticker.
+		 */
 		public Ticker(){
 			super();
 		}
+		
+		/**
+		 * Instantiates a new ticker.
+		 *
+		 * @param l the l
+		 */
 		public Ticker(long l){
 			interval=l;
 		}
+		
+		/* (non-Javadoc)
+		 * @see java.lang.Thread#run()
+		 */
 		public void run(){
 			while(true){
 				try {

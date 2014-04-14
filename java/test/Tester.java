@@ -17,7 +17,17 @@ import world.Chunk;
 import world.World;
 import json.JSONArray;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Tester.
+ */
 public class Tester {
+	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args){
 		
 		GameManager gm = new GameManager();

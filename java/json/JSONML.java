@@ -27,6 +27,7 @@ SOFTWARE.
 import java.util.Iterator;
 
 
+// TODO: Auto-generated Javadoc
 /**
  * This provides static methods to convert an XML text into a JSONArray or
  * JSONObject, and to covert a JSONArray or JSONObject into an XML text using
@@ -39,12 +40,13 @@ public class JSONML {
 
     /**
      * Parse XML values and store them in a JSONArray.
+     *
      * @param x       The XMLTokener containing the source string.
      * @param arrayForm true if array form, false if object form.
      * @param ja      The JSONArray that is containing the current tag or null
      *     if we are at the outermost level.
      * @return A JSONArray if the value is the outermost tag, otherwise null.
-     * @throws JSONException
+     * @throws JSONException the JSON exception
      */
     private static Object parse(
         XMLTokener x,
@@ -243,9 +245,10 @@ public class JSONML {
      * name/value pairs. If the tag contains children, then strings and
      * JSONArrays will represent the child tags.
      * Comments, prologs, DTDs, and <code>&lt;[ [ ]]></code> are ignored.
+     *
      * @param string The source string.
      * @return A JSONArray containing the structured data from the XML string.
-     * @throws JSONException
+     * @throws JSONException the JSON exception
      */
     public static JSONArray toJSONArray(String string) throws JSONException {
         return toJSONArray(new XMLTokener(string));
@@ -260,9 +263,10 @@ public class JSONML {
      * name/value pairs. If the tag contains children, then strings and
      * JSONArrays will represent the child content and tags.
      * Comments, prologs, DTDs, and <code>&lt;[ [ ]]></code> are ignored.
+     *
      * @param x An XMLTokener.
      * @return A JSONArray containing the structured data from the XML string.
-     * @throws JSONException
+     * @throws JSONException the JSON exception
      */
     public static JSONArray toJSONArray(XMLTokener x) throws JSONException {
         return (JSONArray)parse(x, true, null);
@@ -276,11 +280,11 @@ public class JSONML {
      * the attributes will be in the JSONObject as properties. If the tag
      * contains children, the object will have a "childNodes" property which
      * will be an array of strings and JsonML JSONObjects.
-
      * Comments, prologs, DTDs, and <code>&lt;[ [ ]]></code> are ignored.
+     *
      * @param x An XMLTokener of the XML source text.
      * @return A JSONObject containing the structured data from the XML string.
-     * @throws JSONException
+     * @throws JSONException the JSON exception
      */
     public static JSONObject toJSONObject(XMLTokener x) throws JSONException {
            return (JSONObject)parse(x, false, null);
@@ -294,11 +298,11 @@ public class JSONML {
      * the attributes will be in the JSONObject as properties. If the tag
      * contains children, the object will have a "childNodes" property which
      * will be an array of strings and JsonML JSONObjects.
-
      * Comments, prologs, DTDs, and <code>&lt;[ [ ]]></code> are ignored.
+     *
      * @param string The XML source text.
      * @return A JSONObject containing the structured data from the XML string.
-     * @throws JSONException
+     * @throws JSONException the JSON exception
      */
     public static JSONObject toJSONObject(String string) throws JSONException {
         return toJSONObject(new XMLTokener(string));
@@ -307,9 +311,10 @@ public class JSONML {
 
     /**
      * Reverse the JSONML transformation, making an XML text from a JSONArray.
+     *
      * @param ja A JSONArray.
      * @return An XML string.
-     * @throws JSONException
+     * @throws JSONException the JSON exception
      */
     public static String toString(JSONArray ja) throws JSONException {
         int             i;
@@ -389,9 +394,10 @@ public class JSONML {
      * The JSONObject must contain a "tagName" property. If it has children,
      * then it must have a "childNodes" property containing an array of objects.
      * The other properties are attributes with string values.
+     *
      * @param jo A JSONObject.
      * @return An XML string.
-     * @throws JSONException
+     * @throws JSONException the JSON exception
      */
     public static String toString(JSONObject jo) throws JSONException {
         StringBuffer sb = new StringBuffer();

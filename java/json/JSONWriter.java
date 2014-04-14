@@ -3,6 +3,7 @@ package json;
 import java.io.IOException;
 import java.io.Writer;
 
+// TODO: Auto-generated Javadoc
 /*
 Copyright (c) 2006 JSON.org
 
@@ -57,6 +58,8 @@ SOFTWARE.
  * @version 2011-11-24
  */
 public class JSONWriter {
+    
+    /** The Constant maxdepth. */
     private static final int maxdepth = 200;
 
     /**
@@ -92,6 +95,8 @@ public class JSONWriter {
 
     /**
      * Make a fresh JSONWriter. It can be used to build one JSON text.
+     *
+     * @param w the w
      */
     public JSONWriter(Writer w) {
         this.comma = false;
@@ -269,7 +274,8 @@ public class JSONWriter {
 
     /**
      * Push an array or object scope.
-     * @param c The scope to open.
+     *
+     * @param jo the jo
      * @throws JSONException If nesting is too deep.
      */
     private void push(JSONObject jo) throws JSONException {
@@ -285,9 +291,10 @@ public class JSONWriter {
     /**
      * Append either the value <code>true</code> or the value
      * <code>false</code>.
+     *
      * @param b A boolean.
      * @return this
-     * @throws JSONException
+     * @throws JSONException the JSON exception
      */
     public JSONWriter value(boolean b) throws JSONException {
         return this.append(b ? "true" : "false");
@@ -305,9 +312,10 @@ public class JSONWriter {
 
     /**
      * Append a long value.
+     *
      * @param l A long.
      * @return this
-     * @throws JSONException
+     * @throws JSONException the JSON exception
      */
     public JSONWriter value(long l) throws JSONException {
         return this.append(Long.toString(l));

@@ -29,6 +29,11 @@ public class World {
 	/** The chunks. */
 	private ArrayList<Chunk> chunks = new ArrayList<Chunk>();
 	
+	/**
+	 * Gets the players.
+	 *
+	 * @return the players
+	 */
 	@Getter private ArrayList<Player> players = new ArrayList<Player>();
 	
 	/**
@@ -123,6 +128,12 @@ public class World {
 		
 	}
 	
+	/**
+	 * Load players.
+	 *
+	 * @param dir the dir
+	 * @return true, if successful
+	 */
 	public boolean loadPlayers(String dir){
 		try{
 			File directory = new File(dir);
@@ -209,22 +220,55 @@ public class World {
 		chunks.add(Chunk.generateRandomChunk(100 , 100, id, this, 1));
 	}
 	
+	/**
+	 * Gets the chunk.
+	 *
+	 * @param id the id
+	 * @return the chunk
+	 */
 	public Chunk getChunk(int id){
 		return chunks.get(id);
 	}
 	
+	/**
+	 * Gets the entities.
+	 *
+	 * @return the entities
+	 */
 	public ArrayList<Entity> getEntities(){
 		return entities;
 	}
+	
+	/**
+	 * Adds the entity.
+	 *
+	 * @param e the e
+	 */
 	public void addEntity(Entity e){
 		entities.add(e);
 	}
+	
+	/**
+	 * Removes the entity.
+	 *
+	 * @param e the e
+	 */
 	public void removeEntity(Entity e){
 		entities.remove(e);
 	}
+	
+	/**
+	 * Adds the player.
+	 *
+	 * @param p the p
+	 */
 	public void addPlayer(Player p){
 		players.add(p);
 	}
+	
+	/**
+	 * Tick.
+	 */
 	public void tick(){
 		for(Entity e : entities)
 			e.tick();
@@ -232,6 +276,12 @@ public class World {
 			p.tick();
 	}
 	
+	/**
+	 * Gets the player.
+	 *
+	 * @param name the name
+	 * @return the player
+	 */
 	public Player getPlayer(String name){
 		for(Player p : players){
 			if(p.getName()!=null && p.getName().equals(name))
@@ -240,6 +290,12 @@ public class World {
 		return null;
 	}
 	
+	/**
+	 * Checks for player.
+	 *
+	 * @param name the name
+	 * @return true, if successful
+	 */
 	public boolean hasPlayer(String name){
 		return !(getPlayer(name)==null);
 	}

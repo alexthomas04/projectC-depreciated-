@@ -30,76 +30,255 @@ public abstract class Entity{
 	protected int		locY					= 0;
 
 	/** The strength. */
+	
+	/**
+	 * Gets the strength.
+	 *
+	 * @return the strength
+	 */
 	@Getter
+	
+	/**
+	 * Sets the strength.
+	 *
+	 * @param strength the new strength
+	 */
 	@Setter
 	protected Skill		strength				= new Skill(0);
 
 	/** The power. */
+	
+	/**
+	 * Gets the power.
+	 *
+	 * @return the power
+	 */
 	@Getter
+	
+	/**
+	 * Sets the power.
+	 *
+	 * @param power the new power
+	 */
 	@Setter
 	protected Skill		power					= new Skill(0);
 
 	/** The wisdom. */
+	
+	/**
+	 * Gets the wisdom.
+	 *
+	 * @return the wisdom
+	 */
 	@Getter
+	
+	/**
+	 * Sets the wisdom.
+	 *
+	 * @param wisdom the new wisdom
+	 */
 	@Setter
 	protected Skill		wisdom					= new Skill(0);
 
 	/** The physical endurence. */
+	
+	/**
+	 * Gets the physical endurence.
+	 *
+	 * @return the physical endurence
+	 */
 	@Getter
+	
+	/**
+	 * Sets the physical endurence.
+	 *
+	 * @param physicalEndurence the new physical endurence
+	 */
 	@Setter
 	protected Skill		physicalEndurence		= new Skill(0);
 
 	/** The sharp endurence. */
+	
+	/**
+	 * Gets the sharp endurence.
+	 *
+	 * @return the sharp endurence
+	 */
 	@Getter
+	
+	/**
+	 * Sets the sharp endurence.
+	 *
+	 * @param sharpEndurence the new sharp endurence
+	 */
 	@Setter
 	protected Skill		sharpEndurence			= new Skill(0);
 
 	/** The stab enderence. */
+	
+	/**
+	 * Gets the stab enderence.
+	 *
+	 * @return the stab enderence
+	 */
 	@Getter
+	
+	/**
+	 * Sets the stab enderence.
+	 *
+	 * @param stabEnderence the new stab enderence
+	 */
 	@Setter
 	protected Skill		stabEnderence			= new Skill(0);
 
 	/** The temperature resistance. */
+	
+	/**
+	 * Gets the temperature resistance.
+	 *
+	 * @return the temperature resistance
+	 */
 	@Getter
+	
+	/**
+	 * Sets the temperature resistance.
+	 *
+	 * @param temperatureResistance the new temperature resistance
+	 */
 	@Setter
 	protected Skill		temperatureResistance	= new Skill(0);
 
 	/** The p h afinity. */
+	
+	/**
+	 * Gets the PH afinity.
+	 *
+	 * @return the PH afinity
+	 */
 	@Getter
+	
+	/**
+	 * Sets the PH afinity.
+	 *
+	 * @param pHAfinity the new PH afinity
+	 */
 	@Setter
 	protected Skill		pHAfinity				= new Skill(7);
 
 	/** The hydration. */
+	
+	/**
+	 * Gets the hydration.
+	 *
+	 * @return the hydration
+	 */
 	@Getter
+	
+	/**
+	 * Sets the hydration.
+	 *
+	 * @param hydration the new hydration
+	 */
 	@Setter
 	protected Skill		hydration				= new Skill(0);
 
 	/** The vitality. */
+	
+	/**
+	 * Gets the vitality.
+	 *
+	 * @return the vitality
+	 */
 	@Getter
+	
+	/**
+	 * Sets the vitality.
+	 *
+	 * @param vitality the new vitality
+	 */
 	@Setter
 	protected Skill		vitality				= new Skill(0);
 
 	/** The dexterity. */
+	
+	/**
+	 * Gets the dexterity.
+	 *
+	 * @return the dexterity
+	 */
 	@Getter
+	
+	/**
+	 * Sets the dexterity.
+	 *
+	 * @param dexterity the new dexterity
+	 */
 	@Setter
 	protected Skill		dexterity				= new Skill(0);
 
 	/** The speed. */
+	
+	/**
+	 * Gets the speed.
+	 *
+	 * @return the speed
+	 */
 	@Getter
+	
+	/**
+	 * Sets the speed.
+	 *
+	 * @param speed the new speed
+	 */
 	@Setter
 	protected Skill		speed					= new Skill(0);
 
 	/** The luck. */
+	
+	/**
+	 * Gets the luck.
+	 *
+	 * @return the luck
+	 */
 	@Getter
+	
+	/**
+	 * Sets the luck.
+	 *
+	 * @param luck the new luck
+	 */
 	@Setter
 	protected Skill		luck					= new Skill(0);
 
 	/** The weight. */
+	
+	/**
+	 * Gets the weight.
+	 *
+	 * @return the weight
+	 */
 	@Getter
+	
+	/**
+	 * Sets the weight.
+	 *
+	 * @param weight the new weight
+	 */
 	@Setter
 	protected Skill		weight					= new Skill(0);
 
+	/**
+	 * Gets the vision.
+	 *
+	 * @return the vision
+	 */
 	@Getter
+	
+	/**
+	 * Sets the vision.
+	 *
+	 * @param vision the new vision
+	 */
 	@Setter
 	protected Skill		vision					= new Skill(1);
 
@@ -160,6 +339,7 @@ public abstract class Entity{
 	/** The world. */
 	protected World		world;
 
+	/** The dead. */
 	protected boolean	dead					= false;
 
 	/**
@@ -457,14 +637,29 @@ public abstract class Entity{
 		return json;
 	}
 
+	/**
+	 * Gets the standard.
+	 *
+	 * @return the standard
+	 */
 	public static Hashtable<String, String> getStandard(){
 		return null;
 	}
 
+	/**
+	 * Gets the type.
+	 *
+	 * @return the type
+	 */
 	public String getType(){
 		return "ABSTRACT";
 	}
 
+	/**
+	 * Gets the details.
+	 *
+	 * @return the details
+	 */
 	public Hashtable<String, String> getDetails(){
 		JSONObject json = getJson();
 		Iterator itr = json.keys();
@@ -482,14 +677,26 @@ public abstract class Entity{
 		return attributes;
 	}
 
+	/**
+	 * Tick.
+	 */
 	public void tick(){
 	}
 
+	/**
+	 * Calculate stats.
+	 */
 	public void calcStats(){
 		healthPoints = (int) ((100+dexterity.getCurrentLevel()/10)*Math.pow(1.01, vitality.getCurrentLevel()));//ben calculation
 		hit=dexterity.getCurrentLevel()+vision.getCurrentLevel()/4;//half of a ben calculation
 		
 	}
+	
+	/**
+	 * Attack.
+	 *
+	 * @param e the entitiy being attacked
+	 */
 	public void attack(Entity e){
 		int hitRate = 80+this.hit;//-e.flee
 		e.healthPoints-=hitRate;
@@ -500,5 +707,8 @@ public abstract class Entity{
 		}
 	}
 	
+	/**
+	 * Die.
+	 */
 	protected void die(){ }
 }

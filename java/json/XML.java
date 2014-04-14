@@ -27,6 +27,7 @@ SOFTWARE.
 import java.util.Iterator;
 
 
+// TODO: Auto-generated Javadoc
 /**
  * This provides static methods to convert an XML text into a JSONObject,
  * and to covert a JSONObject into an XML text.
@@ -69,7 +70,8 @@ public class XML {
      * &lt; <small>(less than)</small> is replaced by &amp;lt;
      * &gt; <small>(greater than)</small> is replaced by &amp;gt;
      * &quot; <small>(double quote)</small> is replaced by &amp;quot;
-     * </pre>
+     * </pre>.
+     *
      * @param string The string to be escaped.
      * @return The escaped string.
      */
@@ -103,8 +105,9 @@ public class XML {
     /**
      * Throw an exception if the string contains whitespace.
      * Whitespace is not allowed in tagNames and attributes.
-     * @param string
-     * @throws JSONException
+     *
+     * @param string the string
+     * @throws JSONException the JSON exception
      */
     public static void noSpace(String string) throws JSONException {
         int i, length = string.length();
@@ -121,11 +124,12 @@ public class XML {
 
     /**
      * Scan the content following the named tag, attaching it to the context.
+     *
      * @param x       The XMLTokener containing the source string.
      * @param context The JSONObject that will include the new material.
      * @param name    The tag name.
      * @return true if the close tag is processed.
-     * @throws JSONException
+     * @throws JSONException the JSON exception
      */
     private static boolean parse(XMLTokener x, JSONObject context,
                                  String name) throws JSONException {
@@ -345,9 +349,10 @@ public class XML {
      * Sequences of similar elements are represented as JSONArrays. Content
      * text may be placed in a "content" member. Comments, prologs, DTDs, and
      * <code>&lt;[ [ ]]></code> are ignored.
+     *
      * @param string The source string.
      * @return A JSONObject containing the structured data from the XML string.
-     * @throws JSONException
+     * @throws JSONException the JSON exception
      */
     public static JSONObject toJSONObject(String string) throws JSONException {
         JSONObject jo = new JSONObject();
@@ -361,9 +366,10 @@ public class XML {
 
     /**
      * Convert a JSONObject into a well-formed, element-normal XML string.
+     *
      * @param object A JSONObject.
      * @return  A string.
-     * @throws  JSONException
+     * @throws JSONException the JSON exception
      */
     public static String toString(Object object) throws JSONException {
         return toString(object, null);
@@ -372,10 +378,11 @@ public class XML {
 
     /**
      * Convert a JSONObject into a well-formed, element-normal XML string.
+     *
      * @param object A JSONObject.
      * @param tagName The optional name of the enclosing tag.
      * @return A string.
-     * @throws JSONException
+     * @throws JSONException the JSON exception
      */
     public static String toString(Object object, String tagName)
             throws JSONException {

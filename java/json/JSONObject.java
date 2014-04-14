@@ -39,6 +39,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+// TODO: Auto-generated Javadoc
 /**
  * A JSONObject is an unordered collection of name/value pairs. Its external
  * form is a string wrapped in curly braces with colons between the names and
@@ -157,14 +158,8 @@ public class JSONObject {
      * strings is used to identify the keys that should be copied. Missing keys
      * are ignored.
      *
-     * @param jo
-     *            A JSONObject.
-     * @param names
-     *            An array of strings.
-     * @throws JSONException
-     * @exception JSONException
-     *                If a value is a non-finite number or if a name is
-     *                duplicated.
+     * @param jo            A JSONObject.
+     * @param names            An array of strings.
      */
     public JSONObject(JSONObject jo, String[] names) {
         this();
@@ -234,10 +229,8 @@ public class JSONObject {
     /**
      * Construct a JSONObject from a Map.
      *
-     * @param map
-     *            A map object that can be used to initialize the contents of
+     * @param map            A map object that can be used to initialize the contents of
      *            the JSONObject.
-     * @throws JSONException
      */
     public JSONObject(Map map) {
         this.map = new HashMap();
@@ -602,6 +595,7 @@ public class JSONObject {
     /**
      * Get an array of field names from a JSONObject.
      *
+     * @param jo the jo
      * @return An array of field names, or null if there are no names.
      */
     public static String[] getNames(JSONObject jo) {
@@ -622,6 +616,7 @@ public class JSONObject {
     /**
      * Get an array of field names from an Object.
      *
+     * @param object the object
      * @return An array of field names, or null if there are no names.
      */
     public static String[] getNames(Object object) {
@@ -977,6 +972,11 @@ public class JSONObject {
         return NULL.equals(object) ? defaultValue : object.toString();
     }
 
+    /**
+     * Populate map.
+     *
+     * @param bean the bean
+     */
     private void populateMap(Object bean) {
         Class klass = bean.getClass();
 
@@ -1043,12 +1043,10 @@ public class JSONObject {
      * Put a key/value pair in the JSONObject, where the value will be a
      * JSONArray which is produced from a Collection.
      *
-     * @param key
-     *            A key string.
-     * @param value
-     *            A Collection value.
+     * @param key            A key string.
+     * @param value            A Collection value.
      * @return this.
-     * @throws JSONException
+     * @throws JSONException the JSON exception
      */
     public JSONObject put(String key, Collection value) throws JSONException {
         this.put(key, new JSONArray(value));
@@ -1107,12 +1105,10 @@ public class JSONObject {
      * Put a key/value pair in the JSONObject, where the value will be a
      * JSONObject which is produced from a Map.
      *
-     * @param key
-     *            A key string.
-     * @param value
-     *            A Map value.
+     * @param key            A key string.
+     * @param value            A Map value.
      * @return this.
-     * @throws JSONException
+     * @throws JSONException the JSON exception
      */
     public JSONObject put(String key, Map value) throws JSONException {
         this.put(key, new JSONObject(value));
@@ -1151,11 +1147,10 @@ public class JSONObject {
      * are both non-null, and only if there is not already a member with that
      * name.
      *
-     * @param key
-     * @param value
+     * @param key the key
+     * @param value the value
      * @return his.
-     * @throws JSONException
-     *             if the key is a duplicate
+     * @throws JSONException             if the key is a duplicate
      */
     public JSONObject putOnce(String key, Object value) throws JSONException {
         if (key != null && value != null) {
@@ -1210,6 +1205,14 @@ public class JSONObject {
         }
     }
 
+    /**
+     * Quote.
+     *
+     * @param string the string
+     * @param w the w
+     * @return the writer
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public static Writer quote(String string, Writer w) throws IOException {
         if (string == null || string.length() == 0) {
             w.write("\"\"");
@@ -1536,13 +1539,25 @@ public class JSONObject {
      * <p>
      * Warning: This method assumes that the data structure is acyclical.
      *
+     * @param writer the writer
      * @return The writer.
-     * @throws JSONException
+     * @throws JSONException the JSON exception
      */
     public Writer write(Writer writer) throws JSONException {
         return this.write(writer, 0, 0);
     }
 
+    /**
+     * Write value.
+     *
+     * @param writer the writer
+     * @param value the value
+     * @param indentFactor the indent factor
+     * @param indent the indent
+     * @return the writer
+     * @throws JSONException the JSON exception
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     static final Writer writeValue(Writer writer, Object value,
             int indentFactor, int indent) throws JSONException, IOException {
         if (value == null || value.equals(null)) {
@@ -1576,6 +1591,13 @@ public class JSONObject {
         return writer;
     }
 
+    /**
+     * Indent.
+     *
+     * @param writer the writer
+     * @param indent the indent
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     static final void indent(Writer writer, int indent) throws IOException {
         for (int i = 0; i < indent; i += 1) {
             writer.write(' ');
@@ -1588,8 +1610,11 @@ public class JSONObject {
      * <p>
      * Warning: This method assumes that the data structure is acyclical.
      *
+     * @param writer the writer
+     * @param indentFactor the indent factor
+     * @param indent the indent
      * @return The writer.
-     * @throws JSONException
+     * @throws JSONException the JSON exception
      */
     Writer write(Writer writer, int indentFactor, int indent)
             throws JSONException {
