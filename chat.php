@@ -86,6 +86,7 @@ if(substr($message, 0,1)==="/"){
 			}
 			if($user->data()->has_private){
 				$privates = $_db->get('private_chat',array('to_username','=',$user->data()->username))->results();
+				$game_messages = $_db->get('game_messages',array('to_user_id','=',$user->data()->id))->results();
 				$user->change('has_private',0);
 				foreach ($privates as $private) {
 					$from_username = $private->from_username;
@@ -94,6 +95,12 @@ if(substr($message, 0,1)==="/"){
                		$type = $private->type;
 					$text[] = "<span class='private'><span class='time'>{$time}</span> <span class='private_type'>{$type}</span> <span class='private_from'>{$from_username}</span>: <span class='{$type}'>{$t}</span></span>" ;
 					$_db->delete('private_chat',array('id','=',$private->id));
+				}
+				foreach ($game_messages as $game_message) {
+					$message=$game_message->message;
+					$time=$game_message->time;
+					$text[] = "<span class='time'>{$time}</span><span class='game_message'>{$message}</span>";
+					$_db->delete('game_messages',array('id','=',$game_message->id));
 				}
 			}
 			$log['stat']=$state;
