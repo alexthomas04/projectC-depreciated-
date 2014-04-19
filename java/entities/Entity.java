@@ -265,7 +265,7 @@ public abstract class Entity{
 	 * @param weight the new weight
 	 */
 	@Setter
-	protected Skill		weight					= new Skill(0);
+	protected int		weight					= 0;
 
 	/**
 	 * Gets the vision.
@@ -551,7 +551,7 @@ public abstract class Entity{
 			if (attributes.containsKey("luck"))
 				luck = new Skill(attributes.get("luck"), this);
 			if (attributes.containsKey("weight"))
-				weight = new Skill(attributes.get("weight"), this);
+				weight = Integer.parseInt(attributes.get("weight"));
 			if (attributes.containsKey("vision"))
 				vision = new Skill(attributes.get("vision"), this);
 			if (attributes.containsKey("dead"))

@@ -590,7 +590,6 @@ public class Player extends Entity{
 		dexterity = new Skill(1, 0, "dexterity", this);
 		speed = new Skill(1, 0, "speed", this);
 		luck = new Skill(1, 0, "luck", this);
-		weight = new Skill(1, 0, "weight", this);
 		vision = new Skill(1, 0, "vision", this);
 		if (inventory == null)
 			inventory = new ArrayList<Entity>();
@@ -606,7 +605,7 @@ public class Player extends Entity{
 					JSONObject entityJson = invn.optJSONObject(i);
 					Class type = EntityTypeManager.GetEntityType(entityJson.optString("type"));
 					try{
-						int numEntities = world.getEntities().size() + world.getPlayers().size() + inventory.size();
+						int numEntities = world.getNumEntities()+ inventory.size();
 						Entity e = (Entity) type.getConstructor(Integer.TYPE, Chunk.class, World.class, JSONObject.class).newInstance(numEntities, world.getChunk(0), world, entityJson);
 						inventory.add(e);
 					} catch (Exception e){
