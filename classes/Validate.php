@@ -34,7 +34,7 @@ class Validate{
 								$this->addError("{$item}| {$item} must be match {$rule_value}");
 							}
 						break;
-						case 'unique_no_case':
+						case 'unique':
 							$check= $this->_db->get($rule_value,array($item,'=',strtolower($value)));
 							if($check->count()){
 								$this->addError("{$item}| {$item} already exists");
