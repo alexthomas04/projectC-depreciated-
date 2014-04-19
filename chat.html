@@ -8,6 +8,36 @@
 				<input type="submit" style="position: absolute; left: -9999px"/>
 			</form>
 		</div>
+		<div id='buttons'>
+			<div class="command_button">
+				<button >move right</button>
+				<input type="number">
+			</div>
+			<div class="command_button">
+				<button >move left</button>
+				<input type="number">
+			</div>
+			<div class="command_button">
+				<button >move up</button>
+				<input type="number">
+			</div>
+			<div class="command_button">
+				<button >move down</button>
+				<input type="number">
+			</div>
+			<div class="command_button">
+				<button >look around</button>
+				<input type="number">
+			</div>
+			<div class="command_button">
+				<button >pick up</button>
+				<input type="number">
+			</div>
+			<div class="command_button">
+				<button >eat</button>
+				<input type="number">
+			</div>
+		</div>
 		<div id='command_area' onload="">
 			<div class='text_area'>
 				
@@ -64,7 +94,7 @@
 				})
 				.done(function(data) {
 					console.log('done');
-					//updateChat(data);
+					updateChat(data);
 				})
 				.fail(function(xhr, textStatus, errorThrown) {
 					console.log(errorThrown);
@@ -145,4 +175,14 @@
 					console.log("complete");
 				});
 		}
+
+		$('.command_button button').on('click',function(){
+			var command = '/'+$(this).text();
+			var number = $(this).siblings('input').val();
+			if(number != undefined){
+				command += " "+number;
+			}
+			console.log(command);
+			sendMessage(command);
+		});
 		</script>
