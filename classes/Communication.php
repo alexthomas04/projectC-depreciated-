@@ -18,14 +18,6 @@ class Communication{
 		$errorMsg = socket_strerror($errorCode);
 		die("Could not bind socket: [$errorcode] $errorMsg \n");
 	}
-	if(!($onServer)){
-		$guid = uniqid();
-		$prepared = "c" . "|" . $guid . "|" . "add" . "|" . $username ;
-
-		socket_sendto($write_socket,$prepared,4000,0,"127.0.0.1",9876);
-		$user = new User();
-		$user->change("onServer",true);
-	}
 	$guid = uniqid();
 	$prepared = "c" . "|" . $guid . "|" . "execute" . "|" . $username . "|" . $command;
 	 socket_sendto($write_socket,$prepared,4000,0,"127.0.0.1",9876);
@@ -46,9 +38,16 @@ class Communication{
 		$found = false;
 		// while(!$found){
 		//socket_recvfrom($listen_socket, $buf, 4000, 0, "localhost",9875);
+		socket_set_option($listen_socket,SOL_SOCKET,SO_RCVTIMEO,array("sec"=>10,"usec"=>0));
 		$result = socket_recv($listen_socket,$buf,4000,0);
+
+		if(isset($buf) && $buf!=null){
 		$parts = explode("|", $buf);
 		return $parts[count($parts)-1];
+	}else
+	{
+		return "Sorry the game server is offline at this time";
+	}
 		/*if($parts[0]=='s' && $parts[1]==$guid){
 				$found=true;
 				return $parts;

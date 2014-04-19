@@ -4,8 +4,10 @@ import java.util.Hashtable;
 
 import communication.Server;
 import entities.GenericPlant;
+import entities.Pebbles;
 import entities.Player;
 import entities.Rock;
+import entities.RockMeat;
 import entities.RockWithLegs;
 import world.Chunk;
 import world.World;
@@ -34,6 +36,8 @@ public class GameManager {
 		Player.staticLoad();
 		Rock.staticLoad();
 		RockWithLegs.staticLoad();
+		RockMeat.staticLoad();
+		Pebbles.staticLoad();
 		if(!world.loadChunks("world/")){
 			world=new World(1);
 		}
@@ -74,36 +78,18 @@ public class GameManager {
 				for(int i=0;i<parts.length;i++){
 					parts[i]=parts[i].trim();
 				}
-				if(parts[2].equalsIgnoreCase("add")){
-					if(world.hasPlayer(parts[3])){
-						message = "s"+"|"+parts[1]+"|"+"other"+"|"+"Player already Exists";
-						server.sendMessage(message);
-						continue;
-					}
-					else{
+				
+				if(parts[2].equalsIgnoreCase("execute")){
+					if(!world.hasPlayer(parts[3])){
 						Hashtable<String,String> attr =Player.getStandard();
 						attr.put("name", parts[3]);
 						attr.put("locationX", "0");
 						attr.put("locationY","0");
 						Player p = new Player(world.getPlayers().size(),world.getChunk(0),world,attr);
-						world.addPlayer(p);
-						message = "s"+"|"+parts[1]+"|"+"other"+"|"+parts[3]+" added at 0,0";
-						server.sendMessage(message);
-						continue;
 					}
-				}
-				else if(parts[2].equalsIgnoreCase("execute")){
-					if(world.hasPlayer(parts[3])){
-						message=world.getPlayer(parts[3]).handleCommand(parts[4]);
-						message =  "s"+"|"+parts[1]+"|"+"other"+"|"+message;
-						server.sendMessage(message);
-						continue;
-					}
-					else{
-						message =  "s"+"|"+parts[1]+"|"+"other"+"|"+"Player does not exist in world";
-						server.sendMessage(message);
-						continue;
-					}
+					message=world.getPlayer(parts[3]).handleCommand(parts[4]);
+					message =  "s"+"|"+parts[1]+"|"+"other"+"|"+message;
+					server.sendMessage(message);
 				}
 			
 			}
