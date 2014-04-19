@@ -40,7 +40,10 @@ require_once 'core/init.php';
                     <ul>
                         <li><a href="logout.php">log out</a></li>
                         <li><a href="changepassword.php">Change Password</a></li>
-                        <?php if($user->isAdmin()){ ?>
+                        <?php 
+                        $db = DB::getInstance();
+                        $permissions = json_decode($db->get('groups',array('id','=',$user->data()->group))->first()->permissions);
+                        if($permissions->archive){ ?>
                         <li><a href="archive.php">Archive</a></li>
                         <?php } ?>
                     </ul>
