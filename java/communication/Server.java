@@ -64,10 +64,14 @@ public class Server {
 	 * @param message the message
 	 */
 	public void sendMessage(String message){
+		message = message.replaceAll("\n", "<br />");
 		byte[] sendData = message.getBytes();
 		DatagramPacket sendPacket;
 		try {
-			sendPacket = new DatagramPacket(sendData,sendData.length,InetAddress.getByName("127.0.0.1"),WRITE_PORT);
+			int length=sendData.length;
+			if(sendData.length>4000)
+				length=4000;
+			sendPacket = new DatagramPacket(sendData,length,InetAddress.getByName("127.0.0.1"),WRITE_PORT);
 			writeSocket.send(sendPacket);
 			System.out.println(message);
 		} catch (UnknownHostException e) {
