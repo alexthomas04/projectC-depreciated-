@@ -114,8 +114,7 @@ public class World {
 				JSONObject entityData = entityArray.getJSONObject(i);
 				int chunkId=entityData.optInt("chunk");
 				Class type = EntityTypeManager.GetEntityType(entityData.optString("type"));
-				Entity e = (Entity) type.getConstructor(Integer.TYPE,Chunk.class,World.class,JSONObject.class).newInstance(entities.size(),chunks.get(chunkId),this,entityData);
-				entities.add(e);
+				Entity e = (Entity) type.getConstructor(Integer.TYPE,Chunk.class,World.class,JSONObject.class).newInstance(getNumEntities(),chunks.get(chunkId),this,entityData);
 			}
 			
 		}catch(Exception ex){
@@ -156,7 +155,7 @@ public class World {
 				Class type = EntityTypeManager.GetEntityType(entityData.optString("type"));
 				for(Object o : type.getConstructors())
 					System.out.println(o.toString());
-				Player p = (Player) type.getConstructor(Integer.TYPE,Chunk.class,World.class,JSONObject.class).newInstance(entities.size()+players.size(),chunks.get(chunkId),this,entityData);
+				Player p = (Player) type.getConstructor(Integer.TYPE,Chunk.class,World.class,JSONObject.class).newInstance(getNumEntities(),chunks.get(chunkId),this,entityData);
 				players.add(p);
 			}
 			
@@ -300,4 +299,7 @@ public class World {
 		return !(getPlayer(name)==null);
 	}
 
+	public int getNumEntities(){
+		return players.size()+entities.size();
+	}
 }
