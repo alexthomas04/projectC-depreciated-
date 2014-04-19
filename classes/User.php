@@ -4,8 +4,7 @@ class User{
 			$_data,
 			$_sessionName,
 			$_cookieName,
-			$_isLoggedIn,
-			$_isAdmin;
+			$_isLoggedIn;
 
 	public function __construct($user=null){
 		$this->_db=DB::getInstance();
@@ -24,11 +23,7 @@ class User{
 		}else{
 			$this->_isLoggedIn=$this->find($user);
 			}
-			if($this->_isLoggedIn){
-			$admin_id = $this->_db->get('groups',array('name','=','Administrator'))->first()->id;
-			$this->_isAdmin = ($this->data()->group == $admin_id )? true : false;
-			Session::put('username', $this->data()->username);
-			Session::put('onServer',$this->data()->onServer);}
+		
 	}
 
 	public function create($fields=array()){
@@ -60,7 +55,7 @@ class User{
 		}
 			else{
 				if($user){
-							if($this->data()->password === $password){
+							if($this->data()->password === Hash::make($password,$this->data()->salt)){
 								Session::put($this->_sessionName,$this->data()->id);
 								if($remember){
 									$hash = Hash::unique();

@@ -42,7 +42,7 @@ if(Input::exists()){
 							'group' => 1
 						));
 						Session::flash('home','You have been registered and can now log in!');
-						$user->login(Input::get('username'),Hash::make(Input::get('password'),$salt));
+						$user->login(Input::get('username'),Input::get('password'));
 						header('Location: index.php');
 					}
 					catch(Exception $e){
