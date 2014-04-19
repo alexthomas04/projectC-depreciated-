@@ -13,7 +13,7 @@ import java.sql.Statement;
 public class Database{
 	
 	/** The Constant URL. */
-	private static final String	URL		= "jdbc:mysql://localhost/projectc?user=root&password=root";
+	private static final String	URL		= "jdbc:mysql://localhost/projectc?user=root";
 	
 	/** The conn. */
 	private Connection			conn	= null;
