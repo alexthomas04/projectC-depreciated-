@@ -37,6 +37,9 @@
 				<button >eat</button>
 				<input type="number">
 			</div>
+			<div class="command_button">
+				<button >commands</button>
+			</div>
 		</div>
 		<div id='command_area' onload="">
 			<div class='text_area'>
@@ -52,10 +55,23 @@
 
 
 
+
+
+		<div class="edit_button" id="editTemplate">
+			<input type="text" class="button_name">
+			<label>Has Number</label>
+			<input type="checkbox" class="button_number"></input>
+		</div>
+
+
+
+
+
 		<script src="jquery-2.0.3.js"></script>
+		<script src="jquery.cookie.js"></script>
 		<script type="text/javascript">
 		setInterval(function(){update();}, 500);
-		
+		load();
 		var state=-1;
 		var waiting=false;
 		function handleChat(){
@@ -156,27 +172,66 @@
 			
 
 		}
-
-		function getTabs(){
-			$.ajax({
-					url: 'projectC.html',
-					type: 'post',
-					dataType: 'html'
-					
-				})
-				.done(function(data) {
-					$('#frame').src(data);
-					return data;
-				})
-				.fail(function(xhr, textStatus, errorThrown) {
-					console.log(errorThrown);
-				})
-				.always(function() {
-					console.log("complete");
-				});
+		function editButtons(){
+			var buttons = $('.command_button');
+			var template = $('#editTemplate');
+			buttons.each(function(){
+				var clone  = template.clone();
+				clone.children('.button_name').val($(this).children('button').text());
+				if($(this).children('input').length>0){
+					clone.children('.button_number').prop('checked', true);
+				}
+				clone.attr('id','');
+				$(this).after(clone);
+			});
+			buttons.remove();
+			$('#buttons').append('<a href="#" onClick="saveButtons();">save</a>');
+			$('#buttons').append('<span>  </span>');
+			$('#buttons').append('<a href="#" onClick="addEditButton();">add button</a>');
 		}
 
-		$('.command_button button').on('click',function(){
+		function saveButtons(){
+			var buttons = $('.edit_button');
+			
+			var buttonsArray = new Array(buttons.length);
+			buttons.each(function(i){
+				var button = {};
+				button.text = $(this).children('.button_name').val();
+				button.hasNumber = $(this).children('.button_number').is(":checked");
+				buttonsArray[i]=button;
+			});
+			var data = {};
+			data.buttons=buttonsArray;
+			data.buttonCount = buttons.length;
+			$.cookie('buttons',JSON.stringify(data));
+			load();
+		}
+
+		function load(){
+			if($.cookie('buttons')!= undefined){
+				var data = JSON.parse($.cookie('buttons'));
+				$('#buttons').children().remove();
+				for (var i =0; i < data.buttons.length; i++) {
+					var buttonData = data.buttons[i];
+					var button = $("<div class='command_button'></div>");
+					if(buttonData.text != ""){
+						button.append('<button>'+buttonData.text+'</button>');
+						if(buttonData.hasNumber){
+							button.append('<input type="number"></input>')
+						}
+						$('#buttons').append(button);
+					}
+				};
+			}
+		}
+		function addEditButton(){
+			var template = $('#editTemplate');
+			var clone  = template.clone();
+			clone.attr('id','');
+			$('#buttons a').first().before(clone);
+		}
+
+		$(document).on('click','.command_button button',function(){
 			var command = '/'+$(this).text();
 			var number = $(this).siblings('input').val();
 			if(number != undefined){
@@ -185,4 +240,5 @@
 			console.log(command);
 			sendMessage(command);
 		});
+	
 		</script>

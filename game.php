@@ -41,6 +41,7 @@ require_once 'core/init.php';
                         <li><a href="logout.php">log out</a></li>
                         <li><a href="changepassword.php">Change Password</a></li>
                         <li><a href="index.php">Home</a></li>
+                        <li><a href="#" onclick="editButtons();">change buttons</a></li>
                         <?php 
                         $db = DB::getInstance();
                         $permissions = json_decode($db->get('groups',array('id','=',$user->data()->group))->first()->permissions);
