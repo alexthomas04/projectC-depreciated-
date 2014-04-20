@@ -40,6 +40,7 @@ require_once 'core/init.php';
                     <ul>
                         <li><a href="logout.php">log out</a></li>
                         <li><a href="changepassword.php">Change Password</a></li>
+                        <li><a href="index.php">Home</a></li>
                         <?php 
                         $db = DB::getInstance();
                         $permissions = json_decode($db->get('groups',array('id','=',$user->data()->group))->first()->permissions);
