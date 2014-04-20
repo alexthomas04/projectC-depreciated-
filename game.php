@@ -27,8 +27,8 @@ require_once 'core/init.php';
 	<body>
         <div id="php_Flash">
             <?php
-                if(Session::exists('home')){
-	               echo '<p>' . Session::flash('home') . '</p>';
+                if(Session::exists('game')){
+	               echo '<p>' . Session::flash('game') . '</p>';
                 }
             ?>
         </div>
@@ -40,7 +40,12 @@ require_once 'core/init.php';
                     <ul>
                         <li><a href="logout.php">log out</a></li>
                         <li><a href="changepassword.php">Change Password</a></li>
-                        <li><a href="game.php">Game</a></li>
+                        <?php 
+                        $db = DB::getInstance();
+                        $permissions = json_decode($db->get('groups',array('id','=',$user->data()->group))->first()->permissions);
+                        if($permissions->archive){ ?>
+                        <li><a href="archive.php">Archive</a></li>
+                        <?php } ?>
                     </ul>
                     <?php
                 }else{
@@ -51,7 +56,12 @@ require_once 'core/init.php';
             ?>
         </div>
 
-		
+		<?php
+            if($user->isLoggedIn())
+                {
+                    include 'chat.html'; 
+            }
+        ?>
 	</body>
 
 </html>
