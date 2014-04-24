@@ -4,7 +4,8 @@ class User{
 			$_data,
 			$_sessionName,
 			$_cookieName,
-			$_isLoggedIn;
+			$_isLoggedIn,
+			$_permissions;
 
 	public function __construct($user=null){
 		$this->_db=DB::getInstance();
@@ -22,6 +23,9 @@ class User{
 			}
 		}else{
 			$this->_isLoggedIn=$this->find($user);
+			}
+			if($this->_isLoggedIn){
+				$this->_permissions = json_decode($this->_db->get('groups',array('id','=',$this->data()->group))->first()->permissions,true);
 			}
 		
 	}
@@ -103,7 +107,8 @@ class User{
 		$this->_db->update('users',$this->data()->id,array($field=>$value));
 	}
 
-	public function isAdmin(){
-		return $this->_isAdmin;
+	public function hasPermission($permission){
+		return $this->_permissions[$permission];
+
 	}
 }

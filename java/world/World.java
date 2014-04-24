@@ -156,7 +156,7 @@ public class World {
 				for(Object o : type.getConstructors())
 					System.out.println(o.toString());
 				Player p = (Player) type.getConstructor(Integer.TYPE,Chunk.class,World.class,JSONObject.class).newInstance(getNumEntities(),chunks.get(chunkId),this,entityData);
-				players.add(p);
+				
 			}
 			
 		}catch(Exception ex){

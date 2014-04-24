@@ -41,12 +41,10 @@ require_once 'core/init.php';
                         <li><a href="logout.php">log out</a></li>
                         <li><a href="changepassword.php">Change Password</a></li>
                         <li><a href="index.php">Home</a></li>
-                        <li><a href="#" onclick="editButtons();">change buttons</a></li>
+                        <li><a href="#" onClick="editButtons();">Change Buttons</a></li>
                         <?php 
-                        $db = DB::getInstance();
-                        $permissions = json_decode($db->get('groups',array('id','=',$user->data()->group))->first()->permissions);
-                        if($permissions->archive){ ?>
-                        <li><a href="archive.php">Archive</a></li>
+                        if($user->hasPermission('archive')){ ?>
+                        <li><a href="archive.php" target="_blank">Archive</a></li>
                         <?php } ?>
                     </ul>
                     <?php

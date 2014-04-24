@@ -155,7 +155,7 @@ public class Player extends Entity{
 		else if(command[0].equalsIgnoreCase("attack"))
 			return attack(Arrays.copyOfRange(command, 1, command.length));
 		else if (command[0].equalsIgnoreCase("commands")){
-			return "move {'right,'left','up','down'}[,{distance}]" + "\nlook {'around',closely','down','up'}[,{id},{radius}]" + "\npick up [{id}]" + "\ninventory" + "\neat [{id}]" + "\nskill {skill name}" + "\ndrop {id}";
+			return "move {'right,'left','up','down'}[,{distance}]" + "\nlook {'around',closely','down','up'}[,{id},{radius}]" + "\npick up [{id}]" + "\ninventory" + "\neat [{id}]" + "\nskill {skill name}" + "\ndrop {id}"+"\nattack {id} [{'blunt'}]";
 		}
 		return "Comamnd did not execute";
 	}

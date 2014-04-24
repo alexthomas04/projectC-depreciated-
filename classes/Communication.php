@@ -38,7 +38,7 @@ class Communication{
 		$found = false;
 		// while(!$found){
 		//socket_recvfrom($listen_socket, $buf, 4000, 0, "localhost",9875);
-		socket_set_option($listen_socket,SOL_SOCKET,SO_RCVTIMEO,array("sec"=>2,"usec"=>0));
+		socket_set_option($listen_socket,SOL_SOCKET,SO_RCVTIMEO,array("sec"=>10,"usec"=>0));
 		$result = socket_recv($listen_socket,$buf,4000,0);
 
 		if(isset($buf) && $buf!=null){

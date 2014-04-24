@@ -180,19 +180,13 @@ public class Chunk {
 					int times = rand.nextInt(5);
 					for(int q=0;q<times;q++){
 					if(rand.nextInt(5)==1){
-						Entity e = new Rock(w.getEntities().size(),i,k,c,w,Rock.getStandard());
-						w.addEntity(e);
-						c.addEntity(e, i, k);
+						Entity e = new Rock(w.getNumEntities(),i,k,c,w,Rock.getStandard());
 						}
 					if(rand.nextInt(5)==1){
-						Entity e =new RockWithLegs(w.getEntities().size(),i,k,c,w,RockWithLegs.getStandard());
-						w.addEntity(e);
-						c.addEntity(e, i, k);
+						Entity e =new RockWithLegs(w.getNumEntities(),i,k,c,w,RockWithLegs.getStandard());
 						}
 					if(rand.nextInt(5)==1){
-						Entity e =new GenericPlant(w.getEntities().size(),i,k,c,w,GenericPlant.getStandard());
-						w.addEntity(e);
-						c.addEntity(e, i, k);
+						Entity e =new GenericPlant(w.getNumEntities(),i,k,c,w,GenericPlant.getStandard());
 						}
 					}
 				}

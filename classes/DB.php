@@ -86,7 +86,6 @@ class DB{
 			}
 		}
 			$sql = $sql . "\n";
-
 		
 		if(!$this->query($sql,null)->error()){
 					return $this;
