@@ -1,7 +1,8 @@
 <?php
 require_once 'core/init.php';
 $log = array();
-$message = Input::get('message');  
+$message = Input::get('message'); 
+$guid = Input::get('guid'); 
 $_db = DB::getInstance();
 $user = new User();
 if(substr($message, 0,1)==="/"){
@@ -18,16 +19,20 @@ if(substr($message, 0,1)==="/"){
 				$user->change('color',escape($parts[1]));
 				break;
 			case 'whisper':
-				if(count($parts)==3)
+				if(count($parts)>=3)
 				{
 					$revicpiant = new User($parts[1]);
 					if($revicpiant->exists())
 					{
+						$message = "";
+						for ($i=2; $i <$parts.count() ; $i++) { 
+							$message .= $parts[$i];
+						}
 						$_db->insert('private_chat',array(
 							'from_username'=>$user->data()->username,
 							'time'=> date('H:i:s T',time()),
 							'to_username'=>escape($parts[1]),
-							'message'=>escape($parts[2]),
+							'message'=>escape($message),
 							'type'=>'whisper'));
 						$revicpiant->change('has_private',1);
 						$log['text'][] = "sent whisper";
@@ -70,7 +75,8 @@ if(substr($message, 0,1)==="/"){
 	        		  	'message'=>escape($message),
 	        		  	'name_color'=>$user->data()->color,
 	        		  	'username'=>$user->data()->username,
-	        		  	'time'=> date('H:i:s T',time()));
+	        		  	'time'=> date('H:i:s T',time()),
+	        		  	'guid'=>$guid);
 	      		 	$_db->insert('chat',$chat_item);
 
 
@@ -103,7 +109,6 @@ if(substr($message, 0,1)==="/"){
 					$_db->delete('game_messages',array('id','=',$game_message->id));
 				}
 			}
-			$log['stat']=$state;
 
 			if($state!= $line_count ){
                  	$chats = getMessages($state);
@@ -117,9 +122,9 @@ if(substr($message, 0,1)==="/"){
                  		'<a class="username" style="color:' . $color . '!important" href="profile.php?username=' . $username . '" target="_blank">' . $username . "</a>: " .
                  		$t ;
                        
-              
-                 }
-            
+              	
+              	}
+            $log['guid']=end($chats)->guid;
          }
           $log["text"] = $text;
 		

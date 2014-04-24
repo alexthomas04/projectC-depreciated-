@@ -60,7 +60,7 @@
 		<div class="edit_button" id="editTemplate">
 			<input type="text" class="button_name">
 			<label>Has Number</label>
-			<input type="checkbox" class="button_number"></input>
+			<input type="checkbox" class="button_number">
 		</div>
 
 
@@ -73,27 +73,31 @@
 		setInterval(function(){update();}, 500);
 		load();
 		var state=-1;
+		var lastGuid = "";
 		var waiting=false;
 		function handleChat(){
-				var preparedMessage = getChat();
+				var preparedMessage = getChat();	
+				var newGuid = guid();
 				$(".chat_input").val("");
 				if(!(preparedMessage === undefined )){
 				$.ajax({
 					url: 'chat.php',
 					type: 'post',
 					dataType: 'json',
-					data: {"message": preparedMessage,"state":state}
+					data: {"message": preparedMessage,"state":state,"guid":newGuid}
 					
 				})
 				.done(function(data) {
 					console.log('done');
 					updateChat(data);
+					waiting=false;
 				})
 				.fail(function(xhr, textStatus, errorThrown) {
 					console.log(errorThrown);
+					waiting=false;
 				})
 				.always(function() {
-					waiting=false;
+					
 				});}
 				waiting=true;
 
@@ -105,18 +109,19 @@
 					url: 'chat.php',
 					type: 'post',
 					dataType: 'json',
-					data: {"message": text,"state":state}
+					data: {"message": text,"state":state,"guid":guid()}
 					
 				})
 				.done(function(data) {
 					console.log('done');
 					updateChat(data);
+					waiting=false;
 				})
 				.fail(function(xhr, textStatus, errorThrown) {
 					console.log(errorThrown);
+					waiting=false;
 				})
 				.always(function() {
-					waiting=false;
 				});
 		}
 
@@ -132,13 +137,15 @@
 				})
 				.done(function(data) {
 					updateChat(data);
+					waiting=false;
 				})
 				.fail(function(xhr, textStatus, errorThrown) {
 					console.log(errorThrown);
+					waiting=false;
 				})
 				.always(function() {
 					console.log("complete");
-					waiting=false;
+					
 				});
 			}
 		}
@@ -155,7 +162,10 @@
 			//logic for chat
 			if(data.state>0)
 				state = data.state;
-			if(data.text){
+          
+			if(data.text && data.guid!=undefined && lastGuid != data.guid){
+				lastGuid = data.guid;
+              
 				var div = $('#chat_area .text_area');
 					for (var i = 0; i < data.text.length; i++) {
 						$('#chat_area .text_area').append($("<p>"+ data.text[i]+"</p>"));
@@ -237,8 +247,16 @@
 			if(number != undefined){
 				command += " "+number;
 			}
-			console.log(command);
 			sendMessage(command);
 		});
+		function guid() {
+  		function s4() {
+		    return Math.floor((1 + Math.random()) * 0x10000)
+		               .toString(16)
+		               .substring(1);
+		  }
+		  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+		         s4() + '-' + s4() + s4() + s4();
+		}
 	
 		</script>
