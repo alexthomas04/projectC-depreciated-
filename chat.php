@@ -72,7 +72,7 @@ if(substr($message, 0,1)==="/"){
 	      		 	
 	        		
 	        		$chat_item = array(
-	        		  	'message'=>escape($message),
+	        		  	'message'=>$message,
 	        		  	'name_color'=>$user->data()->color,
 	        		  	'username'=>$user->data()->username,
 	        		  	'time'=> date('H:i:s T',time()),
@@ -112,19 +112,21 @@ if(substr($message, 0,1)==="/"){
 
 			if($state!= $line_count ){
                  	$chats = getMessages($state);
+
                  	foreach($chats as $chat){
                  		$username = $chat->username;
                  		$color=$chat->name_color;
                  		$t = $chat->message;
                  		$time=$chat->time;
-                 		$text[]= 
-                 		'<span class="time">' . $time . "</span> " .
-                 		'<a class="username" style="color:' . $color . '!important" href="profile.php?username=' . $username . '" target="_blank">' . $username . "</a>: " .
-                 		$t ;
+                 		$text[]= array(
+                 			'message'=>	'<span class="time">' . $time . "</span> " .
+                 				'<a class="username" style="color:' . $color . '!important" href="profile.php?username=' . $username . '" target="_blank">' . $username . "</a>: " .
+                 				$t,
+                 			'guid'=>$chat->guid 
+                 		);
                        
               	
               	}
-            $log['guid']=end($chats)->guid;
          }
           $log["text"] = $text;
 		

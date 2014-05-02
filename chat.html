@@ -73,7 +73,7 @@
 		setInterval(function(){update();}, 500);
 		load();
 		var state=-1;
-		var lastGuid = "";
+		var guids = new Array();
 		var waiting=false;
 		function handleChat(){
 				var preparedMessage = getChat();	
@@ -163,13 +163,14 @@
 			if(data.state>0)
 				state = data.state;
           
-			if(data.text && data.guid!=undefined && lastGuid != data.guid){
-				lastGuid = data.guid;
-              
+			if(data.text && data.text.length>0){
+				console.log($.inArray(data.text[0].guid,guids));
 				var div = $('#chat_area .text_area');
 					for (var i = 0; i < data.text.length; i++) {
-						$('#chat_area .text_area').append($("<p>"+ data.text[i]+"</p>"));
+						if($.inArray(data.text[i].guid,guids)==-1)
+						$('#chat_area .text_area').append($("<p>"+ unescape(data.text[i].message)+"</p>"));
 						div.scrollTop(div.scrollTop()+200);
+						guids.push(data.text[i].guid);
 					}	
 				}
 				if(data.type == "internal"){
@@ -258,5 +259,41 @@
 		  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
 		         s4() + '-' + s4() + s4() + s4();
 		}
+
+		$(document).on('mouseenter', ".game_entity", function (event) {
+		       var options = $('<div class="options" style="left:'+(parseInt(event.pageX)-10)+';top:'+(parseInt(event.pageY)-10)+';position:absolute">'+
+		       	'<ul>'+
+		       	'<li class="option">look closely</li>'+
+		       '<li class="option">pick up</li>'+
+		       	'<li class="option">attack</li>'+
+		       	'<li class="option coord">move to</li>'+
+		       	'</ul>'+
+		       	'</div>');
+		       var parent = $(this).parent('span');
+		       options.data('id',parent.children('.game_id').text());
+		       options.data('x',parent.children('.coordX').text());
+		       options.data('y',parent.children('.coordY').text());
+		       console.log($(this));
+		       $('body').append(options);
+		    });
+		$(document).on('mouseleave','.options',function(){
+			$(this).remove();
+		});
+		$(document).on('hover','.option',function(){
+			$(this).toggleClass('.hoverOption');
+			console.log($(this));
+		});
+		$(document).on('click','.option',function(){
+			var command="";
+			if($(this).hasClass('coord')){
+				var parent = $(this).closest('div');
+				command = "/"+$(this).text() + " "+ parent.data('x')+" "+parent.data('y');
+			}
+			else{
+		    	command = "/"+ $(this).text()+" "+$(this).closest('div').data('id');
+			}	
+			sendMessage(command);
+			$(this).closest('div').remove();
+		});
 	
 		</script>
