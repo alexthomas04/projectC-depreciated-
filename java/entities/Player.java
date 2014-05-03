@@ -208,6 +208,22 @@ public class Player extends Entity{
 				return "You are at (" + locX + ", " + locY + ")." + ((0 == locY) ? "You are at the top edge." : "");
 			} else
 				return "You are already at the top edge";
+		}else if(command[0].equalsIgnoreCase("to")){
+			if(command.length<3)
+				return "Not enough arguments";
+			int destX=0;
+			int destY=0;
+			try{
+				destX = Integer.parseInt(command[1]);
+				destY= Integer.parseInt(command[2]);
+				double distanceToTravle = Math.sqrt(Math.pow(destX-locX, 2)+Math.pow(destY-locY,2));
+				if(distance < (int)distanceToTravle)
+					return "Too far away";
+				move(destX,destY);
+				return "You are at (" + locX + ", " + locY + ").";
+			}catch(Exception ex){
+				return "Invalid arguments";
+			}
 		}
 		return "Comamnd did not execute";
 	}
@@ -251,7 +267,7 @@ public class Player extends Entity{
 						if (locX + i < chunk.getSizeX() && locY + k < chunk.getSizeY() && locX + i >= 0 && locY + k >= 0){
 							for (Entity e : chunk.getEntities(locX + i, locY + k))
 								if (type.isInstance(e)){
-									data += e.getType() + " , " + e.getId() + ". At " + (locX + i) + ", " + (locY + k) + "\n";
+									data += "<span><span class='game_entity'>"+e.getType() + "</span> , <span class='game_id'>" + e.getId() + "</span>. At <span class='coordX'>" + e.getX() + "</span>, <span class='coordY'>" + e.getY() + "</span></span>\n";
 									vision.addXP(1);
 								}
 						}
@@ -262,7 +278,7 @@ public class Player extends Entity{
 					for (int k = radius * -1; k <= radius; k++){
 						if (locX + i < chunk.getSizeX() && locY + k < chunk.getSizeY() && locX + i >= 0 && locY + k >= 0){
 							for (Entity e : chunk.getEntities(locX + i, locY + k))
-								data += e.getType() + " , " + e.getId() + ". At " + (locX + i) + ", " + (locY + k) + "\n";
+								data += "<span><span class='game_entity'>"+e.getType() + "</span> , <span class='game_id'>" + e.getId() + "</span>. At <span class='coordX'>" + e.getX() + "</span>, <span class='coordY'>" + e.getY() + "</span></span>\n";
 							vision.addXP(1);
 						}
 					}
@@ -311,14 +327,14 @@ public class Player extends Entity{
 									usedIndexes.add(index);
 									String key=keys[index];
 									if (key == "invnetory"){
-										if (e == this){
-											details += "inventory:[\n";
-											for (int u = 0; u < inventory.size(); u++){
-												Entity var = inventory.get(u);
-												details += var.getType() + ", " + var.getId() + ((u < inventory.size() - 1) ? "\n" : "");
-											}
-											details += "]\n";
-										}
+//										if (e == this){
+//											details += "inventory:[\n";
+//											for (int u = 0; u < inventory.size(); u++){
+//												Entity var = inventory.get(u);
+//												details += var.getType() + ", " + var.getId() + ((u < inventory.size() - 1) ? "\n" : "");
+//											}
+//											details += "]\n";
+//										}
 									} else{
 										details += key + " = " + attributes.get(key) + "\n";
 									}
@@ -365,6 +381,8 @@ public class Player extends Entity{
 				}
 
 			}
+			if(details=="")
+				details="Unable to reach entity.";
 			return details;
 		} else{
 			ArrayList<Entity> entities = chunk.getEntities(locX, locY);
@@ -412,7 +430,7 @@ public class Player extends Entity{
 		}
 		String inven = "inventory:\n";
 		for (Entity e : inventory)
-			inven += e.getId() + " " + e.getType() + "\n";
+			inven += "<span><span class='inventory_id'>"+e.getId() + "</span> <span class='inventory_item'>" + e.getType() + "</span></span>\n";
 		return inven;
 
 	}
@@ -670,7 +688,7 @@ public class Player extends Entity{
 	 */
 	public void levelUp(String skillName, int level){
 		String message = "CONGRATULATIONS!! Your " + skillName + " is now at Level " + level;
-		messageWrite(message);
+		//messageWrite(message);
 		calcStats();
 	}
 	
