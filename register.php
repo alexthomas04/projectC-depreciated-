@@ -90,21 +90,21 @@ if(Input::exists()){
 ?>
 
 		
-<form action="" method="post">
+<form id="register" action="" method="post">
 	<div class ="field">
-		<label for="username">Username</label>
+		<label for="username">Account Name</label>
 		<input type="text" name="username" id="username" value="<?php echo escape(Input::get('username')); ?>" autocomplete="off"></input>
 	</div>
 	<div class="field">
-		<label for="password">Enter your Password</label>
+		<label for="password">Password</label>
 		<input type="password" name="password" id="password" value="" ></input>
 	</div>
 	<div class="field">
-		<label for="password_again">Enter your Password again</label>
+		<label for="password_again">Password (Again)</label>
 		<input type="password" name="password_again" id="password_again" value="" ></input>
 	</div>
 	<div class="field">
-		<label for="name">name</label>
+		<label for="name">Character Name</label>
 		<input type="text" name="name" id="name" value="<?php echo escape(Input::get('name')); ?>" ></input>
 	</div>
 	<input type="hidden" name="token" value="<?php echo Token::generate() ?>">

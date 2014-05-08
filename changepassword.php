@@ -75,8 +75,12 @@ if($user->isLoggedIn()){
 
 
 <html>
+	<head>
+	<link rel="stylesheet" href="css/login.css" type="text/css" />
+	</head>
 	<body>
-		<form action"" method="post">
+		<div id="banner">&nbsp;</div>
+		<form id="changePassword" action="" method="post">
 			<div class="field">
 				<label for="current_password">Current Password</label>
 				<input type="password" id="current_password" name="current_password" value=""></input>
@@ -86,7 +90,7 @@ if($user->isLoggedIn()){
 				<input type="password" id="new_password" name="new_password" value=""></input>
 			</div>
 			<div class="field">
-				<label for="new_password_again">Re-Type New Password</label>
+				<label for="new_password_again">Confirm Password</label>
 				<input type="password" id="new_password_again" name="new_password_again" value=""></input>
 			</div>
 			<input type="hidden" name="token" value="<?php echo Token::generate() ?>">
