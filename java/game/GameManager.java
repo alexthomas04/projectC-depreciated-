@@ -1,6 +1,7 @@
 package game;
 
 import java.util.Hashtable;
+import java.util.Scanner;
 
 import communication.Server;
 import entities.GenericPlant;
@@ -52,6 +53,8 @@ public class GameManager {
 		as.start();
 		Ticker t = new Ticker();
 		t.start();
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.start();
 	}
 	
 	
@@ -95,6 +98,36 @@ public class GameManager {
 			}
 		}
 	}
+
+    private class ConsoleHandler extends  Thread{
+        public void run(){
+            Scanner console = new Scanner(System.in);
+            while(true){
+                System.out.println("Enter player name");
+                String username = console.nextLine();
+                if(!world.hasPlayer(username))
+                {
+                    System.out.println("Player does not exist yet would you like to create it?(y/n)");
+                    if("y".equalsIgnoreCase(console.nextLine())){
+                        Hashtable<String,String> attr =Player.getStandard();
+                        attr.put("name", username);
+                        attr.put("locationX", "0");
+                        attr.put("locationY","0");
+                        new Player(world.getPlayers().size(),world.getChunk(0),world,attr);
+                    }else{
+                        continue;
+                    }
+
+                }
+                Player p = world.getPlayer(username);
+                System.out.println("Enter command");
+                System.out.println(p.handleCommand(console.nextLine()));
+
+
+
+            }
+        }
+    }
 
 	/**
 	 * The Class AutoSave.
