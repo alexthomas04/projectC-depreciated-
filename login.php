@@ -18,17 +18,20 @@ if(Input::exists()){
 		}
 		else{
 			foreach ($validation->errors() as $error) {
-				echo $error,'<br>';
+				echo '<div id="error">'. $error.'</div>';
 			}
 		}
 
 	}
 }
 ?>
-
-
-
-<form action="" method="post">
+<html>
+<head>
+	<link rel="stylesheet" href="css/login.css" type="text/css" />
+</head>
+<body>
+<div id="banner">&nbsp;</div>
+<form action="" id="login" method="post">
 	<div class ="field">
 		<label for="username">Username</label>
 		<input type="text" name="username" id="username" value="" autocomplete="on"></input>
@@ -46,3 +49,5 @@ if(Input::exists()){
 	<input type="hidden" name="token" value="<?php echo Token::generate() ?>">
 	<input type="submit" value="Log In">
 </form>
+</body>
+</html>
