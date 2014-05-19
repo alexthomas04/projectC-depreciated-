@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Scanner;
 
+import communication.Database;
+
 import entities.GenericPlant;
 import entities.Plant;
 import entities.Player;
@@ -29,9 +31,10 @@ public class Tester {
 	 * @param args the arguments
 	 */
 	public static void main(String[] args){
-		
 		GameManager gm = new GameManager();
 		gm.run();
+//		Database db = Database.getDatabaseInstance();
+//		db.insertMessage("blargad", "asdfeadsf");
 		
 	}
 }

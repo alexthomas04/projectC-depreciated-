@@ -7,7 +7,6 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Server.
  */
@@ -30,7 +29,6 @@ public class Server {
 			listenSocket = new DatagramSocket(LISTEN_PORT);
 			writeSocket = new DatagramSocket();
 		} catch (SocketException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -43,15 +41,14 @@ public class Server {
 	public String getMessage(){
 		String message="";
 		do{
-		byte[] reciveData = new byte[4000];
-		DatagramPacket recivePacket = new DatagramPacket(reciveData,reciveData.length);
+		byte[] receiveData = new byte[4000];
+		DatagramPacket receivePacket = new DatagramPacket(receiveData,receiveData.length);
 		try {
-			listenSocket.receive(recivePacket);
+			listenSocket.receive(receivePacket);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		message=new String(recivePacket.getData());
+		message=new String(receivePacket.getData());
 		System.out.println(message);
 		}while(message.substring(0,1).equals("s"));
 	
@@ -75,7 +72,6 @@ public class Server {
 			writeSocket.send(sendPacket);
 			System.out.println(message);
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		catch(Exception ex){

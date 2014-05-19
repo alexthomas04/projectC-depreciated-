@@ -63,8 +63,7 @@ public class Player extends Entity{
 	 * @param attributes the attributes
 	 */
 	public Player(int identification, int x, int y, Chunk c, World w, Hashtable<String, String> attributes){
-		super(identification, x, y, c, w, attributes);
-		// TODO Auto-generated constructor stub
+        super(identification, x, y, c, w, attributes);
 	}
 
 	/**

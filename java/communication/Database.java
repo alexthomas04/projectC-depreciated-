@@ -6,14 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Database.
  */
 public class Database{
 	
 	/** The Constant URL. */
-	private static final String	URL		= "jdbc:mysql://localhost/projectc?user=root";
+	private static final String	URL		= "jdbc:mysql://awsdb.cgpnw9vguc2k.us-west-2.rds.amazonaws.com/projectc";
 	
 	/** The conn. */
 	private Connection			conn	= null;
@@ -25,7 +25,7 @@ public class Database{
 	 * Instantiates a new database.
 	 */
 	public Database(){
-		connect();
+		
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class Database{
 	private void connect(){
 
 		try{
-			conn = DriverManager.getConnection(URL);
+			conn = DriverManager.getConnection(URL,"java1","BwkFXcz9Uh");
 
 		} catch (SQLException ex){
 			// handle any errors
@@ -62,6 +62,7 @@ public class Database{
 	 * @return the result set
 	 */
 	public ResultSet querySelect(String sql){
+		connect();
 		Statement stm;
 		ResultSet rs = null;
 		try{
@@ -72,7 +73,7 @@ public class Database{
 			System.out.println("SQLState: " + ex.getSQLState());
 			System.out.println("VendorError: " + ex.getErrorCode());
 		}
-
+		
 		return rs;
 	}
 
@@ -104,6 +105,7 @@ public class Database{
 	public boolean insertMessage(String username, String message){
 
 		try{
+			connect();
 			// get userID
 			ResultSet user = querySelect("SELECT * FROM `users` WHERE `username`='"
 					+ username + "'");
@@ -122,6 +124,17 @@ public class Database{
 			System.out.println("SQLException: " + ex.getMessage());
 			System.out.println("SQLState: " + ex.getSQLState());
 			System.out.println("VendorError: " + ex.getErrorCode());
+			ex.printStackTrace();
+		}finally{
+
+			try{
+				conn.close();
+			} catch (SQLException ex){
+				System.out.println("SQLException: " + ex.getMessage());
+				System.out.println("SQLState: " + ex.getSQLState());
+				System.out.println("VendorError: " + ex.getErrorCode());
+				ex.printStackTrace();
+			}
 		}
 
 		return false;

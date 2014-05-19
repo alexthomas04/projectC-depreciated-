@@ -1,6 +1,6 @@
 package ablilities;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Ablility.
  */
