@@ -12,7 +12,7 @@ import json.JSONArray;
 import json.JSONObject;
 import lombok.Getter;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Chunk.
  */
@@ -180,13 +180,13 @@ public class Chunk {
 					int times = rand.nextInt(5);
 					for(int q=0;q<times;q++){
 					if(rand.nextInt(5)==1){
-						Entity e = new Rock(w.getNumEntities(),i,k,c,w,Rock.getStandard());
+                            w.spawnEntity(Rock.TYPE,i,k,c);
 						}
 					if(rand.nextInt(5)==1){
-						Entity e =new RockWithLegs(w.getNumEntities(),i,k,c,w,RockWithLegs.getStandard());
+                        w.spawnEntity(RockWithLegs.TYPE,i,k,c);
 						}
 					if(rand.nextInt(5)==1){
-						Entity e =new GenericPlant(w.getNumEntities(),i,k,c,w,GenericPlant.getStandard());
+                        w.spawnEntity(GenericPlant.TYPE,i,k,c);
 						}
 					}
 				}

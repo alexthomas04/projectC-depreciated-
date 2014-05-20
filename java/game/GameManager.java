@@ -13,7 +13,7 @@ import entities.RockWithLegs;
 import world.Chunk;
 import world.World;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class GameManager.
  */
@@ -111,9 +111,7 @@ public class GameManager {
                     if("y".equalsIgnoreCase(console.nextLine())){
                         Hashtable<String,String> attr =Player.getStandard();
                         attr.put("name", username);
-                        attr.put("locationX", "0");
-                        attr.put("locationY","0");
-                        new Player(world.getPlayers().size(),world.getChunk(0),world,attr);
+                        world.spawnEntity(Player.TYPE,0,0,world.getChunk(0),attr);
                     }else{
                         continue;
                     }
@@ -164,7 +162,6 @@ public class GameManager {
 					world.save("world/");
 					System.out.println("Auto Saved world");
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -205,7 +202,6 @@ public class GameManager {
 					Thread.sleep(interval);
 					world.tick();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				

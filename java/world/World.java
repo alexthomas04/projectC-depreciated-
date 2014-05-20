@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.lang.reflect.*;
+import java.util.Hashtable;
+import java.util.Map;
 
 import json.JSONArray;
 import json.JSONObject;
@@ -12,9 +15,8 @@ import lombok.Getter;
 import entities.Entity;
 import entities.EntityTypeManager;
 import entities.Player;
-import entities.Rock;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class World.
  */
@@ -113,13 +115,14 @@ public class World {
 			for(int i=0;i<entityArray.length();i++){
 				JSONObject entityData = entityArray.getJSONObject(i);
 				int chunkId=entityData.optInt("chunk");
-				Class type = EntityTypeManager.GetEntityType(entityData.optString("type"));
-				Entity e = (Entity) type.getConstructor(Integer.TYPE,Chunk.class,World.class,JSONObject.class).newInstance(getNumEntities(),chunks.get(chunkId),this,entityData);
-			}
+                Chunk c = getChunk(chunkId);
+				String entityType = entityData.optString("type");
+                spawnEntity(entityType,c,entityData);
+            }
 			
 		}catch(Exception ex){
 			ex.printStackTrace();
-			System.out.println("Did you forget to static load somthing ....");
+			System.out.println("Did you forget to static load something ...");
 			return false;
 		}
 		
@@ -152,11 +155,10 @@ public class World {
 			for(int i=0;i<playerArray.length();i++){
 				JSONObject entityData = playerArray.getJSONObject(i);
 				int chunkId=entityData.optInt("chunk");
-				Class type = EntityTypeManager.GetEntityType(entityData.optString("type"));
-				for(Object o : type.getConstructors())
-					System.out.println(o.toString());
-				Player p = (Player) type.getConstructor(Integer.TYPE,Chunk.class,World.class,JSONObject.class).newInstance(getNumEntities(),chunks.get(chunkId),this,entityData);
-				
+                Chunk c = getChunk(chunkId);
+                String entityType = entityData.optString("type");
+				spawnEntity(entityType,c,entityData);
+
 			}
 			
 		}catch(Exception ex){
@@ -302,4 +304,60 @@ public class World {
 	public int getNumEntities(){
 		return players.size()+entities.size();
 	}
+
+    public  Entity spawnEntity(String entityType,int x,int y,Chunk c){
+        try{
+        Class type = EntityTypeManager.GetEntityType(entityType);
+        Method getStandards = type.getMethod("getStandard");
+        Hashtable<String,String> standards = (Hashtable<String,String>) getStandards.invoke(null);
+        Entity e = (Entity) type.getConstructor(Integer.TYPE,Integer.TYPE,Integer.TYPE,Chunk.class,World.class, Hashtable.class).newInstance(getNumEntities(),x,y,c,this,standards);
+            return  e;
+        }catch(NoSuchMethodException nsme){
+            nsme.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return  null;
+    }
+    public  Entity spawnEntity(String entityType,int x,int y,Chunk c,Hashtable<String,String> attr){
+        try{
+            Class type = EntityTypeManager.GetEntityType(entityType);
+            Method getStandards = type.getMethod("getStandard");
+            Hashtable<String,String> standards = (Hashtable<String,String>) getStandards.invoke(null);
+            for (Map.Entry<String, String> entry : attr.entrySet()) {
+                standards.put(entry.getKey(),entry.getValue());
+            }
+            Entity e = (Entity) type.getConstructor(Integer.TYPE,Integer.TYPE,Integer.TYPE,Chunk.class,World.class, Hashtable.class).newInstance(getNumEntities(),x,y,c,this,standards);
+            return  e;
+        }catch(NoSuchMethodException nsme){
+            nsme.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return  null;
+    }
+    public  Entity spawnEntity(String entityType,Chunk c,JSONObject entityData){
+        try{
+            Class type = EntityTypeManager.GetEntityType(entityType);
+            Entity e = (Entity) type.getConstructor(Integer.TYPE,Chunk.class,World.class,JSONObject.class).newInstance(getNumEntities(),c,this,entityData);
+            return  e;
+        }catch(NoSuchMethodException nsme){
+            nsme.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return  null;
+    }
 }
