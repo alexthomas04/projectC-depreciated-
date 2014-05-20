@@ -2,7 +2,6 @@ package entities;
 
 import lombok.Getter;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface Edible.
  */

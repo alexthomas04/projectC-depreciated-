@@ -3,7 +3,6 @@ package json;
 import java.io.IOException;
 import java.io.Writer;
 
-// TODO: Auto-generated Javadoc
 /*
 Copyright (c) 2006 JSON.org
 

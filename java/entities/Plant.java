@@ -6,7 +6,6 @@ import json.JSONObject;
 import world.Chunk;
 import world.World;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Plant.
  */
@@ -26,7 +25,7 @@ public abstract class Plant extends Entity implements Edible {
 	 */
 	public Plant(int identification, int x, int y, Chunk c, World w) {
 		super(identification, x, y, c, w);
-		// TODO Auto-generated constructor stub
+
 	}
 
 	/**
@@ -42,7 +41,6 @@ public abstract class Plant extends Entity implements Edible {
 	public Plant(int identification, int x, int y, Chunk c, World w,
 			Hashtable<String, String> attributes) {
 		super(identification, x, y, c, w, attributes);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -55,7 +53,6 @@ public abstract class Plant extends Entity implements Edible {
 	 */
 	public Plant(int identification, Chunk c, World w, String jsonString) {
 		super(identification, c, w, jsonString);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -68,7 +65,6 @@ public abstract class Plant extends Entity implements Edible {
 	 */
 	public Plant(int identification, Chunk c, World w, JSONObject json) {
 		super(identification, c, w, json);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -82,7 +78,6 @@ public abstract class Plant extends Entity implements Edible {
 	public Plant(int identification, Chunk c, World w,
 			Hashtable<String, String> attributes) {
 		super(identification, c, w, attributes);
-		// TODO Auto-generated constructor stub
 	}
 	
 	/* (non-Javadoc)
@@ -111,7 +106,6 @@ public abstract class Plant extends Entity implements Edible {
 	 */
 	@Override
 	public int getFoodLevel() {
-		// TODO Auto-generated method stub
 		return foodLevel;
 	}
 	

@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.Set;
 
 import communication.Database;
 import skills.Skill;
@@ -15,7 +14,6 @@ import world.Chunk;
 import world.World;
 import lombok.*;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Player.
  */
@@ -76,7 +74,6 @@ public class Player extends Entity{
 	 */
 	public Player(int identification, Chunk c, World w, String jsonString){
 		super(identification, c, w, jsonString);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -89,7 +86,6 @@ public class Player extends Entity{
 	 */
 	public Player(int identification, Chunk c, World w, JSONObject json){
 		super(identification, c, w, json);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -102,11 +98,10 @@ public class Player extends Entity{
 	 */
 	public Player(int identification, Chunk c, World w, Hashtable<String, String> attributes){
 		super(identification, c, w, attributes);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * Stores the enetity type in the EntityTypeManager
+	 * Stores the entity type in the EntityTypeManager
 	 */
 	public static void staticLoad(){
 		EntityTypeManager.storeType(TYPE, Player.class);
@@ -121,6 +116,8 @@ public class Player extends Entity{
 	public static Hashtable<String, String> getStandard(){
 		Hashtable<String, String> table = new Hashtable<String, String>();
 		table.put("food", "1000");
+        table.put("locationX", "0");
+        table.put("locationY","0");
 		// table.put("vision", "1");
 		return table;
 	}
@@ -156,7 +153,7 @@ public class Player extends Entity{
 		else if (command[0].equalsIgnoreCase("commands")){
 			return "move {'right,'left','up','down'}[,{distance}]" + "\nlook {'around',closely','down','up'}[,{id},{radius}]" + "\npick up [{id}]" + "\ninventory" + "\neat [{id}]" + "\nskill {skill name}" + "\ndrop {id}"+"\nattack {id} [{'blunt'}]";
 		}
-		return "Comamnd did not execute";
+		return "Command did not execute";
 	}
 
 	/**
@@ -325,7 +322,7 @@ public class Player extends Entity{
 									}while(usedIndexes.contains(index));
 									usedIndexes.add(index);
 									String key=keys[index];
-									if (key == "invnetory"){
+									if (key == "inventory"){
 //										if (e == this){
 //											details += "inventory:[\n";
 //											for (int u = 0; u < inventory.size(); u++){
@@ -477,24 +474,24 @@ public class Player extends Entity{
 		Skill skill;
 		if (command.length < 1)
 			return "Invalid number of arguments";
-		if (command[0].equalsIgnoreCase("physicalEndurence"))
-			skill = physicalEndurence;
+		if (command[0].equalsIgnoreCase("physicalEndurance"))
+			skill = physicalEndurance;
 		else if (command[0].equalsIgnoreCase("hydration"))
 			skill = hydration;
 		else if (command[0].equalsIgnoreCase("luck"))
 			skill = luck;
 		else if (command[0].equalsIgnoreCase("wisdom"))
 			skill = wisdom;
-		else if (command[0].equalsIgnoreCase("sharpEndurence"))
-			skill = sharpEndurence;
+		else if (command[0].equalsIgnoreCase("sharpEndurance"))
+			skill = sharpEndurance;
 		else if (command[0].equalsIgnoreCase("dexterity"))
 			skill = dexterity;
-		else if (command[0].equalsIgnoreCase("stabEnderence"))
-			skill = stabEnderence;
+		else if (command[0].equalsIgnoreCase("stabEndurance"))
+			skill = stabEndurance;
 		else if (command[0].equalsIgnoreCase("power"))
 			skill = power;
-		else if (command[0].equalsIgnoreCase("pHAfinity"))
-			skill = pHAfinity;
+		else if (command[0].equalsIgnoreCase("pHAffinity"))
+			skill = pHAffinity;
 		else if (command[0].equalsIgnoreCase("speed"))
 			skill = speed;
 		else if (command[0].equalsIgnoreCase("vitality"))
@@ -584,7 +581,7 @@ public class Player extends Entity{
 		if(command.length>=2){
 			String type = command[1];
 			if(type.equalsIgnoreCase("blunt"))
-				physicalEndurence.addXP(1);
+				physicalEndurance.addXP(1);
 		}
 		return "They are at "+victim.healthPoints+" HP";
 	}
@@ -597,11 +594,11 @@ public class Player extends Entity{
 		strength = new Skill(1, 0, "strength", this);
 		power = new Skill(1, 0, "power", this);
 		wisdom = new Skill(1, 0, "wisdom", this);
-		physicalEndurence = new Skill(1, 0, "physicalEndurence", this);
-		sharpEndurence = new Skill(1, 0, "sharpEndurence", this);
-		stabEnderence = new Skill(1, 0, "stabEnderence", this);
+		physicalEndurance = new Skill(1, 0, "physicalEndurance", this);
+		sharpEndurance = new Skill(1, 0, "sharpEndurance", this);
+		stabEndurance = new Skill(1, 0, "stabEndurance", this);
 		temperatureResistance = new Skill(1, 0, "temperatureResistance", this);
-		pHAfinity = new Skill(1, 0, "pHAfinity", this);
+		pHAffinity = new Skill(1, 0, "pHAffinity", this);
 		hydration = new Skill(1, 0, "hydration", this);
 		vitality = new Skill(1, 0, "vitality", this);
 		dexterity = new Skill(1, 0, "dexterity", this);
@@ -616,8 +613,8 @@ public class Player extends Entity{
 				food = Integer.parseInt(attributes.get("food"));
 			if (attributes.containsKey("name"))
 				name = attributes.get("name");
-			if (attributes.containsKey("invnetory")){
-				JSONArray invn = new JSONArray(attributes.get("invnetory"));
+			if (attributes.containsKey("inventory")){
+				JSONArray invn = new JSONArray(attributes.get("inventory"));
 				for (int i = 0; i < invn.length(); i++){
 					JSONObject entityJson = invn.optJSONObject(i);
 					Class type = EntityTypeManager.GetEntityType(entityJson.optString("type"));
@@ -643,7 +640,7 @@ public class Player extends Entity{
 		JSONArray invn = new JSONArray();
 		for (Entity e : inventory)
 			invn.put(e.getJson());
-		json.put("invnetory", invn);
+		json.put("inventory", invn);
 		json.put("food", food);
 		json.put("name", name);
 		return json;
@@ -699,5 +696,6 @@ public class Player extends Entity{
 	public void messageWrite(String message){
 		Database db = Database.getDatabaseInstance();
 		db.insertMessage(name, message);
+
 	}
 }

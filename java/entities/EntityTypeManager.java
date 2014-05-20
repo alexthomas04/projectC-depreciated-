@@ -8,7 +8,6 @@ import java.util.Map;
 
 import json.JSONObject;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class EntityTypeManager.
  *

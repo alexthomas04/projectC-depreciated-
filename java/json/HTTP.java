@@ -26,7 +26,6 @@ SOFTWARE.
 
 import java.util.Iterator;
 
-// TODO: Auto-generated Javadoc
 /**
  * Convert an HTTP header to a JSONObject and back.
  * @author JSON.org

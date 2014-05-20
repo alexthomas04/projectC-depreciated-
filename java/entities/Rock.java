@@ -7,7 +7,6 @@ import lombok.Data;
 import world.Chunk;
 import world.World;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Rock.
  */
@@ -28,7 +27,6 @@ public class Rock extends Entity {
 	 */
 	public Rock(int identification,int  x, int y, Chunk c, World w) {
 		super(identification,x, y, c, w);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -41,7 +39,6 @@ public class Rock extends Entity {
 	 */
 	public Rock(int identification,Chunk c, World w, String jsonString) {
 		super(identification,c, w, jsonString);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -54,7 +51,6 @@ public class Rock extends Entity {
 	 */
 	public Rock(int identification,Chunk c, World w, JSONObject json) {
 		super(identification,c, w, json);
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**
@@ -117,6 +113,7 @@ public class Rock extends Entity {
 	public static Hashtable<String, String> getStandard() {
 		Hashtable<String,String> table= new Hashtable<String,String>();
 		table.put("weight", "20");
+        table.put("pickupAble","True");
 		return table;
 	}
 	

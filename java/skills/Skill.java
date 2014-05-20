@@ -5,7 +5,7 @@ import lombok.Getter;
 import entities.Entity;
 import entities.Player;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Skill.
  */

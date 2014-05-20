@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 
-// TODO: Auto-generated Javadoc
 /*
 Copyright (c) 2002 JSON.org
 

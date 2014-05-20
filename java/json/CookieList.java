@@ -26,7 +26,6 @@ SOFTWARE.
 
 import java.util.Iterator;
 
-// TODO: Auto-generated Javadoc
 /**
  * Convert a web browser cookie list string to a JSONObject and back.
  * @author JSON.org

@@ -19,7 +19,6 @@ import world.Chunk;
 import world.World;
 import json.JSONArray;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Tester.
  */

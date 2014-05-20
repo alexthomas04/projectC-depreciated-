@@ -9,7 +9,7 @@ import json.JSONObject;
 import world.Chunk;
 import world.World;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Animal.
  *
@@ -28,7 +28,6 @@ public abstract class Animal extends Entity {
 	 */
 	public Animal(int identification, int x, int y, Chunk c, World w) {
 		super(identification, x, y, c, w);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -44,7 +43,6 @@ public abstract class Animal extends Entity {
 	public Animal(int identification, int x, int y, Chunk c, World w,
 			Hashtable<String, String> attributes) {
 		super(identification, x, y, c, w, attributes);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -57,7 +55,6 @@ public abstract class Animal extends Entity {
 	 */
 	public Animal(int identification, Chunk c, World w, String jsonString) {
 		super(identification, c, w, jsonString);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -70,7 +67,6 @@ public abstract class Animal extends Entity {
 	 */
 	public Animal(int identification, Chunk c, World w, JSONObject json) {
 		super(identification, c, w, json);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -84,7 +80,6 @@ public abstract class Animal extends Entity {
 	public Animal(int identification, Chunk c, World w,
 			Hashtable<String, String> attributes) {
 		super(identification, c, w, attributes);
-		// TODO Auto-generated constructor stub
 	}
 
 }

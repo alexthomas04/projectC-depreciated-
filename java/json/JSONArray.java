@@ -33,7 +33,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
-// TODO: Auto-generated Javadoc
 /**
  * A JSONArray is an ordered sequence of values. Its external text form is a
  * string wrapped in square brackets with commas separating the values. The

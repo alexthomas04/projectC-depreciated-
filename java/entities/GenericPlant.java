@@ -6,7 +6,6 @@ import json.JSONObject;
 import world.Chunk;
 import world.World;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class GenericPlant.
  */
@@ -26,7 +25,6 @@ public class GenericPlant extends Plant {
 	 */
 	public GenericPlant(int identification, int x, int y, Chunk c, World w) {
 		super(identification, x, y, c, w);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -42,7 +40,6 @@ public class GenericPlant extends Plant {
 	public GenericPlant(int identification, int x, int y, Chunk c, World w,
 			Hashtable<String, String> attributes) {
 		super(identification, x, y, c, w, attributes);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -55,7 +52,6 @@ public class GenericPlant extends Plant {
 	 */
 	public GenericPlant(int identification, Chunk c, World w, String jsonString) {
 		super(identification, c, w, jsonString);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -68,7 +64,6 @@ public class GenericPlant extends Plant {
 	 */
 	public GenericPlant(int identification, Chunk c, World w, JSONObject json) {
 		super(identification, c, w, json);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -82,7 +77,6 @@ public class GenericPlant extends Plant {
 	public GenericPlant(int identification, Chunk c, World w,
 			Hashtable<String, String> attributes) {
 		super(identification, c, w, attributes);
-		// TODO Auto-generated constructor stub
 	}
 
 	/* (non-Javadoc)
@@ -117,6 +111,7 @@ public class GenericPlant extends Plant {
 	public static Hashtable<String, String> getStandard() {
 		Hashtable<String,String> table= new Hashtable<String,String>();
 		table.put("foodLevel", ((int)Math.random()*5)+"");
+        table.put("pickupAble","True");
 		return table;
 	}
 	

@@ -5,13 +5,11 @@ import java.util.Iterator;
 
 import skills.Skill;
 import json.JSONObject;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import world.Chunk;
 import world.World;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Entity.
  * 
@@ -80,56 +78,56 @@ public abstract class Entity{
 	@Setter
 	protected Skill		wisdom					= new Skill(0);
 
-	/** The physical endurence. */
+	/** The physical endurance. */
 	
 	/**
-	 * Gets the physical endurence.
+	 * Gets the physical endurance.
 	 *
-	 * @return the physical endurence
+	 * @return the physical endurance
 	 */
 	@Getter
 	
 	/**
-	 * Sets the physical endurence.
+	 * Sets the physical endurance.
 	 *
-	 * @param physicalEndurence the new physical endurence
+	 * @param physicalEndurance the new physical endurance
 	 */
 	@Setter
-	protected Skill		physicalEndurence		= new Skill(0);
+	protected Skill physicalEndurance = new Skill(0);
 
-	/** The sharp endurence. */
+	/** The sharp endurance. */
 	
 	/**
-	 * Gets the sharp endurence.
+	 * Gets the sharp endurance.
 	 *
-	 * @return the sharp endurence
+	 * @return the sharp endurance
 	 */
 	@Getter
 	
 	/**
-	 * Sets the sharp endurence.
+	 * Sets the sharp endurance.
 	 *
-	 * @param sharpEndurence the new sharp endurence
+	 * @param sharpEndurance the new sharp endurance
 	 */
 	@Setter
-	protected Skill		sharpEndurence			= new Skill(0);
+	protected Skill sharpEndurance = new Skill(0);
 
-	/** The stab enderence. */
+	/** The stab endurance. */
 	
 	/**
-	 * Gets the stab enderence.
+	 * Gets the stab endurance.
 	 *
-	 * @return the stab enderence
+	 * @return the stab endurance
 	 */
 	@Getter
 	
 	/**
-	 * Sets the stab enderence.
+	 * Sets the stab endurance.
 	 *
-	 * @param stabEnderence the new stab enderence
+	 * @param stabEndurance the new stab endurance
 	 */
 	@Setter
-	protected Skill		stabEnderence			= new Skill(0);
+	protected Skill stabEndurance = new Skill(0);
 
 	/** The temperature resistance. */
 	
@@ -148,22 +146,22 @@ public abstract class Entity{
 	@Setter
 	protected Skill		temperatureResistance	= new Skill(0);
 
-	/** The p h afinity. */
+	/** The p h affinity. */
 	
 	/**
-	 * Gets the PH afinity.
+	 * Gets the PH affinity.
 	 *
-	 * @return the PH afinity
+	 * @return the PH affinity
 	 */
 	@Getter
 	
 	/**
-	 * Sets the PH afinity.
+	 * Sets the PH affinity.
 	 *
-	 * @param pHAfinity the new PH afinity
+	 * @param pHAffinity the new PH afinity
 	 */
 	@Setter
-	protected Skill		pHAfinity				= new Skill(7);
+	protected Skill pHAffinity = new Skill(7);
 
 	/** The hydration. */
 	
@@ -309,8 +307,8 @@ public abstract class Entity{
 	/** The p h endurance. */
 	protected int		pHEndurance;
 
-	/** The hydration endurence. */
-	protected int		hydrationEndurence;
+	/** The hydration endurance. */
+	protected int hydrationEndurance;
 
 	/** The health points. */
 	protected int		healthPoints;
@@ -341,6 +339,8 @@ public abstract class Entity{
 
 	/** The dead. */
 	protected boolean	dead					= false;
+
+    protected boolean pickupAble=false;
 
 	/**
 	 * Instantiates a new entity.
@@ -527,19 +527,19 @@ public abstract class Entity{
 				power = new Skill(attributes.get("power"), this);
 			if (attributes.containsKey("wisdom"))
 				wisdom = new Skill(attributes.get("wisdom"), this);
-			if (attributes.containsKey("physicalEndurence"))
-				physicalEndurence = new Skill(
-						attributes.get("physicalEndurence"), this);
-			if (attributes.containsKey("sharpEndurence"))
-				sharpEndurence = new Skill(attributes.get("sharpEndurence"),
+			if (attributes.containsKey("physicalEndurance"))
+				physicalEndurance = new Skill(
+						attributes.get("physicalEndurance"), this);
+			if (attributes.containsKey("sharpEndurance"))
+				sharpEndurance = new Skill(attributes.get("sharpEndurance"),
 						this);
-			if (attributes.containsKey("stabEnderence"))
-				stabEnderence = new Skill(attributes.get("stabEnderence"), this);
+			if (attributes.containsKey("stabEndurance"))
+				stabEndurance = new Skill(attributes.get("stabEndurance"), this);
 			if (attributes.containsKey("temperatureResistance"))
 				temperatureResistance = new Skill(
 						attributes.get("temperatureResistance"), this);
-			if (attributes.containsKey("pHAfinity"))
-				pHAfinity = new Skill(attributes.get("pHAfinity"), this);
+			if (attributes.containsKey("pHAffinity"))
+				pHAffinity = new Skill(attributes.get("pHAffinity"), this);
 			if (attributes.containsKey("hydration"))
 				hydration = new Skill(attributes.get("hydration"), this);
 			if (attributes.containsKey("vitality"))
@@ -556,6 +556,8 @@ public abstract class Entity{
 				vision = new Skill(attributes.get("vision"), this);
 			if (attributes.containsKey("dead"))
 				dead = Boolean.parseBoolean(attributes.get("dead"));
+            if(attributes.contains("pickupAble"))
+                pickupAble = Boolean.parseBoolean(attributes.get("pickupAble"));
 		}
 		chunk.addEntity(this, locX, locY);
 		if(!(this instanceof Player))
@@ -616,11 +618,11 @@ public abstract class Entity{
 		json.put("strength", strength);
 		json.put("power", power);
 		json.put("wisdom", wisdom);
-		json.put("physicalEndurence", physicalEndurence);
-		json.put("sharpEndurence", sharpEndurence);
-		json.put("stabEnderence", stabEnderence);
+		json.put("physicalEndurance", physicalEndurance);
+		json.put("sharpEndurance", sharpEndurance);
+		json.put("stabEndurance", stabEndurance);
 		json.put("temperatureResistance", temperatureResistance);
-		json.put("pHAfinity", pHAfinity);
+		json.put("pHAffinity", pHAffinity);
 		json.put("hydration", hydration);
 		json.put("vitality", vitality);
 		json.put("dexterity", dexterity);
@@ -633,6 +635,7 @@ public abstract class Entity{
 		json.put("Hit points", healthPoints);
 		json.put("hit",hit);
 		json.put("crit", crit);
+        json.put("pickupAble",pickupAble);
 
 		return json;
 	}
@@ -711,4 +714,6 @@ public abstract class Entity{
 	 * Die.
 	 */
 	protected void die(){ }
+
+
 }

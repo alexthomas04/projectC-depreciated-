@@ -27,7 +27,6 @@ SOFTWARE.
 import java.util.Iterator;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * This provides static methods to convert an XML text into a JSONObject,
  * and to covert a JSONObject into an XML text.

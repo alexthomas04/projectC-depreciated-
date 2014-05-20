@@ -1,5 +1,4 @@
 package json;
-// TODO: Auto-generated Javadoc
 /**
  * The <code>JSONString</code> interface allows a <code>toJSONString()</code>
  * method so that a class can change the behavior of

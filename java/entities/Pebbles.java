@@ -9,7 +9,6 @@ import json.JSONObject;
 import world.Chunk;
 import world.World;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Pebbles.
  *
@@ -31,7 +30,6 @@ public class Pebbles extends Entity{
 	 */
 	public Pebbles(int identification, int x, int y, Chunk c, World w){
 		super(identification, x, y, c, w);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -46,7 +44,6 @@ public class Pebbles extends Entity{
 	 */
 	public Pebbles(int identification, int x, int y, Chunk c, World w, Hashtable<String, String> attributes){
 		super(identification, x, y, c, w, attributes);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -59,7 +56,6 @@ public class Pebbles extends Entity{
 	 */
 	public Pebbles(int identification, Chunk c, World w, String jsonString){
 		super(identification, c, w, jsonString);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -72,7 +68,6 @@ public class Pebbles extends Entity{
 	 */
 	public Pebbles(int identification, Chunk c, World w, JSONObject json){
 		super(identification, c, w, json);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -85,7 +80,6 @@ public class Pebbles extends Entity{
 	 */
 	public Pebbles(int identification, Chunk c, World w, Hashtable<String, String> attributes){
 		super(identification, c, w, attributes);
-		// TODO Auto-generated constructor stub
 	}
 	
 	/* (non-Javadoc)
@@ -102,5 +96,11 @@ public class Pebbles extends Entity{
 		EntityTypeManager.storeType(TYPE, Player.class);
 
 	}
+
+    public static Hashtable<String, String> getStandard(){
+        Hashtable<String,String>attributes = new Hashtable<String, String>();
+        attributes.put("pickupAble","True");
+        return attributes;
+    }
 
 }

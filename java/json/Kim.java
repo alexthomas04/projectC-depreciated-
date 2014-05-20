@@ -1,7 +1,6 @@
 package json;
 
 
-// TODO: Auto-generated Javadoc
 /*
  Copyright (c) 2013 JSON.org
 

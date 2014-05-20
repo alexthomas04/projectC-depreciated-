@@ -39,7 +39,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-// TODO: Auto-generated Javadoc
 /**
  * A JSONObject is an unordered collection of name/value pairs. Its external
  * form is a string wrapped in curly braces with colons between the names and

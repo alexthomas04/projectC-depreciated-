@@ -28,7 +28,6 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Properties;
 
-// TODO: Auto-generated Javadoc
 /**
  * Converts a Property file data into JSONObject and back.
  * @author JSON.org

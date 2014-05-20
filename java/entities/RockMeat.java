@@ -6,7 +6,6 @@ import json.JSONObject;
 import world.Chunk;
 import world.World;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class RockMeat.
  */
@@ -14,6 +13,8 @@ public class RockMeat extends Entity implements Edible{
 	
 	/** The Constant TYPE. */
 	public final static String	TYPE	= "rock meat";
+
+    protected int foodLevel=0;
 	
 	/**
 	 * Instantiates a new rock meat.
@@ -26,7 +27,6 @@ public class RockMeat extends Entity implements Edible{
 	 */
 	public RockMeat(int identification, int x, int y, Chunk c, World w){
 		super(identification, x, y, c, w);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -41,7 +41,6 @@ public class RockMeat extends Entity implements Edible{
 	 */
 	public RockMeat(int identification, int x, int y, Chunk c, World w, Hashtable<String, String> attributes){
 		super(identification, x, y, c, w, attributes);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -54,7 +53,6 @@ public class RockMeat extends Entity implements Edible{
 	 */
 	public RockMeat(int identification, Chunk c, World w, String jsonString){
 		super(identification, c, w, jsonString);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -67,7 +65,6 @@ public class RockMeat extends Entity implements Edible{
 	 */
 	public RockMeat(int identification, Chunk c, World w, JSONObject json){
 		super(identification, c, w, json);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -80,24 +77,15 @@ public class RockMeat extends Entity implements Edible{
 	 */
 	public RockMeat(int identification, Chunk c, World w, Hashtable<String, String> attributes){
 		super(identification, c, w, attributes);
-		// TODO Auto-generated constructor stub
 	}
 
-	/* (non-Javadoc)
-	 * @see entities.Edible#getFoodLevel()
-	 */
-	@Override
-	public int getFoodLevel(){
-		// TODO Auto-generated method stub
-		return 10;
-	}
+
 
 	/* (non-Javadoc)
 	 * @see entities.Edible#getMaxFoodLevel()
 	 */
 	@Override
 	public int getMaxFoodLevel(){
-		// TODO Auto-generated method stub
 		return 10;
 	}
 	
@@ -115,5 +103,40 @@ public class RockMeat extends Entity implements Edible{
 		EntityTypeManager.storeType(TYPE, Player.class);
 
 	}
+    public static Hashtable<String, String> getStandard(){
+        Hashtable<String,String>attributes = new Hashtable<String, String>();
+        attributes.put("pickupAble","True");
+        attributes.put("foodLevel","5");
+        return attributes;
+    }
+
+    /* (non-Javadoc)
+	 * @see entities.Entity#init(java.util.Hashtable)
+	 */
+    @Override
+    public void init(Hashtable<String,String> attributes){
+        if(attributes!=null){
+            super.init(attributes);
+            if(attributes.containsKey("foodLevel"))
+                foodLevel = Integer.parseInt(attributes.get("foodLevel"));
+        }
+    }
+
+    /* (non-Javadoc)
+     * @see entities.Entity#getJson()
+     */
+    public JSONObject getJson(){
+        JSONObject json = super.getJson();
+        json.put("foodLevel", foodLevel);
+        return json;
+    }
+
+    /* (non-Javadoc)
+     * @see entities.Edible#getFoodLevel()
+     */
+    @Override
+    public int getFoodLevel() {
+        return foodLevel;
+    }
 
 }
